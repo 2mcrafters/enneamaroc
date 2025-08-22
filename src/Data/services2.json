@@ -1,0 +1,50 @@
+[
+  {
+    "icon": "icon-switch",
+    "title": "Coaching Individuel",
+    "desc": "Un accompagnement sur-mesure pour clarifier vos objectifs, dépasser vos blocages et révéler vos talents grâce à l’Ennéagramme.",
+    "number": "01.",
+    "btnText": "Voir détails",
+    "btnLink": "/service/coaching-individuel"
+  },
+  {
+    "icon": "icon-risk",
+    "title": "Coaching d’Équipe",
+    "desc": "Renforcez la cohésion, améliorez la communication et développez un leadership collectif durable.",
+    "number": "02.",
+    "btnText": "Voir détails",
+    "btnLink": "/service/coaching-equipe"
+  },
+  {
+    "icon": "icon-checked-box",
+    "title": "Formations Ennéagramme",
+    "desc": "Découvrez les 9 types de personnalité et leurs dynamiques pour mieux comprendre, collaborer et évoluer.",
+    "number": "03.",
+    "btnText": "Voir détails",
+    "btnLink": "/service/formations-enneagramme"
+  },
+  {
+    "icon": "icon-inverted-triangle",
+    "title": "Développement Personnel",
+    "desc": "Libérez vos ressources intérieures, transformez vos freins en atouts et avancez vers une vie plus équilibrée.",
+    "number": "04.",
+    "btnText": "Voir détails",
+    "btnLink": "/service/developpement-personnel"
+  },
+  {
+    "icon": "icon-refresh-arrow",
+    "title": "Leadership Authentique",
+    "desc": "Développez un style de leadership basé sur la conscience de soi, la confiance et l’impact positif.",
+    "number": "05.",
+    "btnText": "Voir détails",
+    "btnLink": "/service/leadership-authentique"
+  },
+  {
+    "icon": "icon-idea",
+    "title": "Ateliers & Retraites",
+    "desc": "Expérimentez l’Ennéagramme à travers des ateliers pratiques et des retraites pour une transformation profonde.",
+    "number": "06.",
+    "btnText": "Voir détails",
+    "btnLink": "/service/ateliers-retraites"
+  }
+]

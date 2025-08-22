@@ -1,0 +1,50 @@
+[
+  {
+    "img": "/assets/images/team/team01.jpg",
+    "title": "CHAFIK MEKRAI HARTI",
+    "desc": "Directeur Général",
+    "linkedin": "#",
+    "twitter": "#",
+    "facebook": "#"
+  },
+  {
+    "img": "/assets/images/team/team04.jpg",
+    "title": "HAFSSA EL BAKKALI",
+    "desc": "Resp. Développement",
+    "linkedin": "#",
+    "twitter": "#",
+    "facebook": "#"
+  },
+  {
+    "img": "/assets/images/team/team03.jpg",
+    "title": "OMAR BELKHEIRI",
+    "desc": "Consultant Senior",
+    "linkedin": "#",
+    "twitter": "#",
+    "facebook": "#"
+  },
+  {
+    "img": "/assets/images/team/team02.jpg",
+    "title": "MOHAMED RACHID BELHADJ",
+    "desc": "Consultant Senior",
+    "linkedin": "#",
+    "twitter": "#",
+    "facebook": "#"
+  },
+  {
+    "img": "/assets/images/team/brahim-temsamani.jpg",
+    "title": "BRAHIM TEMSAMANI",
+    "desc": "Consultant Senior",
+    "linkedin": "#",
+    "twitter": "#",
+    "facebook": "#"
+  },
+  {
+    "img": "/assets/images/team/bilal-elouardi.jpg",
+    "title": "BILAL ELOUARDI",
+    "desc": "Consultant Senior",
+    "linkedin": "#",
+    "twitter": "#",
+    "facebook": "#"
+  }
+]

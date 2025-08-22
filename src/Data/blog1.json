@@ -1,0 +1,29 @@
+[
+  {
+    "img": "/assets/images/blog/blog01.jpg",
+    "category": "Ennéagramme",
+    "social-img": "/assets/images/blog/social-pr01.jpg",
+    "name": "Robert Aguilar",
+    "title": "Comprendre les 9 types : une porte d’entrée vers soi",
+    "desc": "Introduction claire aux 9 profils et à leurs motivations profondes pour mieux se connaître au quotidien.",
+    "btn-title": "Lire la suite"
+  },
+  {
+    "img": "/assets/images/blog/blog02.jpg",
+    "category": "Coaching",
+    "social-img": "/assets/images/blog/social-pr02.jpg",
+    "name": "Amy Renner",
+    "title": "Du stress à l’équilibre : pratiques concrètes par type",
+    "desc": "Des pistes simples et actionnables pour passer des automatismes de défense à des réponses plus conscientes.",
+    "btn-title": "Lire la suite"
+  },
+  {
+    "img": "/assets/images/blog/blog03.jpg",
+    "category": "Leadership & Équipe",
+    "social-img": "/assets/images/blog/social-pr03.jpg",
+    "name": "RDevid Lucas",
+    "title": "Leadership par l’Ennéagramme : mieux collaborer",
+    "desc": "Comment adapter sa communication et développer la cohésion d’équipe grâce aux dynamiques des types.",
+    "btn-title": "Lire la suite"
+  }
+]

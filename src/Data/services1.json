@@ -1,0 +1,42 @@
+[
+  {
+    "icon": "icon-switch",
+    "title": "Coaching Individuel",
+    "desc": "Un accompagnement personnalisé pour clarifier vos objectifs, dépasser vos blocages et libérer votre potentiel grâce à l’Ennéagramme.",
+    "number": "01.",
+    "btnText": "Voir Détails",
+    "btnLink": "/service/coaching-individuel"
+  },
+  {
+    "icon": "icon-risk",
+    "title": "Gestion des Émotions",
+    "desc": "Apprenez à identifier vos mécanismes de défense, à réguler vos émotions et à cultiver une meilleure intelligence relationnelle.",
+    "number": "02.",
+    "btnText": "Voir Détails",
+    "btnLink": "/service/gestion-emotions"
+  },
+  {
+    "icon": "icon-checked-box",
+    "title": "Formations Ennéagramme",
+    "desc": "Découvrez les 9 types de personnalité, leurs motivations profondes et leurs dynamiques pour mieux comprendre les autres et soi-même.",
+    "number": "03.",
+    "btnText": "Voir Détails",
+    "btnLink": "/service/formations-enneagramme"
+  },
+  {
+    "icon": "icon-inverted-triangle",
+    "title": "Coaching d’Équipe & Leadership",
+    "desc": "Renforcez la cohésion, développez un leadership authentique et améliorez la communication dans vos équipes avec l’Ennéagramme.",
+    "number": "04.",
+    "btnText": "Voir Détails",
+    "btnLink": "/service/coaching-equipe"
+  },
+  {
+    "icon": "icon-refresh-arrow",
+    "title": "Développement Personnel",
+    "desc": "Explorez vos forces, transformez vos faiblesses et évoluez vers une vie plus équilibrée et alignée sur vos valeurs profondes.",
+    "number": "05.",
+    "btnText": "Voir Détails",
+    "btnLink": "/service/developpement-personnel"
+  }
+]
