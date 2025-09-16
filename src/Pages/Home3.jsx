@@ -7,7 +7,7 @@ import Counter1 from "../Components/Counter/Counter1";
 import HeroBanner3 from "../Components/HeroBanner/HeroBanner3";
 import Marquee from "../Components/Marquee/Marquee";
 import Pricing2 from "../Components/Pricing/Pricing2";
-import Process2 from "../Components/Process/Process2";
+import Process from "../Components/Process/Process";
 import Project2 from "../Components/Project/Project2";
 import Services3 from "../Components/Services/Services3";
 import Team2 from "../Components/Team/Team2";
@@ -16,29 +16,27 @@ import ContactInfo4 from "../Components/ContactInfo/ContactInfo4";
 import Testimonial3 from "../Components/Testimonial/Testimonial3";
 
 const Home3 = () => {
-    return (
-      <div>
-        <HeroBanner3></HeroBanner3>
-        <Marquee></Marquee>
-        {/* <Services3></Services3> */}
-        <About3></About3>
-        <Choose3></Choose3> 
-        {/* <Project2></Project2> */}
-        <Counter1></Counter1>
-        <Process2></Process2>
-        <Marquee></Marquee>
-        {/* <Pricing2></Pricing2> */}
-        <Team2></Team2>
-        {/* <Testimonial3></Testimonial3> */}
-            <Blog1></Blog1>
-            <ContactInfo4></ContactInfo4>
-            
-            
-            
-        {/* <ContactList></ContactList> */}
-        <Nwesletter addclass="newsletter-section"></Nwesletter>
-      </div>
-    );
+  return (
+    <div>
+      <HeroBanner3></HeroBanner3>
+      <Marquee></Marquee>
+      {/* <Services3></Services3> */}
+      <About3></About3>
+      <Choose3></Choose3>
+      {/* <Project2></Project2> */}
+      <Counter1></Counter1>
+      <Process></Process>
+      <Marquee></Marquee>
+      {/* <Pricing2></Pricing2> */}
+      <Team2></Team2>
+      {/* <Testimonial3></Testimonial3> */}
+      <Blog1></Blog1>
+      <ContactInfo4></ContactInfo4>
+
+      {/* <ContactList></ContactList> */}
+      <Nwesletter addclass="newsletter-section"></Nwesletter>
+    </div>
+  );
 };
 
 export default Home3;

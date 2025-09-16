@@ -108,7 +108,7 @@ const Choose1 = () => {
               </div>
 
               {/* Bouton */}
-              <Link to="/team" className="theme-btn bg-dark mt-35">
+              <Link to="/contact" className="theme-btn bg-dark mt-35">
                 <span className="link-effect">
                   <span className="effect-1">Rencontrez notre équipe</span>
                   <span className="effect-1">Rencontrez notre équipe</span>

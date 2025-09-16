@@ -1,23 +1,16 @@
 [
   {
-    "icon": "icon-comercial",  
-    "title": "Approfondissez Des mouvements",
-    "desc": "Des mouvements de Gurdjieff aux types jungiens : panels et 27 profils en mouvement pour explorer les dynamiques humaines autrement.",
+    "icon": "icon-comercial",
+    "title": "Une sagesse spirituelle et humaniste",
+    "desc": "Issu de traditions anciennes et enrichi par la psychologie contemporaine, l’Ennéagramme relie la sagesse spirituelle et les réalités humaines.\nIl nous rappelle que nous sommes plus que nos conditionnements : nous sommes appelés à retrouver notre essence profonde, faite d’amour, de présence et de créativité.",
     "addclass": "process-single-box br-10",
     "number": "01"
   },
   {
-    "icon": "icon-infomsg",  
-    "title": "Nous proposons des formations",
-    "desc": "à l'ennéagramme pour les professionnel·les RH, coachs et formateurs souhaitant intégrer ce modèle dans leur pratique. différentes certifications sont accessibles ",
-    "addclass": "process-single-box br-10",  
+    "icon": "icon-infomsg",
+    "title": "Pourquoi choisir l’Ennéagramme aujourd’hui ?",
+    "desc": "• Parce qu’il est à la fois pragmatique et profond.\n• Parce qu’il éclaire les chemins intérieurs et les relations concrètes.\n• Parce qu’il nous aide à devenir des femmes et des hommes plus conscients, plus libres et plus reliés.\n\nL’Ennéagramme est une invitation à vivre pleinement, à se rencontrer soi-même et à rencontrer l’autre, dans toute la richesse de l’humanité.",
+    "addclass": "process-single-box br-10",
     "number": "02"
-  },
-  {
-    "icon": "icon-finished",  
-    "title": "Grâce à nos modules de découverte",
-    "desc": "vous irez bien au-delà de la simple connaissance de votre profil ennéagramme. Vous pourrez explorer en profondeur votre fonctionnement",
-    "addclass": "process-single-box br-10", 
-    "number": "03"
   }
 ]

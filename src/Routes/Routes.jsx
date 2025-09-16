@@ -12,7 +12,7 @@ import Layout4 from "../Layout/Layout4";
 import TeamPage from "../Pages/TeamPage";
 import GalleryPage from "../Pages/GalleryPage";
 import TestimonialPage from "../Pages/TestimonialPage";
-import PricingPage from "../Pages/PricingPage";
+
 import FaqPage from "../Pages/FaqPage";
 import ContactPage from "../Pages/ContactPage";
 import ServicePage from "../Pages/ServicePage";
@@ -20,101 +20,86 @@ import ServiceDetailPage from "../Pages/ServiceDetailPage";
 import BlogGridPage from "../Pages/BlogGridPage";
 import BlogListPage from "../Pages/BlogListPage";
 import BlogDetailsPage from "../Pages/BlogDetailsPage";
-import ProjectDetailPage from "../Pages/ProjectDetailPage";
+import PricingPage from "../Pages/PricingPage";
 import ProjectPage from "../Pages/ProjectPage";
+import ProjectDetailPage from "../Pages/ProjectDetailPage";
+import Profile from "../Pages/Profile";
+import DataShowcase from "../Pages/DataShowcase";
+import PrivateRoute from "../Components/Common/PrivateRoute";
 
-export const router = createBrowserRouter([
+import Découvrir from "../Pages/Découvrir";
+import Approfondir from "../Pages/Approfondir";
+import Transmettre from "../Pages/Transmettre";
+import ParcoursPage from "../Pages/ParcoursPage";
+
+export const router = createBrowserRouter(
+  [
     {
       path: "/",
-      element: <Layout4></Layout4>,
+      element: <Layout4 />,
       children: [
+        { path: "/about", element: <About /> },
+
+        { path: "/team", element: <TeamPage /> },
+        { path: "/gallery", element: <GalleryPage /> },
+        { path: "/testimonial", element: <TestimonialPage /> },
+        { path: "/pricing", element: <PricingPage /> },
+        { path: "/faq", element: <FaqPage /> },
+
+        { path: "/service", element: <ServicePage /> },
+        { path: "/service/service-details", element: <ServiceDetailPage /> },
+        { path: "/blog", element: <BlogGridPage /> },
+        { path: "/blog-sidebar", element: <BlogListPage /> },
+        { path: "/blog/blog-details", element: <BlogDetailsPage /> },
+        { path: "/project/project-details", element: <ProjectDetailPage /> },
+        { path: "/project", element: <ProjectPage /> },
+      ],
+    },
+    {
+      path: "/",
+      element: <Main />,
+      children: [
+        { index: true, element: <Home /> },
+        { path: "/contact", element: <ContactPage /> },
+        { path: "/data-showcase", element: <DataShowcase /> },
         {
-            path: "/about",
-            element: <About></About>,
-        },  
-        {
-          path: "/team",
-          element: <TeamPage></TeamPage>,
-        },  
-        {
-          path: "/gallery",
-          element: <GalleryPage></GalleryPage>,
-        },         
-        {
-          path: "/testimonial",
-          element: <TestimonialPage></TestimonialPage>,
-        },        
-        {
-          path: "/pricing",
-          element: <PricingPage></PricingPage>,
-        }, 
-        {
-          path: "/faq",
-          element: <FaqPage></FaqPage>,
+          path: "/profile",
+          element: (
+            <PrivateRoute>
+              <Profile />
+            </PrivateRoute>
+          ),
         },
         {
-          path: "/contact",
-          element: <ContactPage></ContactPage>,
-        },       
+          path: "/parcours",
+          element: <ParcoursPage />,
+        },
         {
-          path: "/service",
-          element: <ServicePage></ServicePage>,
-        }, 
+          path: "/Découvrir",
+          element: <Découvrir />,
+        },
         {
-          path: "/service/service-details",
-          element: <ServiceDetailPage></ServiceDetailPage>,
-        }, 
+          path: "/Approfondir",
+          element: <Approfondir />,
+        },
         {
-          path: "/blog",
-          element: <BlogGridPage></BlogGridPage>,
-        }, 
-        {
-          path: "/blog-sidebar",
-          element: <BlogListPage></BlogListPage>,
-        },         
-        {
-          path: "/blog/blog-details",
-          element: <BlogDetailsPage></BlogDetailsPage>,
-        }, 
-        {
-          path: "/project/project-details",
-          element: <ProjectDetailPage></ProjectDetailPage>,
-        },        
-        {
-          path: "/project",
-          element: <ProjectPage></ProjectPage>,
-        }, 
-
+          path: "/Transmettre",
+          element: <Transmettre />,
+        },
       ],
-    },  
+    },
     {
-      path: '/',
-      element: <Main></Main>,
-      children: [
-        {
-          index: true,
-          element: <Home></Home>,
-        },                           
-      ],
-    },     
+      path: "home2",
+      element: <Layout2 />,
+      children: [{ index: true, element: <Home2 /> }],
+    },
     {
-      path: 'home2',
-      element: <Layout2></Layout2>,
-      children: [
-        {
-          index: true,
-          element: <Home2></Home2>,
-        },                           
-      ],
-    }, 
-    {
-      path: 'home3',
-      element: <Layout3></Layout3>,
-      children: [
-        {
-          index: true,
-          element: <Home3></Home3>,
-        },                           
-      ],
-    },           
-  ]);
+      path: "home3",
+      element: <Layout3 />,
+      children: [{ index: true, element: <Home3 /> }],
+    },
+  ]
+  // {
+  //   basename: "/ennemaroc", // 👈 très important pour ton sous-dossier
+  // }
+);

@@ -1,134 +1,113 @@
-import { useState } from "react";
-import VideoModal from "../VideoModal/VideoModal";
-import parse from 'html-react-parser';
+import parse from "html-react-parser";
 import { Link } from "react-router-dom";
 
 const HeroBanner1 = ({
-  videotext = "<strong>Regarder</strong><br>Histoire de Bentol",
   title = "Libérez votre potentiel avec l’Ennéagramme",
-  btnname = "Contactez-nous",
-  btnurl = "/contact",
   mainimg = "/assets/imgss001/Layer 01.png",
-  Clientnumber = "5k",
-  Client = "Nous conseillons des clients dans le monde entier",
-  customers = "Clients satisfaits",
-  rating = "4.8",
-  review = "(120K avis)",
+  inscriptionUrl = "/Seconnecter",
+  RegisterUrl = "/Register",
+  subtitle = "Découvrez une voie claire pour mieux vous comprendre, transformer vos relations et agir avec conscience.",
+  height = "90vh",
+  heightSm = "70vh",
 }) => {
-  const [iframeSrc, setIframeSrc] = useState("about:blank");
-  const [toggle, setToggle] = useState(false);
-
-  const handelClick = () => {
-    setIframeSrc("https://www.youtube.com/embed/rRid6GCJtgc");
-    setToggle(!toggle);
-  };
-  const handelClose = () => {
-    setIframeSrc("about:blank");
-    setToggle(!toggle);
-  };
+  const bgUrl = typeof mainimg === "string" ? encodeURI(mainimg) : mainimg;
 
   return (
-    <div>
-      <section className="hero-section overflow-hidden">
-        <div
-          className="p-top-left wow slideInLeft"
-          data-wow-delay="500ms"
-          data-wow-duration="1000ms"
-        >
-          <img src="/assets/images/banner/shape01.png" alt="shape" />
-        </div>{" "}
-        <div
-          className="shape-mockup spin2 d-none d-xxl-block hero-shape-mockup1"
-          data-top="23%"
-          data-left="48%"
-        >
-          <img src="/assets/images/shapes/star.png" alt="shape" />
-        </div>
-        <div className="hero-scroll smooth">
-          <a href="#about-section" id="scrollLink">
-            <div className="scroll-me">Faites défiler</div>
-            <div className="hero-social_arrow">
-              <img src="/assets/images/icons/arrow-down-long.png" alt="" />
-            </div>
-          </a>
-        </div>
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12">
-              <div className="hero-content">
-                <a
-                  className="popup-video"
-                  onClick={handelClick}
-                  data-fancybox="video-gallery"
-                >
-                  <div className="inner-popup d-flex align-items-center">
-                    <span className="icon">
-                      <i className="bi bi-play-fill"></i>
-                    </span>
-                    <p>{parse(videotext)}</p>
-                  </div>
-                </a>
-                <h1 className="title">{parse(title)}</h1>
-                <Link to={btnurl} className="theme-btn">
-                  <span className="link-effect">
-                    <span className="effect-1">{btnname}</span>
-                    <span className="effect-1">{btnname}</span>
-                  </span>
-                  <i className="bi bi-arrow-right"></i>
-                </Link>
-              </div>
-            </div>
+    <section
+      className="hb-wrap"
+      style={{
+        "--hero-h": height,
+        "--hero-h-sm": heightSm,
+        paddingTop: "10rem",
+      }}
+    >
+      <style>{`
+        .hb-wrap{
+          position:relative;
+          min-height: var(--hero-h);
+          display:flex; align-items:center; justify-content:center;
+          overflow:hidden; color:#fff; background:#0a83ca; isolation:isolate;
+        }
+        @media (max-width: 768px){ .hb-wrap{ min-height: var(--hero-h-sm); } }
+        .hb-bg{ position:absolute; inset:0; background-image:url("${bgUrl}"); background-size:cover; background-position:center; z-index:-2; }
+        .hb-scrim{
+          position:absolute; inset:0; z-index:-1; pointer-events:none;
+          background:
+            linear-gradient(180deg, rgba(0,0,0,.32), rgba(10,131,202,.25)),
+            radial-gradient(900px 420px at 50% 0%, rgba(255,255,255,.12), rgba(255,255,255,0) 70%);
+        }
+
+        .hb-container{ width:100%; max-width:1100px; padding: clamp(56px, 6vw, 96px) 20px; }
+        .hb-center{ display:flex; flex-direction:column; align-items:center; text-align:center; gap:16px; }
+        .hb-title{
+          margin:0; font-size: clamp(34px, 6vw, 64px); line-height:1.05;
+          font-weight:900; letter-spacing:.2px; color:#fff;
+          text-shadow: 0 10px 30px rgba(0,0,0,.35), 0 2px 6px rgba(0,0,0,.25);
+          text-wrap: balance;
+        }
+        .hb-sub{
+          margin:0; max-width:820px; font-size: clamp(16px, 1.7vw, 19px);
+          color: rgba(255,255,255,.97); text-shadow: 0 2px 8px rgba(0,0,0,.25);
+        }
+        .hb-actions{ display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:12px; }
+
+        .hb-btn{
+          display:inline-flex; align-items:center; justify-content:center; gap:10px;
+          padding:14px 18px; border-radius:12px; font-weight:800;
+          transition: transform .15s ease, box-shadow .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
+          border:1px solid transparent; text-decoration:none;
+          will-change: transform;
+        }
+
+        /* Primary default: 1c8bce bg / white text */
+        .hb-btn.primary{
+          background:#1c8bce; color:#fff; border-color:#1c8bce;
+          box-shadow: 0 10px 26px rgba(0,0,0,.22);
+        }
+        /* Primary hover: reverse */
+        .hb-btn.primary:hover,
+        .hb-btn.primary:focus-visible{
+          background:#fff; color:#1c8bce; border-color:#1c8bce;
+          transform: translateY(-1px);
+          box-shadow: 0 14px 32px rgba(0,0,0,.28);
+          outline:none;
+        }
+
+        /* Secondary default: e13734 bg / white text */
+        .hb-btn.secondary{
+          background:#e13734; color:#fff; border-color:#e13734;
+          box-shadow: 0 10px 26px rgba(0,0,0,.22);
+        }
+        /* Secondary hover: reverse */
+        .hb-btn.secondary:hover,
+        .hb-btn.secondary:focus-visible{
+          background:#fff; color:#e13734; border-color:#e13734;
+          transform: translateY(-1px);
+          box-shadow: 0 14px 32px rgba(0,0,0,.28);
+          outline:none;
+        }
+
+        .hb-btn:active{ transform: translateY(0); box-shadow: 0 8px 18px rgba(0,0,0,.18); }
+      `}</style>
+
+      <div className="hb-bg" aria-hidden="true" />
+      <div className="hb-scrim" aria-hidden="true" />
+
+      <div className="hb-container">
+        <div className="hb-center">
+          <h1 className="hb-title">{parse(title)}</h1>
+          {subtitle && <p className="hb-sub">{subtitle}</p>}
+          <div className="hb-actions">
+            <Link to={inscriptionUrl} className="hb-btn primary">
+              Se connecter
+            </Link>
+            <Link to={RegisterUrl} className="hb-btn secondary">
+              Inscrivez-vous
+            </Link>
           </div>
         </div>
-        <div className="hero-img p-top-right">
-          <img src={mainimg} alt="hero" />
-        </div>
-        <div className="hero-info-wrapper">
-          <div className="client-count-box">
-            <div className="count-box">
-              <div className="inner-count">
-                <span>{Clientnumber}</span>
-              </div>
-            </div>
-            <div className="text">{Client}</div>
-            <a href="#!">
-              <i className="bi bi-arrow-up-right"></i>
-            </a>
-          </div>
-          <div className="review-block">
-            <div className="hero-social-proof">
-              <div className="social">
-                <img
-                  src="/assets/images/social/social-img01.jpg"
-                  alt="Client 01"
-                />
-                <img
-                  src="/assets/images/social/social-img02.jpg"
-                  alt="Client 02"
-                />
-                <img
-                  src="/assets/images/social/social-img03.jpg"
-                  alt="Client 03"
-                />
-              </div>
-              <div className="happy-customers">
-                <div className="text">{customers}</div>
-                <div className="rating-viewers">
-                  <i className="bi bi-star-fill"></i>
-                  <span className="rating"> {rating}</span>
-                  <span className="count">{review}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <VideoModal
-        isTrue={toggle}
-        iframeSrc={iframeSrc}
-        handelClose={handelClose}
-      ></VideoModal>
-    </div>
+      </div>
+    </section>
   );
 };
 

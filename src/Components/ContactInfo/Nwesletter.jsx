@@ -23,9 +23,8 @@ const Nwesletter = ({ addclass }) => {
               <div className="text">
                 <h3>Besoin d’une première consultation gratuite&nbsp;?</h3>
                 <p>
-                  Contactez-nous pour découvrir comment le coaching et
-                  l’Ennéagramme peuvent vous aider à développer votre potentiel
-                  et à renforcer vos relations.
+                  le coaching et l’Ennéagramme peuvent vous aider à développer
+                  votre potentiel et à renforcer vos relations.
                 </p>
               </div>
 

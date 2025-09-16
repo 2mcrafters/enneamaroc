@@ -10,26 +10,32 @@ const BreadCumb = ({bg,Title,Content}) => {
       }, []);
 
     return (
-
       <section className="breadcrumb-section">
-      <div className="bg bg-image" data-background={bg}></div>
-      <div className="container">
+        <div
+          className="bg bg-image"
+          style={{ opacity: 0.2 }}
+          data-background={bg}
+        ></div>
+        <div className="container">
           <div className="title-outer">
-              <div className="page-title">
-                  <h2 className="title">{Title}</h2>
-                  <ul className="page-breadcrumb">
-                      <li><Link to="/">Home Main</Link></li>
-                      <li>{Title}</li>
-                  </ul>
+            <div className="page-title">
+              <h2 className="title">{Title}</h2>
+              <ul className="page-breadcrumb">
+                <li>
+                  <Link to="/">Acc</Link>
+                </li>
+                <li>{Title}</li>
+              </ul>
+            </div>
+            <div className="text">
+              <div className="icon">
+                <i className="icon-arrow-up-right"></i>
               </div>
-              <div className="text">
-                  <div className="icon"><i className="icon-arrow-up-right"></i></div>
-                  <p>{parse(Content)}</p>
-              </div>
+              <p style={{ color: "#fff" }}>{parse(Content)}</p>
+            </div>
           </div>
-      </div>
-  </section>
-
+        </div>
+      </section>
     );
 };
 

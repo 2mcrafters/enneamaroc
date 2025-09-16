@@ -18,7 +18,7 @@ const ContactInfo3 = () => {
                     Contactez l’équipe <br />{" "}
                     <span className="bold">Enneagram Maroc</span>
                   </h2>
-                  <p className="sec-text text-gray">
+                  <p className="sec-text " style={{ color: "#000" }}>
                     Une question sur nos formations, le coaching ou
                     l’ennéagramme ? Écrivez-nous, on vous répond rapidement.
                   </p>
@@ -31,7 +31,7 @@ const ContactInfo3 = () => {
                     </div>
                     <div className="info">
                       <h4 className="title">Adresse</h4>
-                      <p>
+                      <p style={{ color: "#000" }}>
                         Enneagram Maroc (Horizon RH) <br />
                         Casablanca, Maroc
                       </p>
@@ -44,12 +44,16 @@ const ContactInfo3 = () => {
                     </div>
                     <div className="info">
                       <h4 className="title">Appelez-nous</h4>
-                      <div className="content">
+                      <div className="content" style={{ color: "#000" }}>
                         Coaching :{" "}
-                        <a href="tel:+212661246647">+212 661 24 66 47</a>
+                        <a href="tel:+212661246647" style={{ color: "#000" }}>
+                          +212 661 24 66 47
+                        </a>
                         <br />
                         Entreprises :{" "}
-                        <a href="tel:+212661246647">+212 661 24 66 47</a>
+                        <a href="tel:+212661246647" style={{ color: "#000" }}>
+                          +212 661 24 66 47
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -61,11 +65,17 @@ const ContactInfo3 = () => {
                     <div className="info">
                       <h4 className="title">E-mail</h4>
                       <div className="content">
-                        <a href="mailto:contact@enneagrammaroc.ma">
+                        <a
+                          href="mailto:contact@enneagrammaroc.ma"
+                          style={{ color: "#000" }}
+                        >
                           contact@enneagrammaroc.ma
                         </a>
                         <br />
-                        <a href="mailto:support@enneagrammaroc.ma">
+                        <a
+                          href="mailto:support@enneagrammaroc.ma"
+                          style={{ color: "#000" }}
+                        >
                           support@enneagrammaroc.ma
                         </a>
                       </div>
@@ -106,6 +116,18 @@ const ContactInfo3 = () => {
             <div className="col-lg-7">
               <div className="contact-form">
                 <h2 className="title mt--5 mb-35">Envoyez-nous un message</h2>
+
+                {/* Style inline pour placeholder */}
+                <style>
+                  {`
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder,
+        .contact-form select option:first-child {
+          color: rgba(0, 0, 0, 0.5); /* noir avec opacité */
+        }
+      `}
+                </style>
+
                 <form
                   id="contact_form"
                   className="contact_form"
@@ -190,7 +212,7 @@ const ContactInfo3 = () => {
 
                   <div className="form-group terms">
                     <input type="checkbox" id="terms" required />
-                    <label htmlFor="terms">
+                    <label htmlFor="terms" style={{ color: "#000" }}>
                       J’accepte les conditions générales.
                     </label>
                   </div>

@@ -61,7 +61,7 @@ const About1 = ({ subtitle, title, rotatetext, subtitle2, content, btnname, expy
                   <p style={{ color: "var(--gray-color2)" }}>
                     {parse(content)}
                   </p>
-                  <Link to="/about" className="theme-btn bg-white mt-30">
+                  <Link to="/contact" className="theme-btn bg-white mt-30">
                     <span className="link-effect">
                       <span className="effect-1">{btnname}</span>
                       <span className="effect-1">{btnname}</span>

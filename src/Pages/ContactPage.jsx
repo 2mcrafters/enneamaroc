@@ -5,16 +5,17 @@ import Nwesletter from "../Components/ContactInfo/Nwesletter";
 
 const ContactPage = () => {
     return (
-        <div>
-             <BreadCumb
-                bg="/assets/images/bg-img/breadcrumb.jpg"
-                Title="Contact Us"
-                Content="Completely restore extensive materials interactive solutions. <br> Progressively myocardinate viral paradigms"
-            ></BreadCumb>   
-            <ContactInfo3></ContactInfo3>
-            <Brances></Brances>
-            <Nwesletter addclass="newsletter-section bg-white"></Nwesletter>              
-        </div>
+      <div>
+        <BreadCumb
+          bg="/assets/imgss001/coaching (23).jpg"
+          Title="Contactez-nous"
+          Content="Parlons de votre parcours avec l’Ennéagramme
+Que vous débutiez ou souhaitiez approfondir, notre équipe répond à vos questions,<br> vous aide à choisir le bon module et vous informe sur les dates, tarifs et prérequis.  "
+        ></BreadCumb>
+        <ContactInfo3></ContactInfo3>
+        {/* <Brances></Brances> */}
+        <Nwesletter addclass="newsletter-section bg-white"></Nwesletter>
+      </div>
     );
 };
 

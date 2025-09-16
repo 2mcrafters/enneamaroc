@@ -1,27 +1,30 @@
 [
   {
     "img": "/assets/images/blog/blog01.jpg",
-    "category": "Marketing",
+    "category": "Découvrir",
     "socialImg": "/assets/images/blog/social-pr01.jpg",
     "name": "Robert Aguilar",
-    "title": "Continually monetize open source networks",
-    "link": "blog-details"
+    "title": "À la découverte de soi ",
+    "para": "À la découverte de soi – Les 27 visages de la personnalité",
+    "link": "Découvrir"
   },
   {
     "img": "/assets/images/blog/blog02.jpg",
-    "category": "Business",
+    "category": "Approfondir",
     "socialImg": "/assets/images/blog/social-pr02.jpg",
     "name": "Amy Renner",
-    "title": "Quickly reconceptualize strategic e-tailers",
-    "link": "blog-details"
+    "title": " Voyage intérieur ",
+    "para": "Voyage intérieur — Mécanismes, Ombres et Potentiels",
+    "link": "Approfondir"
   },
   {
     "img": "/assets/images/blog/blog03.jpg",
-    "category": "Technology",
+    "category": "Transmettre",
     "socialImg": "/assets/images/blog/social-pr03.jpg",
     "name": "Devid Lucas",
-    "title": "Dramatically benchmarks collaborative growth",
-    "link": "blog-details"
+    "title": "Transmission et transformation",
+    "para": "Transmettre: À la maîtrise – Transmission et transformation",
+    "link": "Transmettre"
   },
   {
     "img": "/assets/images/blog/blog04.jpg",
