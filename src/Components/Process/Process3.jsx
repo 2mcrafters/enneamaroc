@@ -1,8 +1,8 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 
 const Process3 = () => {
   const colors = {
-    bg: "#0a83ca", // ← requested background
+    bg: "#0a83ca",
     primary: "#0a83ca",
     danger: "#dc3545",
     text: "#0e1b25",
@@ -10,8 +10,6 @@ const Process3 = () => {
     cardBg: "#ffffff",
     shadow: "0 14px 36px rgba(5, 28, 50, .08)",
     border: "rgba(10,131,202,.25)",
-
-    // clarity on blue background
     onPrimary: "#ffffff",
     mutedOnPrimary: "rgba(255,255,255,.88)",
     borderOnPrimary: "rgba(255,255,255,.45)",
@@ -22,14 +20,14 @@ const Process3 = () => {
     {
       id: "essence",
       label: "Essence",
-      title: "La recherche de l’essence",
+      title: "La recherche de l'essence",
       intro:
-        "L’Ennéagramme enseigne que nous ne sommes pas réductibles à nos conditionnements.",
+        "L'Ennéagramme enseigne que nous ne sommes pas réductibles à nos conditionnements.",
       bullets: [
         "Notre ego est une construction, une stratégie de survie.",
         "Derrière lui, il y a notre essence : une lumière intérieure, unique et universelle à la fois.",
       ],
-      note: "Philosophie : apprendre à se libérer des illusions de l’ego pour révéler l’essence.",
+      note: "Philosophie : apprendre à se libérer des illusions de l'ego pour révéler l'essence.",
     },
     {
       id: "conscience",
@@ -38,30 +36,30 @@ const Process3 = () => {
       intro:
         "Chaque type porte une passion (émotion dominante), une fixation (schéma mental) et une compulsion (évitement). Ces mécanismes nous enferment, mais ils sont aussi des portes de transformation.",
       bullets: [],
-      note: "Philosophie : l’obstacle est le chemin – prendre conscience de nos conditionnements pour les dépasser.",
+      note: "Philosophie : l'obstacle est le chemin – prendre conscience de nos conditionnements pour les dépasser.",
     },
     {
       id: "diversite",
       label: "Diversité",
-      title: "L’unité dans la diversité",
+      title: "L'unité dans la diversité",
       intro:
-        "Il n’y a pas de « bon » ou de « mauvais » type. Chaque ennéatype exprime une partie du puzzle de l’humanité.",
+        "Il n'y a pas de « bon » ou de « mauvais » type. Chaque ennéatype exprime une partie du puzzle de l'humanité.",
       bullets: [
         "En se reconnaissant dans son type, on apprend à se respecter.",
         "En découvrant les autres types, on apprend à aimer la différence.",
       ],
-      note: "Philosophie : la diversité des personnalités est une richesse et un appel à l’unité.",
+      note: "Philosophie : la diversité des personnalités est une richesse et un appel à l'unité.",
     },
     {
       id: "tajalli",
       label: "Fi Takhallî – Tajallî",
       title: "La dynamique de libération : Fi Takhallî – Tajallî",
-      intro: "Comme l’a enseigné Rûmî et la tradition soufie :",
+      intro: "Comme l'a enseigné Rûmî et la tradition soufie :",
       bullets: [
         "Takhallî → se vider, se délester des illusions, des attachements et des automatismes.",
         "Tajallî → se révéler, laisser apparaître la lumière intérieure.",
       ],
-      note: "Philosophie : l’Ennéagramme est une pédagogie de dépouillement pour permettre la révélation de l’être.",
+      note: "Philosophie : l'Ennéagramme est une pédagogie de dépouillement pour permettre la révélation de l'être.",
     },
     {
       id: "humanisme",
@@ -69,23 +67,23 @@ const Process3 = () => {
       title: "Un humanisme spirituel",
       intro: (
         <>
-          L’Ennéagramme relie la <strong>psychologie moderne</strong> et la{" "}
+          L'Ennéagramme relie la <strong>psychologie moderne</strong> et la{" "}
           <strong>sagesse spirituelle ancienne</strong>.
         </>
       ),
       bullets: [
         "Il est un outil pragmatique pour le développement personnel, le leadership, la communication.",
-        "Il est aussi une voie de sens, une philosophie de vie tournée vers la liberté intérieure, l’amour et la présence consciente.",
+        "Il est aussi une voie de sens, une philosophie de vie tournée vers la liberté intérieure, l'amour et la présence consciente.",
       ],
       note: (
         <>
-          La philosophie de l’Ennéagramme est une philosophie de transformation
+          La philosophie de l'Ennéagramme est une philosophie de transformation
           et de réconciliation :
           <ul style={{ margin: "8px 0 0 18px" }}>
             <li>Avec soi-même (retrouver son essence),</li>
             <li>Avec les autres (honorer la diversité),</li>
             <li>
-              Avec la vie (accueillir ce qui est et s’ouvrir à ce qui se
+              Avec la vie (accueillir ce qui est et s'ouvrir à ce qui se
               révèle).
             </li>
           </ul>
@@ -146,48 +144,91 @@ const Process3 = () => {
   return (
     <section style={{ background: colors.bg, padding: "80px 0" }}>
       <div style={{ maxWidth: 1160, margin: "0 auto", padding: "0 16px" }}>
-        {/* Header */}
-        <header style={{ textAlign: "center", marginBottom: 28 }}>
+        {/* Hero Image with Overlay */}
+        <div
+          style={{
+            position: "relative",
+            borderRadius: "20px",
+            overflow: "hidden",
+            marginBottom: "40px",
+            boxShadow: "0 20px 60px rgba(0, 0, 0, 0.4)",
+            height: "420px",
+          }}
+        >
+          <img
+            src="/assets/imgss001/coaching (23).jpg"
+            alt="Philosophie de l'Ennéagramme"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center",
+            }}
+          />
           <div
             style={{
-              display: "inline-flex",
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background:
+                "linear-gradient(135deg, rgba(225, 55, 52, 0.9) 0%, rgba(235, 83, 75, 0.85) 100%)",
+              display: "flex",
+              flexDirection: "column",
               alignItems: "center",
-              gap: 8,
-              padding: "6px 12px",
-              borderRadius: 999,
-              background: colors.pillOnPrimary, // clearer on blue
-              color: colors.onPrimary,
-              fontWeight: 700,
-              letterSpacing: ".06em",
+              justifyContent: "center",
+              padding: "40px 20px",
             }}
           >
-            PHILOSOPHIE
+            <div
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                padding: "8px 20px",
+                borderRadius: 999,
+                background: "rgba(255, 255, 255, 0.25)",
+                backdropFilter: "blur(10px)",
+                border: "1px solid rgba(255, 255, 255, 0.4)",
+                color: "#ffffff",
+                fontWeight: 700,
+                letterSpacing: ".08em",
+                marginBottom: "20px",
+              }}
+            >
+              PHILOSOPHIE
+            </div>
+            <h2
+              style={{
+                margin: "0 0 16px",
+                fontSize: "clamp(28px, 5vw, 48px)",
+                lineHeight: 1.2,
+                fontWeight: 900,
+                color: "#ffffff",
+                textAlign: "center",
+                maxWidth: "800px",
+                textShadow: "0 4px 20px rgba(0, 0, 0, 0.3)",
+              }}
+            >
+              La philosophie de l'Ennéagramme
+            </h2>
+            <p
+              style={{
+                maxWidth: "700px",
+                margin: "0 auto",
+                color: "rgba(255, 255, 255, 0.95)",
+                fontSize: "17px",
+                lineHeight: "1.6",
+                textAlign: "center",
+              }}
+            >
+              Sous la lumière de cette définition (spirituelle, humaniste et
+              enracinée dans l'histoire), on peut dire que la philosophie de
+              l'Ennéagramme repose sur plusieurs piliers.
+            </p>
           </div>
-          <h2
-            style={{
-              margin: "14px 0 6px",
-              fontSize: 38,
-              lineHeight: 1.15,
-              fontWeight: 900,
-              color: colors.onPrimary, // white title on blue
-              textWrap: "balance",
-            }}
-          >
-            La philosophie{" "}
-            <span style={{ opacity: 0.95 }}>de l’Ennéagramme</span>
-          </h2>
-          <p
-            style={{
-              maxWidth: 860,
-              margin: "0 auto",
-              color: colors.mutedOnPrimary, // readable paragraph on blue
-            }}
-          >
-            Sous la lumière de cette définition (spirituelle, humaniste et
-            enracinée dans l’histoire), on peut dire que la philosophie de
-            l’Ennéagramme repose sur plusieurs piliers.
-          </p>
-        </header>
+        </div>
 
         {/* Tabs */}
         <div
@@ -233,7 +274,7 @@ const Process3 = () => {
         >
           <article
             style={{
-              background: colors.cardBg, // white card for clarity
+              background: colors.cardBg,
               borderRadius: 17,
               padding: 22,
               display: "grid",
@@ -246,7 +287,7 @@ const Process3 = () => {
                 margin: "0 0 6px",
                 fontWeight: 900,
                 lineHeight: 1.2,
-                color: colors.primary, // blue heading inside white card
+                color: colors.primary,
               }}
             >
               {current.title}

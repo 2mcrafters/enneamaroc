@@ -1,6 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-// ⬇️ Keep or remove if unused
-import Header1 from "../Components/Header/Header1";
 
 const Découvrir = () => {
   // ---------- DATA ----------
@@ -326,7 +324,7 @@ const Découvrir = () => {
 
               <div className="mt-4">
                 <a
-                  href="/contact"
+                  href="/app/#/course/31"
                   className="btn btn--white-blue"
                   style={btn(C.white, C.blue)}
                 >
@@ -364,8 +362,11 @@ const Découvrir = () => {
         <div className="container">
           <div className="row gy-4">
             {modules.map((m) => (
-              <div key={m.id} className="col-lg-6">
-                <div style={card} className="hover-card">
+              <div key={m.id} className="col-lg-6 d-flex">
+                <div
+                  style={{ ...card, width: "100%" }}
+                  className="hover-card equal-height-card"
+                >
                   <div
                     className="d-flex justify-content-between align-items-center mb-2"
                     style={{ gap: 12 }}
@@ -406,16 +407,6 @@ const Découvrir = () => {
                     {m.description}
                   </p>
                   <p style={{ color: C.black, lineHeight: 1.6 }}>{m.details}</p>
-
-                  <div className="mt-3">
-                    <a
-                      href="#"
-                      className="btn btn--blue"
-                      style={btn(C.blue, C.white)}
-                    >
-                      En savoir plus <i className="fas fa-arrow-right" />
-                    </a>
-                  </div>
                 </div>
               </div>
             ))}
@@ -426,72 +417,72 @@ const Découvrir = () => {
       {/* INFO + PRICING */}
       <section style={{ background: "#f7f7f7", padding: "56px 0" }}>
         <div className="container">
+          {/* Row 1: Informations + Lieu */}
           <div className="row g-4 align-items-start">
+            {/* LEFT: Informations pratiques */}
             <div className="col-lg-6">
-              <div>
-                <span style={{ color: C.red, fontWeight: 700 }}>
-                  INFORMATIONS PRATIQUES
-                </span>
-                <h2 className="mt-1" style={h2}>
-                  Ce qui est inclus dans la formation
-                </h2>
+              <span style={{ color: C.red, fontWeight: 700 }}>
+                INFORMATIONS PRATIQUES
+              </span>
+              <h2 className="mt-1" style={h2}>
+                Ce qui est inclus dans la formation
+              </h2>
 
-                <ul
-                  className="mt-3"
-                  style={{ paddingLeft: 0, listStyle: "none" }}
-                >
-                  {[
-                    "La formation complète sur 6 modules",
-                    "Le livre sur les 9 bases de l'Ennéagramme",
-                    "Les pauses café et rafraîchissements",
-                    "Certificat de formation",
-                  ].map((t, i) => (
-                    <li
-                      key={i}
-                      className="d-flex align-items-start"
-                      style={{ gap: 10, marginBottom: 8 }}
-                    >
-                      <i
-                        className="fas fa-check-circle"
-                        style={{ color: C.red, marginTop: 2 }}
-                      />
-                      <span style={{ color: C.black }}>{t}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <div
-                  style={{ ...card, padding: 16, marginTop: 12 }}
-                  className="hover-card"
-                >
-                  <h4
-                    className="mb-2"
-                    style={{ display: "flex", alignItems: "center", gap: 8 }}
+              <ul
+                className="mt-3"
+                style={{ paddingLeft: 0, listStyle: "none" }}
+              >
+                {[
+                  "La formation complète sur 6 modules",
+                  "Le livre sur les 9 bases de l'Ennéagramme",
+                  "Les pauses café et rafraîchissements",
+                  "Certificat de formation",
+                ].map((t, i) => (
+                  <li
+                    key={i}
+                    className="d-flex align-items-start"
+                    style={{ gap: 10, marginBottom: 8 }}
                   >
                     <i
-                      className="fas fa-map-marker-alt"
-                      style={{ color: C.blue }}
+                      className="fas fa-check-circle"
+                      style={{ color: C.red, marginTop: 2 }}
                     />
-                    Lieu de Formation
-                  </h4>
-                  <p
-                    className="mb-1"
-                    style={{ fontWeight: 700, color: C.black }}
-                  >
-                    Ferme J'nan Lemonie Sidi Yamani
-                  </p>
-                  <p style={{ color: C.black, marginBottom: 0 }}>
-                    <i className="fas fa-clock" style={{ marginRight: 6 }} />{" "}
-                    Horaires : 9H - 17H
-                  </p>
-                </div>
-              </div>
+                    <span style={{ color: C.black }}>{t}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            {/* Pricing (ticket cards) */}
+            {/* RIGHT: Lieu & Horaires */}
             <div className="col-lg-6">
-              <div className="row g-4">
-                <div className="col-md-6">
+              <div style={{ ...card, padding: 16 }} className="hover-card">
+                <h4
+                  className="mb-2"
+                  style={{ display: "flex", alignItems: "center", gap: 8 }}
+                >
+                  <i
+                    className="fas fa-map-marker-alt"
+                    style={{ color: C.blue }}
+                  />
+                  Lieu & Horaires
+                </h4>
+                <p className="mb-1" style={{ fontWeight: 700, color: C.black }}>
+                  Ferme J'nan Lemonie — Sidi Yamani
+                </p>
+                <p style={{ color: C.black, marginBottom: 0 }}>
+                  <i className="fas fa-clock" style={{ marginRight: 6 }} />
+                  9H – 17H
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Row 2: Pricing Cards */}
+          <div className="row g-4 mt-4">
+            <div className="col-12">
+              <div className="row g-3">
+                {/* Card 1 */}
+                <div className="col-12 col-md-6">
                   <div
                     className="hover-card"
                     style={{
@@ -513,30 +504,6 @@ const Découvrir = () => {
                       }}
                     />
                     <div
-                      style={{
-                        position: "absolute",
-                        left: -6,
-                        top: 60,
-                        width: 12,
-                        height: 12,
-                        background: C.white,
-                        borderRadius: "50%",
-                        boxShadow: "inset 0 0 0 1px rgba(0,0,0,.08)",
-                      }}
-                    />
-                    <div
-                      style={{
-                        position: "absolute",
-                        left: -6,
-                        bottom: 60,
-                        width: 12,
-                        height: 12,
-                        background: C.white,
-                        borderRadius: "50%",
-                        boxShadow: "inset 0 0 0 1px rgba(0,0,0,.08)",
-                      }}
-                    />
-                    <div
                       className="d-flex justify-content-between align-items-center"
                       style={{ paddingLeft: 16 }}
                     >
@@ -547,6 +514,7 @@ const Découvrir = () => {
                         TTC
                       </span>
                     </div>
+
                     <div
                       style={{
                         margin: "10px 0 14px",
@@ -571,6 +539,7 @@ const Découvrir = () => {
                         3000
                       </span>
                     </div>
+
                     <ul
                       className="mt-2"
                       style={{ paddingLeft: 0, listStyle: "none" }}
@@ -597,8 +566,9 @@ const Découvrir = () => {
                         </li>
                       ))}
                     </ul>
+
                     <a
-                      href="#"
+                      href="/app/#/course/31"
                       className="btn"
                       style={{
                         ...btn(C.red, C.white),
@@ -612,7 +582,8 @@ const Découvrir = () => {
                   </div>
                 </div>
 
-                <div className="col-md-6">
+                {/* Card 2 */}
+                <div className="col-12 col-md-6">
                   <div
                     className="hover-card"
                     style={{
@@ -634,30 +605,6 @@ const Découvrir = () => {
                       }}
                     />
                     <div
-                      style={{
-                        position: "absolute",
-                        left: -6,
-                        top: 60,
-                        width: 12,
-                        height: 12,
-                        background: C.white,
-                        borderRadius: "50%",
-                        boxShadow: "inset 0 0 0 1px rgba(0,0,0,.08)",
-                      }}
-                    />
-                    <div
-                      style={{
-                        position: "absolute",
-                        left: -6,
-                        bottom: 60,
-                        width: 12,
-                        height: 12,
-                        background: C.white,
-                        borderRadius: "50%",
-                        boxShadow: "inset 0 0 0 1px rgba(0,0,0,.08)",
-                      }}
-                    />
-                    <div
                       className="d-flex justify-content-between align-items-center"
                       style={{ paddingLeft: 16 }}
                     >
@@ -668,6 +615,7 @@ const Découvrir = () => {
                         HTVA
                       </span>
                     </div>
+
                     <div
                       style={{
                         margin: "10px 0 14px",
@@ -692,6 +640,7 @@ const Découvrir = () => {
                         4000
                       </span>
                     </div>
+
                     <ul
                       className="mt-2"
                       style={{ paddingLeft: 0, listStyle: "none" }}
@@ -718,8 +667,9 @@ const Découvrir = () => {
                         </li>
                       ))}
                     </ul>
+
                     <a
-                      href="#"
+                      href="/app/#/course/31"
                       className="btn btn--blue"
                       style={{
                         ...btn(C.blue, C.white),
@@ -728,7 +678,7 @@ const Découvrir = () => {
                         marginTop: 8,
                       }}
                     >
-                      Demander un devis
+                      S'inscrire maintenant
                     </a>
                   </div>
                 </div>
@@ -794,7 +744,7 @@ const Découvrir = () => {
                   <div className="col-12 text-lg-end">
                     <div style={{ marginLeft: 14 }}>
                       <a
-                        href="/contact"
+                        href="/app/#/course/31"
                         className="btn btn--blue"
                         style={{
                           ...btn(C.blue, C.white),

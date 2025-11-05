@@ -32,8 +32,10 @@ const ContactInfo3 = () => {
                     <div className="info">
                       <h4 className="title">Adresse</h4>
                       <p style={{ color: "#000" }}>
-                        Enneagram Maroc (Horizon RH) <br />
-                        Casablanca, Maroc
+                        Av. My Youssef, résidence Hamza (au-dessus du café
+                        picasso)
+                        <br />
+                        Entresol, n°2 · CP 90 000 Tanger
                       </p>
                     </div>
                   </div>
@@ -45,14 +47,21 @@ const ContactInfo3 = () => {
                     <div className="info">
                       <h4 className="title">Appelez-nous</h4>
                       <div className="content" style={{ color: "#000" }}>
-                        Coaching :{" "}
-                        <a href="tel:+212661246647" style={{ color: "#000" }}>
-                          +212 661 24 66 47
+                        <strong>Tel :</strong>{" "}
+                        <a href="tel:0661246647" style={{ color: "#000" }}>
+                          0661 24 66 47
                         </a>
                         <br />
-                        Entreprises :{" "}
-                        <a href="tel:+212661246647" style={{ color: "#000" }}>
-                          +212 661 24 66 47
+                        <span>Nous sommes à votre disposition</span>
+                        <br />
+                        <span>Entreprise :</span>{" "}
+                        <a href="tel:0662062032" style={{ color: "#000" }}>
+                          0662 062 032
+                        </a>
+                        <br />
+                        <span>Dev. Personnel :</span>{" "}
+                        <a href="tel:0661246647" style={{ color: "#000" }}>
+                          0661 24 66 47
                         </a>
                       </div>
                     </div>
@@ -81,31 +90,64 @@ const ContactInfo3 = () => {
                       </div>
                     </div>
                   </div>
+
+                  <div className="contact-item">
+                    <div className="icon">
+                      <i className="bi bi-clock-fill"></i>
+                    </div>
+                    <div className="info">
+                      <h4 className="title">Heures de travail</h4>
+                      <p style={{ color: "#000" }}>
+                        Découvrez les horaires et informations.
+                      </p>
+                      <div className="content" style={{ color: "#000" }}>
+                        <span>Lun – Vend: 09:00 – 17:00</span>
+                        <br />
+                        <span>Sam – Dim: Fermé</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 <div className="social-links">
-                  <a href="#">
+                  <a
+                    href="https://www.facebook.com/HorizonRessourcesHumaines"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     <span className="link-effect">
                       <span className="effect-1">Facebook</span>
                       <span className="effect-1">Facebook</span>
                     </span>
                   </a>
-                  <a href="#">
+                  <a
+                    href="https://www.instagram.com/accounts/login/?next=%2Fhorizon_rh%2F&source=omni_redirect"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <span className="link-effect">
+                      <span className="effect-1">Instagram</span>
+                      <span className="effect-1">Instagram</span>
+                    </span>
+                  </a>
+                  <a
+                    href="https://x.com/horizonrh"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     <span className="link-effect">
                       <span className="effect-1">Twitter/X</span>
                       <span className="effect-1">Twitter/X</span>
                     </span>
                   </a>
-                  <a href="#">
+                  <a
+                    href="https://www.linkedin.com/company/horizon-rh-maroc/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     <span className="link-effect">
                       <span className="effect-1">LinkedIn</span>
                       <span className="effect-1">LinkedIn</span>
-                    </span>
-                  </a>
-                  <a href="#">
-                    <span className="link-effect">
-                      <span className="effect-1">Instagram</span>
-                      <span className="effect-1">Instagram</span>
                     </span>
                   </a>
                 </div>
@@ -217,16 +259,30 @@ const ContactInfo3 = () => {
                     </label>
                   </div>
 
-                  <button
-                    type="submit"
-                    className="theme-btn bg-dark mt-35"
-                    data-loading-text="Veuillez patienter..."
-                  >
-                    <span className="link-effect">
-                      <span className="btn-title">Envoyer</span>
-                    </span>
-                    <i className="bi bi-arrow-right"></i>
-                  </button>
+                  <div className="d-flex flex-wrap align-items-center gap-3 mt-35">
+                    <button
+                      type="submit"
+                      className="theme-btn bg-dark"
+                      data-loading-text="Veuillez patienter..."
+                    >
+                      <span className="link-effect">
+                        <span className="btn-title">Envoyer</span>
+                      </span>
+                      <i className="bi bi-arrow-right"></i>
+                    </button>
+                    <a
+                      href="https://www.horizonrh.ma/contact/"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="theme-btn bg-white text-dark"
+                    >
+                      <span className="link-effect">
+                        <span className="effect-1">Formulaire Horizon RH</span>
+                        <span className="effect-1">Formulaire Horizon RH</span>
+                      </span>
+                      <i className="bi bi-arrow-up-right"></i>
+                    </a>
+                  </div>
                 </form>
               </div>
             </div>
@@ -241,8 +297,8 @@ const ContactInfo3 = () => {
             <div className="map-box">
               <iframe
                 className="map-canvas"
-                // Remplace l'embed ci-dessous par la carte de ton adresse (Casablanca)
-                src="https://www.google.com/maps?q=Casablanca%2C%20Maroc&output=embed"
+                // Carte intégrée du nouveau siège à Tanger
+                src="https://maps.google.com/maps?q=35.771008,-5.811756&z=15&output=embed"
                 loading="lazy"
               ></iframe>
             </div>

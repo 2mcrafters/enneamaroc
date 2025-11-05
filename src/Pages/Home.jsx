@@ -1,19 +1,11 @@
 import About1 from "../Components/About/About1";
-import Blog1 from "../Components/Blog/Blog1";
 import BlogGrid from "../Components/Blog/BlogGrid";
 import Choose1 from "../Components/Choose/Choose1";
 import ContactInfo1 from "../Components/ContactInfo/ContactInfo1";
-import ContactList from "../Components/ContactInfo/ContactList";
-import Nwesletter from "../Components/ContactInfo/Nwesletter";
 import HeroBanner1 from "../Components/HeroBanner/HeroBanner1";
-import Marquee from "../Components/Marquee/Marquee";
-import Partner1 from "../Components/Partner/Partner1";
-import Pricing1 from "../Components/Pricing/Pricing1";
 import Process from "../Components/Process/Process";
 import Process3 from "../Components/Process/Process3";
-import Services1 from "../Components/Services/Services1";
 import Testimonial from "../Components/Testimonial/Testimonial";
-import { Link } from "react-router-dom";
 // import chafik from "../../../assets/imgss001/chafik.jpg";
 
 const Home = () => {
@@ -23,7 +15,7 @@ const Home = () => {
         videotext="<strong>Regarder</strong><br>l’histoire de Bentol"
         title="Libérez votre<br> potentiel avec <br><span class='bold'> l’Ennéagramme</span> "
         btnname="Parlons-en avec l’Ennéagramme "
-        btnurl="/contact"
+        btnurl="/app/#/login"
         //   mainimg="/assets/imgss001/coaching (25).jpg"
         Clientnumber="5k"
         Client="Nous conseillons des clients "
@@ -33,11 +25,11 @@ const Home = () => {
       ></HeroBanner1>
       {/* <Marquee></Marquee> */}
       <About1
-        subtitle="À PROPOS D’ENNEAMAROC"
+        subtitle="À PROPOS D'ENNEAMAROC"
         title="Votre cabinet de <br> <span class='bold'>coaching et de développement</span> <br> personnel pour réussir "
-        rotatetext="* IT BUSINESS  *  CONSULTANTIS  *  DEVELOPMENTS"
+        rotatetext="* ENNÉAGRAMME  *  COACHING  *  DÉVELOPPEMENT"
         subtitle2="DEPUIS 2006"
-        content="Nous accompagnons particuliers et entreprises dans la connaissance de soi, la communication et la cohésion d’équipe grâce à l’Ennéagramme et au coaching."
+        content="Nous accompagnons particuliers et entreprises dans la connaissance de soi, la communication et la cohésion d'équipe grâce à l'Ennéagramme et au coaching."
         btnname="En savoir plus"
         expyear="25"
         exptitle="<span class='fw-semibold'>années</span> <br>d’expérience pro"
@@ -47,16 +39,52 @@ const Home = () => {
       ></About1>
       {/* <Partner1></Partner1> */}
       {/* <Services1></Services1> */}
-      <BlogGrid></BlogGrid>
-      <Choose1></Choose1>
-      <Process3></Process3>
-      <Process></Process>
 
       <Testimonial></Testimonial>
+      <Process></Process>
+      <Process3></Process3>
+      <Choose1></Choose1>
+      <BlogGrid></BlogGrid>
 
       {/* <Pricing1></Pricing1> */}
 
       {/* <Marquee></Marquee> */}
+
+      {/* Image Banner before Contact Section */}
+      <section
+        style={{
+          position: "relative",
+          width: "100%",
+          height: "200px",
+          overflow: "hidden",
+          margin: 0,
+          padding: 0,
+        }}
+      >
+        <img
+          src="/assets/imgss001/coaching (10).jpg"
+          alt="Banner"
+          style={{
+            width: "100%",
+            height: "200px",
+            objectFit: "cover",
+            display: "block",
+          }}
+        />
+        {/* Blue overlay */}
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(10, 131, 202, 0.6)",
+            pointerEvents: "none",
+          }}
+        />
+      </section>
+
       <ContactInfo1></ContactInfo1>
 
       {/* <ContactList></ContactList> */}

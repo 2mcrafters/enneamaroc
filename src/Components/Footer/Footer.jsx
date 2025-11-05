@@ -12,45 +12,40 @@ const Footer = () => {
     { label: "Contact", path: "/contact" },
   ];
 
-  const socialLinks = [
-    {
-      href: "https://facebook.com",
-      ariaLabel: "Facebook",
-      iconClass: "bi-facebook",
-      hoverClass: "hover:bg-blue-600",
-    },
-    {
-      href: "https://x.com",
-      ariaLabel: "Twitter / X",
-      iconClass: "bi-twitter-x",
-      hoverClass: "hover:bg-black",
-    },
-    {
-      href: "https://linkedin.com",
-      ariaLabel: "LinkedIn",
-      iconClass: "bi-linkedin",
-      hoverClass: "hover:bg-blue-700",
-    },
-    {
-      href: "https://instagram.com",
-      ariaLabel: "Instagram",
-      iconClass: "bi-instagram",
-      hoverClass: "hover:bg-pink-600",
-    },
-    {
-      href: "https://youtube.com",
-      ariaLabel: "YouTube",
-      iconClass: "bi-youtube",
-      hoverClass: "hover:bg-red-600",
-    },
-  ];
-
   const contact = {
-    phone: "+212 000 000 000",
-    whatsapp: "+212 600 000 000",
+    phone: {
+      main: "0661 24 66 47",
+    },
+    whatsapp: "0661 24 66 47",
     email: "bonjour@enneagrammaroc.ma",
-    address: "Casablanca, Maroc",
-    hours: "Lun–Ven · 09h–18h",
+    address:
+      "Av. My Youssef, résidence Hamza (au-dessus du café picasso) Entresol, n°2, CP 90 000 Tanger",
+  };
+
+  const digitsOnly = (value) => value.replace(/\D/g, "");
+
+  const buildTelHref = (value) => {
+    const digits = digitsOnly(value);
+    if (!digits) return "#";
+    if (digits.startsWith("0")) {
+      return `+212${digits.slice(1)}`;
+    }
+    if (digits.startsWith("212")) {
+      return `+${digits}`;
+    }
+    return digits;
+  };
+
+  const buildWhatsAppHref = (value) => {
+    const digits = digitsOnly(value);
+    if (!digits) return "#";
+    if (digits.startsWith("0")) {
+      return `https://wa.me/212${digits.slice(1)}`;
+    }
+    if (digits.startsWith("212")) {
+      return `https://wa.me/${digits}`;
+    }
+    return `https://wa.me/${digits}`;
   };
 
   const legalLinks = [
@@ -60,46 +55,46 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-[#1c8bce] text-white">
+    <footer className="bg-[#1c8bce] text-white not-prose">
       {/* Main */}
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 pt-16 pb-12">
-        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 pt-8 pb-6">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 items-start">
           {/* Brand + creative copy */}
-          <div>
-            <Link to="/" className="inline-block mb-4">
+          <div className="space-y-3">
+            <Link to="/" className="inline-block">
               <img
                 src={logoSrc}
                 alt="Enneagram Maroc"
-                className="h-12 w-auto"
+                className="h-7 w-auto"
+                style={{ maxWidth: "61%" }}
               />
             </Link>
 
-            <p className="max-w-sm text-white">
-              <span className="font-semibold">
+            <p className="max-w-sm text-white leading-relaxed text-xs">
+              <span className="font-semibold text-sm block mb-1">
                 Enneagram Maroc – Chemin vers soi.
               </span>
-              <br />
               Respirez. Observez. Choisissez. Chaque jour, un pas de plus vers
               une clarté intérieure.
             </p>
 
-            <p className="mt-4 text-sm text-white">
+            <p className="text-xs text-white leading-relaxed opacity-90">
               Outils, formations et accompagnements pour mieux vous comprendre
               et transformer vos relations.
             </p>
           </div>
 
           {/* Navigation */}
-          <div>
-            <h3 className="text-sm font-semibold tracking-wider uppercase text-white">
+          <div className="space-y-3">
+            <h3 className="text-xs font-semibold tracking-wider uppercase text-white">
               Navigation
             </h3>
-            <ul className="mt-4 space-y-2 text-sm">
+            <ul className="space-y-1.5">
               {navLinks.map(({ label, path }) => (
                 <li key={path}>
                   <Link
                     to={path}
-                    className="text-white hover:opacity-90 transition"
+                    className="text-white hover:translate-x-1 transition-all inline-block text-xs"
                   >
                     {label}
                   </Link>
@@ -109,47 +104,52 @@ const Footer = () => {
           </div>
 
           {/* Contact */}
-          <div>
-            <h3 className="text-sm font-semibold tracking-wider uppercase text-white">
+          <div className="space-y-3">
+            <h3 className="text-xs font-semibold tracking-wider uppercase text-white">
               Contact
             </h3>
-            <ul className="mt-4 space-y-3 text-sm text-white">
-              <li className="flex items-center gap-2">
-                <i className="bi bi-telephone-fill" aria-hidden="true" />
-                <a
-                  href={`tel:${contact.phone.replace(/\s/g, "")}`}
-                  className="text-white hover:opacity-90 transition"
-                >
-                  {contact.phone}
-                </a>
+            <ul className="space-y-3 text-white text-xs">
+              <li className="flex items-start gap-1.5">
+                <i
+                  className="bi bi-telephone-fill text-sm mt-0.5"
+                  aria-hidden="true"
+                />
+                <div className="space-y-1">
+                  <div className="font-semibold uppercase tracking-wide text-[11px]">
+                    Appelez-nous :{" "}
+                    <a
+                      href={`tel:${buildTelHref(contact.phone.main)}`}
+                      className="text-white transition underline-offset-2 hover:underline"
+                    >
+                      {contact.phone.main}
+                    </a>
+                  </div>
+                </div>
               </li>
-              <li className="flex items-center gap-2">
-                <i className="bi bi-whatsapp" aria-hidden="true" />
+              <li className="flex items-center gap-1.5">
+                <i className="bi bi-whatsapp text-sm" aria-hidden="true" />
                 <a
-                  href={`https://wa.me/${contact.whatsapp.replace(
-                    /[^0-9]/g,
-                    ""
-                  )}`}
+                  href={buildWhatsAppHref(contact.whatsapp)}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-white hover:opacity-90 transition"
+                  className="text-white transition underline-offset-2 hover:underline"
                 >
                   {contact.whatsapp}
                 </a>
               </li>
-              <li className="flex items-center gap-2">
-                <i className="bi bi-envelope-fill" aria-hidden="true" />
+              <li className="flex items-center gap-1.5">
+                <i className="bi bi-envelope-fill text-sm" aria-hidden="true" />
                 <a
                   href={`mailto:${contact.email}`}
-                  className="text-white hover:opacity-90 transition"
+                  className="text-white transition"
                 >
                   {contact.email}
                 </a>
               </li>
-              <li className="flex items-center gap-2">
-                <i className="bi bi-geo-alt-fill" aria-hidden="true" />
+              <li className="flex items-center gap-1.5">
+                <i className="bi bi-geo-alt-fill text-sm" aria-hidden="true" />
                 <a
-                  className="text-white hover:opacity-90 transition"
+                  className="text-white transition"
                   href={`https://maps.google.com/?q=${encodeURIComponent(
                     contact.address
                   )}`}
@@ -159,68 +159,27 @@ const Footer = () => {
                   {contact.address}
                 </a>
               </li>
-              <li className="flex items-center gap-2">
-                <i className="bi bi-clock-fill" aria-hidden="true" />
-                <span>{contact.hours}</span>
-              </li>
             </ul>
-
-            <p className="mt-4 text-sm text-white">
-              Une question rapide ? Écrivez{" "}
-              <span className="font-semibold">“Bonjour”</span> — on vous répond
-              dans la journée.
-            </p>
+            {/* Removed quick question note per request */}
           </div>
-
-          {/* Social */}
-          <div>
-            <h3 className="text-sm font-semibold tracking-wider uppercase text-white">
-              Suivez-nous
-            </h3>
-            <p className="mt-4 text-sm text-white">
-              Conseils courts, ateliers et coulisses — on partage le meilleur du
-              jour.
-            </p>
-            <div className="mt-4 flex items-center gap-3">
-              {socialLinks.map(({ href, ariaLabel, iconClass, hoverClass }) => (
-                <a
-                  key={href}
-                  href={href}
-                  aria-label={ariaLabel}
-                  className={`inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/80 text-white transition ${hoverClass}`}
-                >
-                  <i className={`bi ${iconClass}`} />
-                </a>
-              ))}
-            </div>
-
-            <div className="mt-6">
-              <Link
-                to="/parcours"
-                className="inline-block rounded-md px-3 py-2 text-sm font-semibold text-white border border-white hover:bg-white/10 transition"
-              >
-                Prêt·e à explorer votre type ?
-              </Link>
-            </div>
-          </div>
+          {/* Social section removed per request (icons and CTA) */}
         </div>
       </div>
 
       {/* Bottom */}
-      <div className="border-t border-white/40">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-4">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <span className="text-xs text-white">
+      <div className="border-t border-white/30">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-3">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-3">
+            <span className="text-[11px] text-white">
               © {new Date().getFullYear()} Enneagram Maroc — Fait avec{" "}
-              <span aria-hidden>♥</span> au Maroc.
+              <span aria-hidden className="text-red-300">
+                ♥
+              </span>{" "}
+              au Maroc.
             </span>
-            <div className="flex items-center gap-x-5 text-xs">
+            <div className="flex items-center gap-x-3 text-[11px]">
               {legalLinks.map(({ label, path }) => (
-                <a
-                  key={label}
-                  href={path}
-                  className="text-white hover:opacity-90 transition"
-                >
+                <a key={label} href={path} className="text-white transition">
                   {label}
                 </a>
               ))}

@@ -1,38 +1,74 @@
 // src/components/Header1.jsx
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { auth } from "../../services/auth";
 
-export default function Header1({ variant }) {
+export default function Header1({ variant = "" }) {
+  // ---- UI state
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [openSub, setOpenSub] = useState(null); // mobile submenu key
   const [isSticky, setIsSticky] = useState("");
   const prevScrollPosRef = useRef(0);
+
+  // ---- Auth
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
+  // ---- Router
   const navigate = useNavigate();
   const location = useLocation();
 
-  // ---- NAV ITEMS
-  // NOTE: l’ennéagramme uses `hashTo` so it scrolls to #process-section
+  // ---- Dropdown
+  const [openDropdown, setOpenDropdown] = useState(null);
+  const dropdownRefs = useRef({});
+
+  const navListId = "main-nav-list";
+
+  // ---- NAV ITEMS (URLs sans accents)
   const navItems = [
-    { label: "l’ennéagramme", hashTo: "process-section" },
-    { label: "école", to: "/ecole" },
+    { type: "hash", label: "l’ennéagramme", hashTo: "enneagramme-section" },
+    { type: "link", label: "école", to: "/ecole" },
     {
+      type: "select",
       label: "parcours",
-      children: [
-        { label: "transmettre", to: "/transmettre" },
-        { label: "approfondir", to: "/approfondir" },
+      options: [
         { label: "découvrir", to: "/découvrir" },
+        { label: "approfondir", to: "/approfondir" },
+        { label: "transmettre", to: "/transmettre" },
       ],
     },
-    { label: "solution", to: "/solution" },
-    { label: "agenda", to: "/agenda" },
-    { label: "contact", to: "/contact" },
+    { type: "link", label: "solution", to: "/solution" },
+    { type: "link", label: "agenda", to: "/agenda" },
+    { type: "link", label: "contact", to: "/contact" },
   ];
 
-  // ---- sticky header behavior
+  // ---- Helpers
+  const isMobile = () =>
+    typeof window !== "undefined" &&
+    window.matchMedia("(max-width: 991px)").matches;
+
+  const closeMobileAll = () => {
+    setMobileOpen(false);
+    setOpenDropdown(null);
+    document.body.classList.remove("mobile-menu-open");
+  };
+
+  const toggleMobileMenu = () => {
+    const next = !mobileOpen;
+    setMobileOpen(next);
+    setOpenDropdown(null);
+    if (next) document.body.classList.add("mobile-menu-open");
+    else document.body.classList.remove("mobile-menu-open");
+  };
+
+  const goToHash = (id) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    else navigate(`/#${id}`);
+  };
+
+  // ---- Effects
+
+  // Sticky header on scroll
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY;
@@ -46,163 +82,254 @@ export default function Header1({ variant }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // ---- Check authentication status
+  // Lock scroll when mobile menu open (iOS safe)
   useEffect(() => {
-    const checkAuth = async () => {
-      const loggedIn = auth.isAuthenticated();
-      setIsLoggedIn(loggedIn);
-
-      if (loggedIn) {
-        try {
-          const isAdminUser = await auth.isAdmin();
-          setIsAdmin(isAdminUser);
-        } catch (error) {
-          console.error("Erreur lors de la vérification du rôle admin:", error);
-        }
-      }
+    if (!mobileOpen) return;
+    const root = document.documentElement;
+    const prevOverflow = root.style.overflow;
+    const prevPaddingRight = root.style.paddingRight;
+    const comp = window.innerWidth - document.documentElement.clientWidth;
+    root.style.overflow = "hidden";
+    if (comp > 0) root.style.paddingRight = `${comp}px`;
+    return () => {
+      root.style.overflow = prevOverflow;
+      root.style.paddingRight = prevPaddingRight;
     };
-    checkAuth();
-  }, []);
+  }, [mobileOpen]);
 
-  // ---- when hash changes anywhere in the app, scroll smoothly
+  // Close menu & dropdown on route change
+  useEffect(() => {
+    closeMobileAll();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.pathname]);
+
+  // Smooth scroll when hash changes
   useEffect(() => {
     if (!location.hash) return;
     const id = location.hash.slice(1);
-    // wait for the page to render
-    setTimeout(() => {
+    const t = setTimeout(() => {
       const el = document.getElementById(id);
       if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 0);
+    return () => clearTimeout(t);
   }, [location.hash]);
 
-  const isMobile = () =>
-    typeof window !== "undefined" &&
-    window.matchMedia("(max-width: 991px)").matches;
+  // ESC to close
+  useEffect(() => {
+    const onKey = (e) => e.key === "Escape" && closeMobileAll();
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
-  const closeMobileAll = () => {
-    setMobileOpen(false);
-    setOpenSub(null);
+  // Reset state when resizing to desktop
+  useEffect(() => {
+    const onResize = () => {
+      if (!isMobile() && mobileOpen) closeMobileAll();
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [mobileOpen]);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    if (!openDropdown) return;
+    const handlePointer = (event) => {
+      const currentRef = dropdownRefs.current?.[openDropdown];
+      if (currentRef && !currentRef.contains(event.target)) {
+        setOpenDropdown(null);
+      }
+    };
+    document.addEventListener("mousedown", handlePointer);
+    document.addEventListener("touchstart", handlePointer, { passive: true });
+    return () => {
+      document.removeEventListener("mousedown", handlePointer);
+      document.removeEventListener("touchstart", handlePointer);
+    };
+  }, [openDropdown]);
+
+  const registerDropdownRef = (label) => (node) => {
+    if (!dropdownRefs.current) dropdownRefs.current = {};
+    if (node) dropdownRefs.current[label] = node;
+    else delete dropdownRefs.current[label];
   };
 
-  // Navigate or scroll to a hash target
-  const goToHash = (id) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-    } else {
-      navigate(`/#${id}`);
+  // Auth status
+  useEffect(() => {
+    (async () => {
+      try {
+        const loggedIn = auth?.isAuthenticated?.() ?? false;
+        setIsLoggedIn(loggedIn);
+        setIsAdmin(loggedIn ? !!(await auth?.isAdmin?.()) : false);
+      } catch (e) {
+        console.error("Auth check error:", e);
+      }
+    })();
+  }, []);
+
+  // ---- Renderers
+
+  const renderItem = (item) => {
+    if (item.type === "hash") {
+      return (
+        <a
+          href={`/#${item.hashTo}`}
+          className="cs_nav_link"
+          role="menuitem"
+          onClick={(e) => {
+            e.preventDefault();
+            closeMobileAll();
+            goToHash(item.hashTo);
+          }}
+          style={{ display: "inline-flex", alignItems: "center", height: 44 }}
+        >
+          {item.label}
+        </a>
+      );
     }
+
+    if (item.type === "link") {
+      return (
+        <Link
+          to={item.to}
+          className="cs_nav_link"
+          role="menuitem"
+          onClick={closeMobileAll}
+          style={{ display: "inline-flex", alignItems: "center", height: 44 }}
+        >
+          {item.label}
+        </Link>
+      );
+    }
+
+    if (item.type === "select") {
+      const isOpen = openDropdown === item.label;
+      const normalizedPath = location.pathname.toLowerCase();
+      const selectedOption = item.options.find(
+        (opt) => normalizedPath === opt.to.toLowerCase()
+      );
+      const dropdownId = `nav-dropdown-${item.label}`;
+
+      return (
+        <div
+          ref={registerDropdownRef(item.label)}
+          className={`nav-dropdown ${isOpen ? "is-open" : ""}`}
+        >
+          <button
+            type="button"
+            className="nav-dropdown-button"
+            aria-haspopup="true"
+            aria-expanded={isOpen}
+            aria-controls={dropdownId}
+            onClick={() =>
+              setOpenDropdown((prev) =>
+                prev === item.label ? null : item.label
+              )
+            }
+            onKeyDown={(event) => {
+              if (event.key === "ArrowDown") {
+                event.preventDefault();
+                setOpenDropdown(item.label);
+                const firstLink =
+                  dropdownRefs.current?.[item.label]?.querySelector(
+                    ".nav-dropdown-link"
+                  );
+                if (firstLink) firstLink.focus();
+              }
+              if (event.key === "Escape") {
+                event.preventDefault();
+                setOpenDropdown(null);
+              }
+            }}
+          >
+            <span className="nav-dropdown-label">{item.label}</span>
+            {selectedOption ? (
+              <span className="nav-dropdown-active-pill">
+                {selectedOption.label}
+              </span>
+            ) : null}
+            <svg
+              aria-hidden="true"
+              className={`nav-dropdown-caret ${isOpen ? "is-open" : ""}`}
+              viewBox="0 0 12 8"
+              fill="none"
+            >
+              <path
+                d="M1 1L6 6L11 1"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+
+          <div id={dropdownId} className="nav-dropdown-menu" role="menu">
+            <div className="nav-dropdown-surface" role="none">
+              {item.options.map((opt) => {
+                const isActive = normalizedPath === opt.to.toLowerCase();
+                return (
+                  <Link
+                    key={opt.to}
+                    to={opt.to}
+                    className={`nav-dropdown-link ${
+                      isActive ? "is-active" : ""
+                    }`}
+                    role="menuitem"
+                    onClick={closeMobileAll}
+                  >
+                    <span>{opt.label}</span>
+                    <svg
+                      aria-hidden="true"
+                      viewBox="0 0 14 12"
+                      className="nav-dropdown-link-icon"
+                    >
+                      <path
+                        d="M1 6h10M7 1l5 5-5 5"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="1.6"
+                      />
+                    </svg>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    return null;
   };
 
   return (
     <header
-      className={`cs_site_header header_style_2 cs_style_1 ${
-        variant || ""
-      } cs_sticky_header cs_site_header_full_width ${
+      className={`cs_site_header header_style_2 cs_style_1 ${variant} cs_sticky_header cs_site_header_full_width ${
         mobileOpen ? "cs_mobile_toggle_active" : ""
       } ${isSticky}`}
       style={{ position: "relative", zIndex: 60 }}
     >
-      {/* ===== Inline CSS ===== */}
-      <style>{`
-        :root{
-          --brand-primary: #1c8bce;
-          --link-base:     #0a83ca;
-          --header-h:      72px;
-        }
-        html { scroll-behavior: smooth; } /* general smooth scrolling */
-        /* avoid sticky header overlap when jumping to #process-section */
-        #process-section { scroll-margin-top: calc(var(--header-h) + 14px); }
-
-        .hdr-in {
-          display:grid; grid-template-columns:auto 1fr auto;
-          align-items:center; gap:16px;
-        }
-        .nav-center { display:flex; justify-content:center; text-transform:lowercase; }
-        .nav-center .cs_navbar { width:100%; }
-        .nav-center .cs_nav_list {
-          display:flex; align-items:center; justify-content:center;
-          gap:28px; margin:0; padding:0; list-style:none;
-        }
-        .nav-center .cs_nav_link {
-          text-decoration:none; color:var(--link-base); font-weight:600;
-        }
-
-        .cs_main_header, .cs_main_header_in, .cs_navbar { overflow:visible; }
-
-        /* ===== Desktop dropdown ===== */
-        @media (min-width: 992px){
-          .menu-item { position:relative; }
-          .menu-item.has-children > .dropdown{
-            position:absolute; left:50%; top:100%; transform:translateX(-50%);
-            min-width:220px; background:#fff; border-radius:12px;
-            padding:12px 8px 8px; border:1px solid rgba(0,0,0,.06);
-            box-shadow:0 16px 40px rgba(0,0,0,.14);
-            z-index:9999;
-
-            opacity:0; visibility:hidden; translate:0 6px; pointer-events:none;
-            transition:opacity .15s ease, translate .15s ease, visibility .15s;
-          }
-          .menu-item.has-children:hover > .dropdown,
-          .menu-item.has-children:focus-within > .dropdown{
-            opacity:1; visibility:visible; translate:0 0; pointer-events:auto;
-          }
-          .dropdown a{
-            display:block; padding:10px 12px; border-radius:8px;
-            color:var(--link-base); font-weight:700; text-decoration:none;
-          }
-          .dropdown a:hover{ background:var(--brand-primary); color:#fff; }
-
-          .cs_parent_label { cursor:default; color:var(--link-base); font-weight:600; }
-          .submenu-toggle { display:none; } /* caret hidden on desktop */
-        }
-
-        /* ===== Mobile nav ===== */
-        .cs-munu_toggle{ display:none; cursor:pointer; }
-        @media (max-width: 991px){
-          .hdr-in{ grid-template-columns:auto auto auto; }
-
-          .cs-munu_toggle{ display:inline-block; margin-left:12px; }
-          .nav-center{ justify-content:flex-end; }
-
-          .nav-center .cs_nav_list{
-            position:fixed; left:0; right:0; top:var(--header-h, 72px);
-            background:#fff; color:var(--link-base);
-            flex-direction:column; gap:6px; padding:14px 16px;
-            box-shadow:0 14px 28px rgba(0,0,0,.12);
-            max-height:0; overflow:hidden; transition:max-height .25s ease;
-            z-index:999; text-align:center;
-          }
-          .nav-center .cs_nav_list.is-open{ max-height:85vh; }
-          .nav-center .cs_nav_link{ color:var(--link-base); display:inline-flex; align-items:center; gap:8px; }
-
-          .menu-item.has-children .dropdown{
-            position:static; transform:none; min-width:unset; width:100%;
-            background:#fff; border-radius:8px; border:1px solid rgba(0,0,0,.06);
-            padding:4px 6px; max-height:0; overflow:hidden; transition:max-height .25s ease;
-          }
-          .menu-item.has-children.open .dropdown{ max-height:320px; }
-          .dropdown a{ color:var(--link-base); padding:10px 10px; border-radius:6px; }
-          .dropdown a:hover{ background:#eaf6fd; color:var(--link-base); }
-
-          .cs_parent_label{ cursor:pointer; color:var(--link-base); font-weight:600; }
-          .submenu-toggle{
-            display:inline-flex; align-items:center; justify-content:center;
-            width:28px; height:28px; margin-left:6px; border-radius:6px;
-            border:1px solid #d7e7f4; color:var(--link-base); background:#fff;
-          }
-          .submenu-toggle svg{ transition: transform .2s ease; }
-          .menu-item.has-children.open .submenu-toggle svg{ transform: rotate(180deg); }
-        }
-
-        /* ===== Sidebar (if you add one later) ===== */
-        .sidebar.header-sidebar-area{ display:none; }
-      `}</style>
+      {/* Mobile overlay */}
+      <div
+        className={`mobile-overlay ${mobileOpen ? "is-open" : ""}`}
+        onClick={closeMobileAll}
+        aria-hidden={!mobileOpen}
+        style={{
+          position: "fixed",
+          inset: 0,
+          background: "rgba(0,0,0,.35)",
+          opacity: mobileOpen ? 1 : 0,
+          pointerEvents: mobileOpen ? "auto" : "none",
+          transition: "opacity .2s ease",
+        }}
+      />
 
       <div className="cs_main_header">
         <div className="container">
           <div className="cs_main_header_in hdr-in">
-            {/* Left: Brand */}
+            {/* Left: brand only */}
             <div className="cs_main_header_left">
               <Link
                 to="/"
@@ -213,140 +340,52 @@ export default function Header1({ variant }) {
                   className="cs-logo"
                   src="/assets/images/logo/logo.png"
                   alt="Enneagram Maroc Logo"
+                  style={{ height: "100%" }}
                 />
               </Link>
             </div>
 
-            {/* Center: Nav */}
+            {/* Center: nav */}
             <div className="cs_main_header_center nav-center">
               <div className="cs_nav cs_primary_font fw-medium">
-                {/* mobile toggler */}
-                <span
-                  className={
-                    mobileOpen
-                      ? "cs-munu_toggle cs_teggle_active"
-                      : "cs-munu_toggle"
-                  }
-                  onClick={() => setMobileOpen((v) => !v)}
-                  aria-label="Toggle menu"
-                  role="button"
-                >
-                  <span></span>
-                </span>
-
                 <nav className="cs_navbar" role="navigation" aria-label="Main">
-                  <ul className={`cs_nav_list ${mobileOpen ? "is-open" : ""}`}>
-                    {navItems.map((item) => {
-                      const hasChildren = !!item.children?.length;
-                      const opened = openSub === item.label;
-
-                      return (
-                        <li
-                          key={item.label}
-                          className={`menu-item ${
-                            hasChildren ? "has-children" : ""
-                          } ${opened ? "open" : ""}`}
-                        >
-                          {/* 1) HASH items (l’ennéagramme) */}
-                          {!hasChildren && item.hashTo && (
-                            <a
-                              href={`/#${item.hashTo}`}
-                              className="cs_nav_link"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                closeMobileAll();
-                                goToHash(item.hashTo);
-                              }}
-                            >
-                              {item.label}
-                            </a>
-                          )}
-
-                          {/* 2) Normal links */}
-                          {!hasChildren && item.to && !item.hashTo && (
-                            <Link
-                              to={item.to}
-                              className="cs_nav_link"
-                              onClick={closeMobileAll}
-                            >
-                              {item.label}
-                            </Link>
-                          )}
-
-                          {/* 3) Parent with dropdown (parcours not clickable) */}
-                          {hasChildren && (
-                            <>
-                              <span
-                                className="cs_nav_link cs_parent_label"
-                                tabIndex={0}
-                                aria-haspopup="true"
-                                aria-expanded={opened}
-                                onClick={() => {
-                                  if (isMobile())
-                                    setOpenSub(opened ? null : item.label);
-                                }}
-                                onKeyDown={(e) => {
-                                  if (
-                                    isMobile() &&
-                                    (e.key === "Enter" || e.key === " ")
-                                  ) {
-                                    e.preventDefault();
-                                    setOpenSub(opened ? null : item.label);
-                                  }
-                                }}
-                              >
-                                {item.label}
-                              </span>
-
-                              <button
-                                type="button"
-                                className="submenu-toggle"
-                                aria-label={`Ouvrir le sous-menu ${item.label}`}
-                                aria-expanded={opened}
-                                onClick={() =>
-                                  setOpenSub(opened ? null : item.label)
-                                }
-                              >
-                                <svg
-                                  width="16"
-                                  height="16"
-                                  viewBox="0 0 24 24"
-                                  fill="currentColor"
-                                >
-                                  <path d="M7 10l5 5 5-5" />
-                                </svg>
-                              </button>
-
-                              <div className="dropdown" role="menu">
-                                {item.children.map((sub) => (
-                                  <Link
-                                    key={sub.to}
-                                    to={sub.to}
-                                    className="cs_nav_link"
-                                    onClick={closeMobileAll}
-                                  >
-                                    {sub.label}
-                                  </Link>
-                                ))}
-                              </div>
-                            </>
-                          )}
-                        </li>
-                      );
-                    })}
+                  <ul
+                    id={navListId}
+                    className={`cs_nav_list ${mobileOpen ? "is-open" : ""}`}
+                    role="menubar"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 28,
+                      listStyle: "none",
+                      margin: 0,
+                      padding: 0,
+                    }}
+                  >
+                    {navItems.map((item) => (
+                      <li
+                        key={item.label}
+                        className="menu-item"
+                        role="none"
+                        style={{ display: "inline-flex", alignItems: "center" }}
+                      >
+                        {renderItem(item)}
+                      </li>
+                    ))}
                   </ul>
                 </nav>
               </div>
             </div>
 
-            {/* Right: Profile Icon (conditional route) */}
+            {/* Right: profile + mobile burger */}
             <div className="cs_main_header_right">
               <div className="header-btn header-right-wrapper">
                 <div className="header-right">
                   <div className="profile-icon">
-                    <Link
-                      to={isLoggedIn ? "/profile" : "/seconnecter"}
-                      aria-label={isLoggedIn ? "Profile" : "Se connecter"}
+                    <a
+                      href={isLoggedIn ? "/app/#/profile" : "/app/#/login"}
+                      aria-label={isLoggedIn ? "Profil" : "Se connecter"}
+                      onClick={closeMobileAll}
                       style={{
                         width: 40,
                         height: 40,
@@ -359,7 +398,6 @@ export default function Header1({ variant }) {
                         justifyContent: "center",
                         textDecoration: "none",
                       }}
-                      onClick={closeMobileAll}
                     >
                       <svg
                         width="18"
@@ -369,13 +407,68 @@ export default function Header1({ variant }) {
                       >
                         <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
                       </svg>
-                    </Link>
+                    </a>
+                    {/* {isAdmin && <Link to="/admin" className="admin-link">Admin</Link>} */}
                   </div>
-                  {/* If you ever need admin-only quick link: */}
-                  {/* {isAdmin && <Link to="/admin" className="admin-link">Admin</Link>} */}
                 </div>
               </div>
+
+              {/* Mobile hamburger button - right side */}
+              <button
+                type="button"
+                className="hambtn mobile-menu-btn"
+                aria-label={mobileOpen ? "Fermer le menu" : "Ouvrir le menu"}
+                aria-controls={navListId}
+                aria-expanded={mobileOpen}
+                onClick={toggleMobileMenu}
+                style={{
+                  width: 50,
+                  height: 50,
+                  borderRadius: 12,
+                  border: "2px solid rgba(10, 131, 202, 0.2)",
+                  background: "#fff",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexDirection: "column",
+                  gap: 4,
+                  boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+                  marginRight: 8,
+                }}
+              >
+                <span
+                  style={{
+                    width: 24,
+                    height: 3,
+                    background: "#0a83ca",
+                    display: "block",
+                    borderRadius: 2,
+                    transition: "all 0.3s ease",
+                  }}
+                />
+                <span
+                  style={{
+                    width: 24,
+                    height: 3,
+                    background: "#0a83ca",
+                    display: "block",
+                    borderRadius: 2,
+                    transition: "all 0.3s ease",
+                  }}
+                />
+                <span
+                  style={{
+                    width: 24,
+                    height: 3,
+                    background: "#0a83ca",
+                    display: "block",
+                    borderRadius: 2,
+                    transition: "all 0.3s ease",
+                  }}
+                />
+              </button>
             </div>
+            {/* /Right */}
           </div>
         </div>
       </div>

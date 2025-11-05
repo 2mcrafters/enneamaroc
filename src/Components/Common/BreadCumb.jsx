@@ -1,42 +1,53 @@
 import { useEffect } from "react";
-import loadBackgroudImages from "./loadBackgroudImages";
 import { Link } from "react-router-dom";
-import parse from 'html-react-parser';
+import parse from "html-react-parser";
 
-const BreadCumb = ({bg,Title,Content}) => {
-    
-    useEffect(() => {
-        loadBackgroudImages();
-      }, []);
+const applyBackgroundImages = () => {
+  if (typeof document === "undefined") {
+    return;
+  }
 
-    return (
-      <section className="breadcrumb-section">
-        <div
-          className="bg bg-image"
-          style={{ opacity: 0.2 }}
-          data-background={bg}
-        ></div>
-        <div className="container">
-          <div className="title-outer">
-            <div className="page-title">
-              <h2 className="title">{Title}</h2>
-              <ul className="page-breadcrumb">
-                <li>
-                  <Link to="/">Acc</Link>
-                </li>
-                <li>{Title}</li>
-              </ul>
+  document.querySelectorAll("[data-background]").forEach((element) => {
+    const imagePath = element.getAttribute("data-background");
+    if (imagePath) {
+      element.style.backgroundImage = `url(${imagePath})`;
+    }
+  });
+};
+
+const BreadCumb = ({ bg, Title, Content }) => {
+  useEffect(() => {
+    applyBackgroundImages();
+  }, []);
+
+  return (
+    <section className="breadcrumb-section">
+      <div
+        className="bg bg-image"
+        style={{ opacity: 0.2 }}
+        data-background={bg}
+      ></div>
+      <div className="container">
+        <div className="title-outer">
+          <div className="page-title">
+            <h2 className="title">{Title}</h2>
+            <ul className="page-breadcrumb">
+              <li>
+                <Link to="/">Acc</Link>
+              </li>
+              <li>{Title}</li>
+            </ul>
+          </div>
+          <div className="text">
+            <div className="icon">
+              <i className="icon-arrow-up-right"></i>
             </div>
-            <div className="text">
-              <div className="icon">
-                <i className="icon-arrow-up-right"></i>
-              </div>
-              <p style={{ color: "#fff" }}>{parse(Content)}</p>
-            </div>
+            <p style={{ color: "#fff" }}>{parse(Content)}</p>
           </div>
         </div>
-      </section>
-    );
+      </div>
+    </section>
+  );
 };
 
 export default BreadCumb;

@@ -1,8 +1,29 @@
 import { Link } from "react-router-dom";
 
+const highlightItems = [
+  {
+    icon: "bi-layers",
+    title: "Des repères clairs",
+    text: "L'Ennéagramme rend les comportements lisibles pour avancer sereinement.",
+  },
+  {
+    icon: "bi-people",
+    title: "Un cadre humain",
+    text: "Chaque atelier favorise l'écoute, la confiance et la coopération durable.",
+  },
+  {
+    icon: "bi-graph-up-arrow",
+    title: "Des résultats concrets",
+    text: "Plans d'action simples, suivis efficaces et progrès visibles dans vos équipes.",
+  },
+];
+
 const Choose1 = () => {
   return (
-    <section className="choose-section space bg-theme3 overflow-hidden">
+    <section
+      id="pourquoi-enneamaroc"
+      className="choose-section space bg-theme3 overflow-hidden"
+    >
       <div className="p-top-right wow slideInRight">
         <img src="/assets/images/choose/shape01.png" alt="Choose shape" />
       </div>
@@ -12,6 +33,7 @@ const Choose1 = () => {
           <div className="col-lg-6 position-relative">
             <div className="choose-thumb">
               <img
+                style={{ width: "240%" }}
                 src="/assets/images/choose/choose01.jpg"
                 alt="Choose Thumb"
               />
@@ -36,85 +58,45 @@ const Choose1 = () => {
 
           {/* Contenu texte */}
           <div className="col-lg-6">
-            <div className="choose-content-wrapper">
-              <div className="title-area two">
-                <div
-                  className="sub-title"
-                  style={{ color: "var(--gray-color2)" }}
-                >
-                  <span>
-                    <i className="asterisk"></i>
-                  </span>
-                  Pourquoi Enneamaroc
-                </div>
-                <h2
-                  className="sec-title"
-                  style={{ color: "var(--theme-color2)" }}
-                >
-                  Nous créons des solutions <br />
-                  <span className="bold">humaines et innovantes</span>
-                </h2>
-                <p
-                  className="sec-text "
-                  style={{ color: "var(--theme-color2)" }}
-                >
-                  Grâce à l’Ennéagramme et au coaching, nous aidons individus et
-                  organisations à libérer leur potentiel, renforcer leurs
-                  relations et évoluer de manière durable.
-                </p>
+            <div className="choose-content-wrapper choose-content-modern">
+              <span className="choose-eyebrow">Pourquoi Enneamaroc</span>
+              <h2 className="choose-headline">
+                Nous créons des solutions
+                <span> humaines et innovantes</span>
+              </h2>
+              <p className="choose-description">
+                Grâce à l’Ennéagramme et au coaching, nous aidons individus et
+                organisations à libérer leur potentiel, renforcer leurs
+                relations et évoluer de manière durable.
+              </p>
+
+              <div className="choose-highlights">
+                {highlightItems.map((item) => (
+                  <div className="choose-highlight-row" key={item.title}>
+                    <span className="choose-highlight-icon">
+                      <i className={`bi ${item.icon}`}></i>
+                    </span>
+                    <div>
+                      <h5>{item.title}</h5>
+                      <p>{item.text}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
 
-              {/* Liste des atouts */}
-              <div className="feature-grid">
-                <div className="feature-item">
-                  <span className="checkmark">
-                    <i className="bi bi-check-lg"></i>
-                  </span>
-                  <p style={{ color: "var(--body-color)" }}>
-                    Une équipe d’experts passionnés
-                  </p>
+              <div className="choose-cta">
+                <div className="choose-badge">
+                  <strong>+15 ans</strong>
+                  <span>d'accompagnement humain</span>
                 </div>
-                <div className="feature-item">
-                  <span className="checkmark">
-                    <i className="bi bi-check-lg"></i>
+                <Link to="/contact" className="theme-btn bg-dark">
+                  <span className="link-effect">
+                    <span className="effect-1">Rencontrez notre équipe</span>
+                    <span className="effect-1">Rencontrez notre équipe</span>
                   </span>
-                  <p style={{ color: "var(--body-color)" }}>
-                    Des outils puissants pour votre évolution
-                  </p>
-                </div>
+                  <i className="bi bi-arrow-up-right"></i>
+                </Link>
               </div>
-
-              <div className="py-25">
-                <div className="border"></div>
-              </div>
-
-              <div className="feature-grid">
-                <div className="feature-item">
-                  <span className="checkmark">
-                    <i className="bi bi-check-lg"></i>
-                  </span>
-                  <p style={{ color: "var(--body-color)" }}>
-                    Stratégies innovantes de coaching
-                  </p>
-                </div>
-                <div className="feature-item">
-                  <span className="checkmark">
-                    <i className="bi bi-check-lg"></i>
-                  </span>
-                  <p style={{ color: "var(--body-color)" }}>
-                    Un accompagnement centré sur l’humain
-                  </p>
-                </div>
-              </div>
-
-              {/* Bouton */}
-              <Link to="/contact" className="theme-btn bg-dark mt-35">
-                <span className="link-effect">
-                  <span className="effect-1">Rencontrez notre équipe</span>
-                  <span className="effect-1">Rencontrez notre équipe</span>
-                </span>
-                <i className="bi bi-arrow-up-right"></i>
-              </Link>
             </div>
           </div>
         </div>

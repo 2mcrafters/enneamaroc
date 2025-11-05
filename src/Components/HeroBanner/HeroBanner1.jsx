@@ -1,11 +1,10 @@
 import parse from "html-react-parser";
-import { Link } from "react-router-dom";
 
 const HeroBanner1 = ({
   title = "Libérez votre potentiel avec l’Ennéagramme",
   mainimg = "/assets/imgss001/Layer 01.png",
-  inscriptionUrl = "/Seconnecter",
-  RegisterUrl = "/Register",
+  inscriptionUrl = "/app/#/login",
+  RegisterUrl = "/app/#/signup",
   subtitle = "Découvrez une voie claire pour mieux vous comprendre, transformer vos relations et agir avec conscience.",
   height = "90vh",
   heightSm = "70vh",
@@ -98,12 +97,12 @@ const HeroBanner1 = ({
           <h1 className="hb-title">{parse(title)}</h1>
           {subtitle && <p className="hb-sub">{subtitle}</p>}
           <div className="hb-actions">
-            <Link to={inscriptionUrl} className="hb-btn primary">
+            <a href={inscriptionUrl} className="hb-btn primary">
               Se connecter
-            </Link>
-            <Link to={RegisterUrl} className="hb-btn secondary">
+            </a>
+            <a href={RegisterUrl} className="hb-btn secondary">
               Inscrivez-vous
-            </Link>
+            </a>
           </div>
         </div>
       </div>
