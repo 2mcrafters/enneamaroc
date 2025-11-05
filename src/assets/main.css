@@ -10633,7 +10633,7 @@ a.text-theme:hover,
     top: 0;
     width: 100%;
     height: 100%;
-    background: var(--bs-bg-color3)
+    background: var(--breadcrumb-overlay-color, var(--bs-bg-color3))
 }
 
 .breadcrumb-section .title-outer {

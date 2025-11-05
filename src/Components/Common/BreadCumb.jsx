@@ -1,32 +1,34 @@
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import parse from "html-react-parser";
 
-const applyBackgroundImages = () => {
-  if (typeof document === "undefined") {
-    return;
+const buildBackgroundStyle = (imagePath, overlayColor) => {
+  const style = {};
+
+  if (overlayColor) {
+    style["--breadcrumb-overlay-color"] = overlayColor;
   }
 
-  document.querySelectorAll("[data-background]").forEach((element) => {
-    const imagePath = element.getAttribute("data-background");
-    if (imagePath) {
-      element.style.backgroundImage = `url(${imagePath})`;
-    }
-  });
+  if (imagePath) {
+    style.backgroundImage = `url("${imagePath}")`;
+    style.backgroundPosition = "center";
+    style.backgroundSize = "cover";
+    style.backgroundRepeat = "no-repeat";
+  }
+
+  return Object.keys(style).length ? style : undefined;
 };
 
-const BreadCumb = ({ bg, Title, Content }) => {
-  useEffect(() => {
-    applyBackgroundImages();
-  }, []);
+const BreadCumb = ({
+  bg,
+  Title,
+  Content,
+  overlayColor = "rgba(10, 131, 202, 0.7)",
+}) => {
+  const backgroundStyle = buildBackgroundStyle(bg, overlayColor);
 
   return (
     <section className="breadcrumb-section">
-      <div
-        className="bg bg-image"
-        style={{ opacity: 0.2 }}
-        data-background={bg}
-      ></div>
+      <div className="bg bg-image" style={backgroundStyle}></div>
       <div className="container">
         <div className="title-outer">
           <div className="page-title">
