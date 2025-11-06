@@ -320,7 +320,7 @@ function Agenda() {
                   margin: "26px 0 20px",
                   fontSize: "clamp(36px, 6vw, 56px)",
                   fontWeight: 800,
-                  lineHeight: 1.15,
+                  flexWrap: "wrap",
                   color: "#fff",
                 }}
               >
@@ -865,13 +865,16 @@ function Agenda() {
                 </table>
               </div>
               <div
+                className="agenda-level-navigation"
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
                   gap: 16,
-                  flexWrap: "wrap",
+                  flexWrap: "nowrap",
                   marginTop: 24,
                   width: "100%",
+                  overflowX: "auto",
+                  paddingBottom: 8,
                 }}
               >
                 <button
@@ -879,15 +882,14 @@ function Agenda() {
                   onClick={() => setActiveTab(Math.max(index - 1, 0))}
                   disabled={index === 0}
                   style={{
+                    flex: "0 0 auto",
                     padding: "14px 28px",
                     borderRadius: 12,
                     border: `2px solid ${colors.blue}`,
                     background:
                       index === 0 ? "rgba(10, 131, 202, 0.08)" : "#fff",
                     color:
-                      index === 0
-                        ? "rgba(10, 131, 202, 0.4)"
-                        : colors.blue,
+                      index === 0 ? "rgba(10, 131, 202, 0.4)" : colors.blue,
                     fontSize: 14,
                     fontWeight: 700,
                     textTransform: "uppercase",
@@ -912,12 +914,11 @@ function Agenda() {
                 <button
                   type="button"
                   onClick={() =>
-                    setActiveTab(
-                      Math.min(index + 1, scheduleLevels.length - 1)
-                    )
+                    setActiveTab(Math.min(index + 1, scheduleLevels.length - 1))
                   }
                   disabled={index === scheduleLevels.length - 1}
                   style={{
+                    flex: "0 0 auto",
                     padding: "14px 28px",
                     borderRadius: 12,
                     border:
@@ -992,6 +993,18 @@ function Agenda() {
             @media (max-width: 768px) {
               .tabs-container {
                 justify-content: center !important;
+              }
+              .agenda-level-navigation {
+                justify-content: flex-start !important;
+              }
+            }
+
+            @media (max-width: 568px) {
+              .agenda-level-navigation button {
+                padding: 12px 20px !important;
+                min-width: 150px !important;
+                font-size: 12px !important;
+                border-radius: 10px !important;
               }
             }
           `}
@@ -1188,9 +1201,7 @@ function Agenda() {
                   Privatisation de panels, modules in situ, formats hybrides :
                   nous réglons chaque étape pour vos équipes.
                 </p>
-                <div
-                  style={{ display: "grid", gap: 12, color: colors.slate }}
-                >
+                <div style={{ display: "grid", gap: 12, color: colors.slate }}>
                   {[
                     "Sélection de dates adaptées à vos contraintes",
                     "Animations co-brandées avec vos directions internes",
