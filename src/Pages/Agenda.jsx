@@ -12,76 +12,276 @@ const colors = {
   lightGray: "#dde7f1",
 };
 
+const tabLabels = [
+  "Découverte de soi",
+  "Voyage intérieur",
+  "Transmission et transformation",
+];
+
 const highlights = [
   {
-    icon: "fa-solid fa-calendar-check",
-    title: "Rencontres mensuelles",
-    text: "Panels, ateliers et cercles de dialogue pour explorer l'Ennéagramme en situation réelle.",
+    icon: "fa-solid fa-layer-group",
+    title: "3 niveaux certifiants",
+    text: "Retrouvez les parcours Découvrir, Approfondir et Transmettre, tels que détaillés sur nos pages dédiées, avec leurs 18 modules cumulés.",
   },
   {
-    icon: "fa-solid fa-people-line",
-    title: "Cohortes accompagnées",
-    text: "Groupes d'entreprises, managers et jeunes talents qui avancent ensemble sur 6 à 8 semaines.",
+    icon: "fa-solid fa-calendar-days",
+    title: "Calendrier continu",
+    text: "Un planning de 14 mois couvrant chaque module, de novembre à décembre de l’année suivante, directement relié aux données des tableaux ci-dessous.",
   },
   {
-    icon: "fa-solid fa-circle-nodes",
-    title: "Réseau EnnéaMaroc",
-    text: "Une communauté active d'apprenants, d'alumni et de praticiens pour partager retours et expertises.",
+    icon: "fa-solid fa-people-arrows",
+    title: "Accompagnement sur mesure",
+    text: "Construisez des parcours intra-entreprise en combinant les modules des niveaux et les formats décrits sur les pages Solution et École.",
   },
 ];
 
-const upcoming = [
-  {
-    tag: "Managers & Leaders",
-    title: "Cycle Leadership conscient",
-    date: "12 • 13 • 26 février 2026",
-    location: "Casa - Business Center Twin 2",
-    focus: "Module immersif en 3 temps pour renforcer posture, communication et plan d'impact.",
-  },
-  {
-    tag: "Jeunes talents",
-    title: "Bootcamp Orientation & Confiance",
-    date: "22 • 23 mars 2026",
-    location: "Campus EnnéaMaroc - Rabat",
-    focus: "Deux jours pour révéler ses talents, apprivoiser le stress et bâtir sa feuille de route.",
-  },
-  {
-    tag: "Cercle ouvert",
-    title: "Espace Dialogue Mensuel",
-    date: "4 avril 2026",
-    location: "En ligne - Zoom studio EnnéaMaroc",
-    focus: "Table ronde sur les neuf profils face aux transformations culturelles des organisations.",
-  },
+const agendaMonths = [
+  "nov-25",
+  "déc-25",
+  "janv-26",
+  "fév-26",
+  "mars-26",
+  "avr-26",
+  "mai-26",
+  "juin-26",
+  "juil-26",
+  "août-26",
+  "sept-26",
+  "oct-26",
+  "nov-26",
+  "déc-26",
 ];
 
-const thematicTracks = [
+const scheduleLevels = [
   {
-    title: "Parcours entreprises",
-    slots: [
-      "Panel découverte Ennéagramme (1h30)",
-      "Session managers : 3 modules sur 6 semaines",
-      "Co-développement et coaching d'équipes",
+    id: "niveau-1",
+    title: "Niveau 1 : Découverte de soi – Les 27 visages de la personnalité",
+    codePrefix: "D",
+    totalDays: 12,
+    totalCost: "18 000 €",
+    modules: [
+      {
+        code: "D1",
+        name: "Initiation et Découverte",
+        days: 2,
+        hours: "9h-17h",
+        prereq: "-",
+        price: "3 000 €",
+        sessions: ["nov-25", "mars-26", "juin-26", "sept-26", "déc-26"],
+      },
+      {
+        code: "D2",
+        name: "Centres d’intelligence",
+        days: 2,
+        hours: "9h-17h",
+        prereq: "D1",
+        price: "3 000 €",
+        sessions: ["déc-25", "avr-26", "juil-26", "oct-26"],
+      },
+      {
+        code: "D3",
+        name: "Instincts",
+        days: 2,
+        hours: "9h-17h",
+        prereq: "D1 - D2",
+        price: "3 000 €",
+        sessions: ["janv-26", "mai-26", "août-26", "nov-26"],
+      },
+      {
+        code: "D4",
+        name: "Lumière – Conscience claire de nos mécanismes inconscients",
+        days: 2,
+        hours: "9h-17h",
+        prereq: "D3",
+        price: "3 000 €",
+        sessions: ["fév-26", "juin-26", "sept-26"],
+      },
+      {
+        code: "D5",
+        name: "Ombre – Se libérer des fardeaux de l’ego",
+        days: 2,
+        hours: "9h-17h",
+        prereq: "D3",
+        price: "3 000 €",
+        sessions: ["mars-26", "août-26", "nov-26"],
+      },
+      {
+        code: "D6",
+        name: "Profondeur – Être autonome dans le chemin d’évolution",
+        days: 2,
+        hours: "9h-17h",
+        prereq: "D3",
+        price: "3 000 €",
+        sessions: ["avr-26", "sept-26", "déc-26"],
+      },
     ],
   },
   {
-    title: "Espace jeunes et alumni",
-    slots: [
-      "Ateliers weekend : trouver sa boussole intérieure",
-      "Cercles d'intégration et mentoring",
-      "Pitch forum projets & talents",
+    id: "niveau-2",
+    title: "Niveau 2 : Voyage intérieur – Mécanismes, ombres et potentiels",
+    codePrefix: "V",
+    totalDays: 15,
+    totalCost: "25 500 €",
+    modules: [
+      {
+        code: "V1",
+        name: "Ressemblance et confusion",
+        days: 2,
+        hours: "9h-17h",
+        prereq: "D",
+        price: "3 400 €",
+        sessions: ["mars-26", "juin-26", "sept-26", "déc-26"],
+      },
+      {
+        code: "V2",
+        name: "Relations en Ennéagramme",
+        days: 2,
+        hours: "9h-17h",
+        prereq: "V1",
+        price: "3 400 €",
+        sessions: ["avr-26", "juil-26", "oct-26"],
+      },
+      {
+        code: "V3",
+        name: "Pathologie et ombres",
+        days: 2,
+        hours: "9h-17h",
+        prereq: "V1",
+        price: "3 400 €",
+        sessions: ["mai-26", "août-26", "nov-26"],
+      },
+      {
+        code: "V4",
+        name: "Grand Panel & pistes de développements",
+        days: 2,
+        hours: "9h-17h",
+        prereq: "V2 - V3",
+        price: "3 400 €",
+        sessions: ["juin-26", "sept-26", "déc-26"],
+      },
+      {
+        code: "V5",
+        name: "Intégration : Ennéagramme et profils jungiens",
+        days: 2,
+        hours: "9h-17h",
+        prereq: "V2",
+        price: "3 400 €",
+        sessions: ["juil-26", "oct-26"],
+      },
+      {
+        code: "V6",
+        name: "Retraite enneagrammiste",
+        days: 5,
+        hours: "9h-17h",
+        prereq: "V2 - V3",
+        price: "8 500 €",
+        sessions: ["août-26", "nov-26"],
+      },
     ],
   },
   {
-    title: "Communauté praticiens",
-    slots: [
-      "Masterclass typologies avancées",
-      "Supervision de cas clients",
-      "Laboratoire expérimental pour nouveaux formats",
+    id: "niveau-3",
+    title: "Niveau 3 : Maîtrise – Transmission et transformation",
+    codePrefix: "M",
+    totalDays: 20,
+    totalCost: "34 000 €",
+    modules: [
+      {
+        code: "M1",
+        name: "Conduite et Animation de Panels",
+        days: 3,
+        hours: "9h-17h",
+        prereq: "V",
+        price: "5 100 €",
+        sessions: ["nov-26"],
+      },
+      {
+        code: "M2",
+        name: "DEVENIR PROFILEUR : Processus de l’Entretien Typologique",
+        days: 3,
+        hours: "9h-17h",
+        prereq: "M1",
+        price: "5 100 €",
+        sessions: ["nov-26", "déc-26"],
+      },
+      {
+        code: "M3",
+        name: "Superviser, co-développer : 5 cas pratiques filmés",
+        days: 3,
+        hours: "9h-17h",
+        prereq: "M2",
+        price: "5 100 €",
+        sessions: ["déc-26"],
+      },
+      {
+        code: "M4",
+        name: "En croisant l’ennéagramme et la thérapie brève",
+        days: 3,
+        hours: "9h-17h",
+        prereq: "B1 - B2 - B3",
+        price: "5 100 €",
+        sessions: ["nov-26"],
+      },
+      {
+        code: "M5",
+        name: "Certification à la méthode Ennea-Pro HRH (Devenir formateur HRH)",
+        days: 3,
+        hours: "9h-17h",
+        prereq: "M2 - M4",
+        price: "5 100 €",
+        sessions: ["déc-26"],
+      },
+      {
+        code: "M6",
+        name: "Projet : Ancrer une approche adaptée à son public avec soutenance",
+        days: 5,
+        hours: "9h-17h",
+        prereq: "M4",
+        price: "8 500 €",
+        sessions: ["déc-26"],
+      },
     ],
   },
 ];
-
 function Agenda() {
+  const [activeTab, setActiveTab] = React.useState(0);
+
+  const levelRoutes = ["/découvrir", "/approfondir", "/transmettre"];
+
+  const levelMeta = scheduleLevels.map((level, index) => {
+    const moduleCount = level.modules.length;
+    const firstCode = level.modules[0]?.code ?? "";
+    const lastCode = level.modules[level.modules.length - 1]?.code ?? firstCode;
+    const uniqueDurations = Array.from(
+      new Set(level.modules.map((module) => module.days))
+    ).sort((a, b) => a - b);
+
+    return {
+      index,
+      label: tabLabels[index] ?? level.title,
+      modules: moduleCount,
+      totalDays: level.totalDays,
+      totalCost: level.totalCost,
+      codeRange:
+        firstCode === lastCode ? firstCode : `${firstCode} – ${lastCode}`,
+      durationsLabel: uniqueDurations
+        .map((day) => `${day} jour${day > 1 ? "s" : ""}`)
+        .join(" • "),
+      route: levelRoutes[index] ?? "/agenda",
+    };
+  });
+
+  const thematicTracks = levelMeta.map((meta) => ({
+    title: scheduleLevels[meta.index]?.title ?? meta.label,
+    slots: [
+      `${meta.modules} modules du ${meta.codeRange}`,
+      `${meta.totalDays} jours cumulés (${meta.durationsLabel})`,
+      `Investissement indicatif : ${meta.totalCost}`,
+    ],
+    route: meta.route,
+  }));
+
   return (
     <div style={{ fontFamily: "system-ui, sans-serif", color: colors.slate }}>
       <section
@@ -124,7 +324,7 @@ function Agenda() {
                   color: "#fff",
                 }}
               >
-                Temps forts, ateliers et espaces de dialogue
+                Calendrier des parcours EnnéaMaroc
               </h1>
               <p
                 style={{
@@ -133,14 +333,16 @@ function Agenda() {
                   fontSize: 20,
                   lineHeight: 1.7,
                   color: "rgba(255,255,255,0.92)",
+                  textAlign: "center",
                 }}
               >
-                Retrouvez les événements à venir pour les entreprises, les
-                managers et les jeunes talents. Chaque rendez-vous prolonge nos
-                parcours Découvrir, Approfondir et Transmettre.
+                Explorez en un coup d'oeil les dates confirmées pour nos
+                parcours certifiants. Chaque niveau renvoie vers les contenus
+                détaillés des pages Découvrir, Approfondir et Transmettre.
               </p>
               <div
                 style={{
+                  display: "flex",
                   display: "flex",
                   justifyContent: "center",
                   gap: 16,
@@ -165,7 +367,7 @@ function Agenda() {
                   <i className="fa-solid fa-arrow-right" />
                 </Link>
                 <Link
-                  to="/solution"
+                  to="/découvrir"
                   style={{
                     border: "2px solid rgba(255,255,255,0.6)",
                     color: "#fff",
@@ -178,8 +380,8 @@ function Agenda() {
                     gap: 10,
                   }}
                 >
-                  Voir EnnéaMaroc PRO
-                  <i className="fa-solid fa-calendar-days" />
+                  Voir le détail des niveaux
+                  <i className="fa-solid fa-layer-group" />
                 </Link>
               </div>
             </div>
@@ -192,7 +394,7 @@ function Agenda() {
           <div className="row text-center mb-5">
             <div className="col-lg-10 mx-auto">
               <h2 style={{ fontSize: 36, fontWeight: 800, marginBottom: 12 }}>
-                Ce que vous trouverez sur l'agenda
+                Les essentiels du calendrier des niveaux
               </h2>
               <p
                 style={{
@@ -202,8 +404,9 @@ function Agenda() {
                   maxWidth: 760,
                 }}
               >
-                Des moments pour progresser, pour partager vos pratiques et pour
-                ancrer l'Ennéagramme dans vos équipes.
+                Une lecture synthétique des niveaux Découvrir, Approfondir et
+                Transmettre, fidèle aux contenus des pages programmes et aux
+                données chiffrées des tableaux qui suivent.
               </p>
             </div>
           </div>
@@ -257,135 +460,10 @@ function Agenda() {
         </div>
       </section>
 
-      <section style={{ padding: "80px 20px", background: "#fff" }}>
-        <div className="container">
-          <div className="row align-items-center mb-5">
-            <div className="col-lg-7">
-              <div
-                style={{
-                  color: colors.blue,
-                  fontSize: 13,
-                  fontWeight: 700,
-                  letterSpacing: "0.12em",
-                  textTransform: "uppercase",
-                  marginBottom: 12,
-                }}
-              >
-                Prochains rendez-vous
-              </div>
-              <h2
-                style={{
-                  fontSize: 40,
-                  fontWeight: 800,
-                  lineHeight: 1.2,
-                  margin: 0,
-                }}
-              >
-                Sélection de sessions ouvertes et de cycles en cours
-              </h2>
-            </div>
-            <div className="col-lg-5 text-lg-end mt-4 mt-lg-0">
-              <p style={{ color: colors.gray, fontSize: 16, lineHeight: 1.6 }}>
-                Inscription prioritaire pour nos partenaires et alumni. Les
-                places restantes sont ouvertes 15 jours avant chaque date.
-              </p>
-            </div>
-          </div>
-
-          <div className="row g-4">
-            {upcoming.map((event) => (
-              <div key={event.title} className="col-lg-4">
-                <div
-                  style={{
-                    border: `1px solid ${colors.lightGray}`,
-                    borderRadius: 18,
-                    padding: "34px 28px",
-                    height: "100%",
-                    background: colors.softWhite,
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: 18,
-                  }}
-                >
-                  <span
-                    style={{
-                      fontSize: 12,
-                      fontWeight: 700,
-                      letterSpacing: "0.22em",
-                      textTransform: "uppercase",
-                      color: colors.red,
-                    }}
-                  >
-                    {event.tag}
-                  </span>
-                  <h3
-                    style={{
-                      fontSize: 22,
-                      fontWeight: 700,
-                      color: colors.slate,
-                      margin: 0,
-                    }}
-                  >
-                    {event.title}
-                  </h3>
-                  <div
-                    style={{
-                      display: "grid",
-                      gap: 10,
-                      fontSize: 15,
-                      color: colors.gray,
-                    }}
-                  >
-                    <div>
-                      <i
-                        className="fa-solid fa-clock"
-                        style={{ marginRight: 8, color: colors.blue }}
-                      />
-                      {event.date}
-                    </div>
-                    <div>
-                      <i
-                        className="fa-solid fa-location-dot"
-                        style={{ marginRight: 8, color: colors.blue }}
-                      />
-                      {event.location}
-                    </div>
-                  </div>
-                  <p
-                    style={{
-                      fontSize: 15,
-                      color: colors.gray,
-                      lineHeight: 1.6,
-                    }}
-                  >
-                    {event.focus}
-                  </p>
-                  <Link
-                    to="/contact"
-                    style={{
-                      marginTop: "auto",
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: 10,
-                      color: colors.blue,
-                      fontWeight: 700,
-                      textDecoration: "none",
-                    }}
-                  >
-                    Demander le programme détaillé
-                    <i className="fa-solid fa-arrow-right" />
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section style={{ padding: "80px 20px", background: colors.softWhite }}>
         <div className="container">
-          <div className="row justify-content-center text-center mb-5">
-            <div className="col-lg-8">
+          <div className="row mb-5">
+            <div className="col-lg-9">
               <div
                 style={{
                   display: "inline-flex",
@@ -399,12 +477,560 @@ function Agenda() {
                   fontWeight: 700,
                   letterSpacing: "0.16em",
                   textTransform: "uppercase",
+                  marginBottom: 16,
+                }}
+              >
+                Parcours certifiants
+              </div>
+              <h2
+                style={{
+                  fontSize: 36,
+                  fontWeight: 800,
+                  margin: "0 0 14px",
+                  color: colors.slate,
+                }}
+              >
+                Calendrier 2025 – 2026 par niveaux
+              </h2>
+              <p
+                style={{
+                  maxWidth: 760,
+                  fontSize: 17,
+                  lineHeight: 1.6,
+                  color: colors.gray,
+                  marginBottom: 12,
+                }}
+              >
+                Les tableaux ci-dessous reprennent les modules issus des niveaux
+                Découvrir, Approfondir et Transmettre. Ils peuvent être affichés
+                sur mobile&nbsp;: faites simplement glisser horizontalement pour
+                consulter toutes les dates proposées.
+              </p>
+            </div>
+          </div>
+
+          {/* Tabs Navigation */}
+          <div style={{ marginBottom: 48 }}>
+            <div
+              style={{
+                display: "flex",
+                gap: 16,
+                alignItems: "center",
+                justifyContent: "flex-start",
+                flexWrap: "wrap",
+              }}
+              className="tabs-container"
+            >
+              {scheduleLevels.map((level, index) => {
+                return (
+                  <React.Fragment key={level.id}>
+                    <button
+                      onClick={() => setActiveTab(index)}
+                      style={{
+                        padding: "16px 32px",
+                        background:
+                          activeTab === index
+                            ? "linear-gradient(135deg, #0a83ca 0%, #09538f 100%)"
+                            : "#fff",
+                        border:
+                          activeTab === index
+                            ? "2px solid rgba(10, 131, 202, 0.3)"
+                            : `2px solid ${colors.lightGray}`,
+                        borderRadius: 8,
+                        color: activeTab === index ? "#fff" : colors.slate,
+                        fontSize: 14,
+                        fontWeight: 600,
+                        cursor: "pointer",
+                        whiteSpace: "nowrap",
+                        transition: "all 0.3s ease",
+                        boxShadow:
+                          activeTab === index
+                            ? "0 4px 16px rgba(10, 131, 202, 0.25)"
+                            : "0 2px 6px rgba(0, 0, 0, 0.06)",
+                        transform:
+                          activeTab === index ? "translateY(-1px)" : "none",
+                      }}
+                      onMouseEnter={(e) => {
+                        if (activeTab !== index) {
+                          e.currentTarget.style.borderColor = colors.blue;
+                          e.currentTarget.style.transform = "translateY(-1px)";
+                          e.currentTarget.style.boxShadow =
+                            "0 3px 12px rgba(10, 131, 202, 0.15)";
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (activeTab !== index) {
+                          e.currentTarget.style.borderColor = colors.lightGray;
+                          e.currentTarget.style.transform = "none";
+                          e.currentTarget.style.boxShadow =
+                            "0 2px 6px rgba(0, 0, 0, 0.06)";
+                        }
+                      }}
+                    >
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 10,
+                        }}
+                      >
+                        <span
+                          style={{
+                            fontSize: 14,
+                            fontWeight: 600,
+                            opacity: 0.85,
+                          }}
+                        >
+                          Niveau {index + 1}
+                        </span>
+                        <span style={{ fontSize: 14, fontWeight: 500 }}>
+                          {tabLabels[index]}
+                        </span>
+                      </div>
+                    </button>
+                    {index < scheduleLevels.length - 1 && (
+                      <i
+                        className="fa-solid fa-circle"
+                        style={{
+                          color: colors.lightGray,
+                          fontSize: 6,
+                        }}
+                      />
+                    )}
+                  </React.Fragment>
+                );
+              })}
+            </div>
+          </div>
+
+          {scheduleLevels.map((level, index) => (
+            <div
+              id={level.id}
+              key={level.id}
+              style={{
+                marginBottom: 64,
+                display: activeTab === index ? "block" : "none",
+                animation: activeTab === index ? "fadeIn 0.4s ease-in" : "none",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: 18,
+                  alignItems: "baseline",
+                  marginBottom: 24,
+                  padding: "20px 24px",
+                  background:
+                    "linear-gradient(135deg, #e13734 0%, #c92a27 100%)",
+                  borderRadius: 14,
+                  border: "1px solid rgba(225, 55, 52, 0.3)",
+                  boxShadow: "0 6px 20px rgba(225, 55, 52, 0.2)",
+                }}
+              >
+                <h3
+                  style={{
+                    margin: 0,
+                    fontSize: 22,
+                    fontWeight: 800,
+                    color: "#fff",
+                    flex: "1 1 340px",
+                  }}
+                >
+                  {level.title}
+                </h3>
+                <div
+                  style={{
+                    display: "flex",
+                    gap: 20,
+                    fontSize: 14,
+                    color: "#fff",
+                    flexWrap: "wrap",
+                    alignItems: "center",
+                  }}
+                >
+                  <span
+                    style={{ display: "flex", alignItems: "center", gap: 6 }}
+                  >
+                    <i
+                      className="fa-solid fa-calendar-days"
+                      style={{ color: "#fff" }}
+                    />
+                    <strong style={{ color: "#fff" }}>
+                      {level.totalDays} jours
+                    </strong>
+                  </span>
+                  <span
+                    style={{ display: "flex", alignItems: "center", gap: 6 }}
+                  >
+                    <strong style={{ color: "#fff" }}>{level.totalCost}</strong>
+                  </span>
+                </div>
+              </div>
+
+              <div
+                className="table-scroll-wrapper"
+                style={{
+                  overflowX: "auto",
+                  WebkitOverflowScrolling: "touch",
+                  borderRadius: 18,
+                  boxShadow: "0 18px 40px rgba(9, 83, 143, 0.08)",
+                  background: "#fff",
+                  border: `1px solid ${colors.lightGray}`,
+                }}
+              >
+                <table
+                  style={{
+                    width: "100%",
+                    minWidth: 1200,
+                    borderCollapse: "separate",
+                    borderSpacing: 0,
+                  }}
+                >
+                  <thead>
+                    <tr>
+                      {[
+                        "Module",
+                        "Jours",
+                        "Horaires",
+                        "Prérequis",
+                        "Tarif",
+                        ...agendaMonths,
+                      ].map((header, idx) => (
+                        <th
+                          key={header}
+                          style={{
+                            background:
+                              idx === 0 ? colors.blue : colors.softBlue,
+                            color: idx === 0 ? "#fff" : colors.blue,
+                            fontSize: idx === 0 ? 13 : 11,
+                            fontWeight: 700,
+                            letterSpacing: "0.08em",
+                            textTransform: "uppercase",
+                            padding: idx === 0 ? "16px 20px" : "12px 14px",
+                            borderBottom: `1px solid ${colors.lightGray}`,
+                            borderRight: `1px solid ${colors.lightGray}`,
+                            whiteSpace: "nowrap",
+                            textAlign: idx === 0 ? "left" : "center",
+                            position: idx === 0 ? "sticky" : "static",
+                            left: idx === 0 ? 0 : "auto",
+                            zIndex: idx === 0 ? 10 : 1,
+                            minWidth: idx === 0 ? 260 : idx < 5 ? 90 : 80,
+                          }}
+                        >
+                          {header}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {level.modules.map((module) => (
+                      <tr key={module.code}>
+                        <td
+                          style={{
+                            padding: "18px 20px",
+                            borderRight: `2px solid ${colors.lightGray}`,
+                            borderBottom: `1px solid ${colors.lightGray}`,
+                            minWidth: 260,
+                            textAlign: "left",
+                            color: colors.slate,
+                            fontWeight: 600,
+                            background: "#fff",
+                            position: "sticky",
+                            left: 0,
+                            zIndex: 9,
+                          }}
+                        >
+                          <div
+                            style={{
+                              fontSize: 12,
+                              color: colors.blue,
+                              marginBottom: 8,
+                              fontWeight: 700,
+                              letterSpacing: "0.08em",
+                            }}
+                          >
+                            {module.code}
+                          </div>
+                          <div
+                            style={{
+                              fontSize: 15,
+                              fontWeight: 700,
+                              lineHeight: 1.4,
+                              marginBottom: 4,
+                            }}
+                          >
+                            {module.name}
+                          </div>
+                        </td>
+                        {[
+                          module.days,
+                          module.hours,
+                          module.prereq,
+                          module.price,
+                        ].map((value, index) => (
+                          <td
+                            key={`${module.code}-meta-${index}`}
+                            style={{
+                              padding: "16px 14px",
+                              borderRight: `1px solid ${colors.lightGray}`,
+                              borderBottom: `1px solid ${colors.lightGray}`,
+                              fontSize: 13,
+                              color: colors.gray,
+                              textAlign: "center",
+                              whiteSpace: "nowrap",
+                              fontWeight:
+                                index === 0 || index === 3 ? 700 : 400,
+                              background:
+                                index === 3 ? colors.softBlue : "#fff",
+                            }}
+                          >
+                            {value}
+                          </td>
+                        ))}
+                        {agendaMonths.map((month) => {
+                          const hasSession = module.sessions.includes(month);
+                          return (
+                            <td
+                              key={`${module.code}-${month}`}
+                              style={{
+                                padding: "14px 12px",
+                                borderRight: `1px solid ${colors.lightGray}`,
+                                borderBottom: `1px solid ${colors.lightGray}`,
+                                background: hasSession
+                                  ? "rgba(10, 131, 202, 0.2)"
+                                  : "#fff",
+                                color: hasSession ? colors.blue : "#ddd",
+                                fontWeight: hasSession ? 700 : 400,
+                                textAlign: "center",
+                                fontSize: 16,
+                                minWidth: 80,
+                                whiteSpace: "nowrap",
+                              }}
+                            >
+                              {hasSession ? "✓" : "—"}
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    ))}
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td
+                        colSpan={5 + agendaMonths.length}
+                        style={{
+                          padding: "20px",
+                          borderTop: `2px solid ${colors.lightGray}`,
+                          background: "#fff",
+                        }}
+                      >
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 16,
+                            padding: "16px 20px",
+                            background: colors.softBlue,
+                            borderRadius: 12,
+                            border: `1px solid ${colors.lightGray}`,
+                          }}
+                        >
+                          <div style={{ flex: 1 }}>
+                            <div
+                              style={{
+                                fontSize: 14,
+                                fontWeight: 600,
+                                color: colors.slate,
+                                marginBottom: 4,
+                              }}
+                            >
+                              <strong style={{ color: colors.blue }}>
+                                Parcours complet
+                              </strong>
+                              &nbsp;: {level.totalDays} jours –{" "}
+                              <span style={{ color: "#e13734" }}>
+                                {level.totalCost}
+                              </span>
+                            </div>
+                            <div style={{ fontSize: 13, color: colors.gray }}>
+                              Planning modulable sur demande (intra ou
+                              inter-entreprises).
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  gap: 16,
+                  flexWrap: "wrap",
+                  marginTop: 24,
+                  width: "100%",
+                }}
+              >
+                <button
+                  type="button"
+                  onClick={() => setActiveTab(Math.max(index - 1, 0))}
+                  disabled={index === 0}
+                  style={{
+                    padding: "14px 28px",
+                    borderRadius: 12,
+                    border: `2px solid ${colors.blue}`,
+                    background:
+                      index === 0 ? "rgba(10, 131, 202, 0.08)" : "#fff",
+                    color:
+                      index === 0
+                        ? "rgba(10, 131, 202, 0.4)"
+                        : colors.blue,
+                    fontSize: 14,
+                    fontWeight: 700,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.05em",
+                    cursor: index === 0 ? "not-allowed" : "pointer",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: 10,
+                    minWidth: 180,
+                    transition: "all 0.3s ease",
+                    boxShadow:
+                      index === 0
+                        ? "none"
+                        : "0 8px 20px rgba(10, 131, 202, 0.15)",
+                  }}
+                  aria-label="Voir le niveau précédent"
+                >
+                  <i className="fa-solid fa-arrow-left" />
+                  Niveau précédent
+                </button>
+                <button
+                  type="button"
+                  onClick={() =>
+                    setActiveTab(
+                      Math.min(index + 1, scheduleLevels.length - 1)
+                    )
+                  }
+                  disabled={index === scheduleLevels.length - 1}
+                  style={{
+                    padding: "14px 28px",
+                    borderRadius: 12,
+                    border:
+                      index === scheduleLevels.length - 1
+                        ? "2px solid rgba(10, 131, 202, 0.2)"
+                        : "2px solid transparent",
+                    background:
+                      index === scheduleLevels.length - 1
+                        ? "rgba(10, 131, 202, 0.15)"
+                        : "linear-gradient(135deg, #0a83ca 0%, #09538f 100%)",
+                    color:
+                      index === scheduleLevels.length - 1
+                        ? "rgba(255,255,255,0.7)"
+                        : "#fff",
+                    fontSize: 14,
+                    fontWeight: 700,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.05em",
+                    cursor:
+                      index === scheduleLevels.length - 1
+                        ? "not-allowed"
+                        : "pointer",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: 10,
+                    minWidth: 180,
+                    transition: "all 0.3s ease",
+                    boxShadow:
+                      index === scheduleLevels.length - 1
+                        ? "none"
+                        : "0 10px 24px rgba(9, 83, 143, 0.3)",
+                  }}
+                  aria-label="Voir le niveau suivant"
+                >
+                  Niveau suivant
+                  <i className="fa-solid fa-arrow-right" />
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+        <style>
+          {`
+            /* Bold red scrollbar styling */
+            .table-scroll-wrapper::-webkit-scrollbar {
+              height: 14px;
+            }
+            
+            .table-scroll-wrapper::-webkit-scrollbar-track {
+              background: rgba(225, 55, 52, 0.15);
+              border-radius: 8px;
+            }
+            
+            .table-scroll-wrapper::-webkit-scrollbar-thumb {
+              background: #e13734;
+              border-radius: 8px;
+              border: 3px solid rgba(255, 255, 255, 0.4);
+            }
+            
+            .table-scroll-wrapper::-webkit-scrollbar-thumb:hover {
+              background: #c92a27;
+            }
+            
+            /* Firefox */
+            .table-scroll-wrapper {
+              scrollbar-width: auto;
+              scrollbar-color: #e13734 rgba(225, 55, 52, 0.15);
+            }
+
+            /* Mobile center tabs */
+            @media (max-width: 768px) {
+              .tabs-container {
+                justify-content: center !important;
+              }
+            }
+          `}
+        </style>
+      </section>
+
+      <section
+        style={{
+          padding: "100px 20px",
+          background: "linear-gradient(135deg, #0a83ca 0%, #09538f 100%)",
+        }}
+      >
+        <div className="container">
+          <div className="row justify-content-center text-center mb-5">
+            <div className="col-lg-8">
+              <div
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 10,
+                  padding: "8px 18px",
+                  borderRadius: 999,
+                  background: "rgba(255,255,255,0.18)",
+                  color: "#fff",
+                  fontSize: 12,
+                  fontWeight: 700,
+                  letterSpacing: "0.16em",
+                  textTransform: "uppercase",
                 }}
               >
                 Parcours thématiques
               </div>
               <h2
-                style={{ fontSize: 34, fontWeight: 800, margin: "18px 0 12px" }}
+                style={{
+                  fontSize: 34,
+                  fontWeight: 800,
+                  margin: "18px 0 12px",
+                  color: "#fff",
+                }}
               >
                 Des trajectoires pour chaque public
               </h2>
@@ -412,13 +1038,14 @@ function Agenda() {
                 style={{
                   maxWidth: 640,
                   margin: "0 auto",
-                  color: colors.gray,
+                  color: "rgba(255,255,255,0.85)",
                   fontSize: 16,
                 }}
               >
-                Choisissez une série d'événements adaptés à vos enjeux. Nos
-                équipes peuvent assembler un calendrier sur mesure pour votre
-                organisation.
+                Ces cartes reprennent les grandes lignes des niveaux présentés
+                dans les pages Découvrir, Approfondir et Transmettre. Elles vous
+                aident à sélectionner rapidement le bloc le plus adapté à vos
+                équipes.
               </p>
             </div>
           </div>
@@ -431,8 +1058,8 @@ function Agenda() {
                     background: "#fff",
                     borderRadius: 16,
                     padding: "32px 28px",
-                    boxShadow: "0 22px 48px rgba(15, 78, 134, 0.08)",
-                    borderTop: `3px solid ${colors.blue}`,
+                    boxShadow: "0 24px 46px rgba(5, 46, 82, 0.18)",
+                    borderTop: `3px solid ${colors.deepBlue}`,
                     height: "100%",
                   }}
                 >
@@ -478,6 +1105,21 @@ function Agenda() {
                       </li>
                     ))}
                   </ul>
+                  <Link
+                    to={track.route}
+                    style={{
+                      marginTop: 20,
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 8,
+                      fontWeight: 700,
+                      color: colors.blue,
+                      textDecoration: "none",
+                    }}
+                  >
+                    Consulter la page programme
+                    <i className="fa-solid fa-arrow-right" />
+                  </Link>
                 </div>
               </div>
             ))}
@@ -489,28 +1131,18 @@ function Agenda() {
         style={{
           position: "relative",
           padding: "96px 20px",
-          background:
-            "linear-gradient(135deg, rgba(7,118,187,0.95), rgba(10,131,202,0.9))",
+          background: "#fff",
           overflow: "hidden",
         }}
       >
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "radial-gradient(circle at 15% 20%, rgba(255,255,255,0.18), transparent 55%), radial-gradient(circle at 85% 80%, rgba(255,255,255,0.12), transparent 60%)",
-            pointerEvents: "none",
-          }}
-        />
         <div className="container" style={{ position: "relative" }}>
           <div
             style={{
-              background: "rgba(255,255,255,0.08)",
-              border: "1px solid rgba(255,255,255,0.22)",
+              background: colors.softBlue,
+              border: `1px solid ${colors.lightGray}`,
               borderRadius: 24,
               padding: "48px 40px",
-              backdropFilter: "blur(6px)",
+              boxShadow: "0 24px 56px rgba(11, 83, 135, 0.08)",
             }}
           >
             <div className="row align-items-center g-4">
@@ -522,9 +1154,9 @@ function Agenda() {
                     gap: 10,
                     padding: "8px 18px",
                     borderRadius: 999,
-                    background: "rgba(255,255,255,0.18)",
-                    border: "1px solid rgba(255,255,255,0.35)",
-                    color: "#fff",
+                    background: "#fff",
+                    border: `1px solid ${colors.lightGray}`,
+                    color: colors.blue,
                     fontSize: 12,
                     fontWeight: 700,
                     letterSpacing: "0.18em",
@@ -538,7 +1170,7 @@ function Agenda() {
                   style={{
                     fontSize: "clamp(30px, 5vw, 44px)",
                     fontWeight: 800,
-                    color: "#fff",
+                    color: colors.blue,
                     lineHeight: 1.15,
                     marginBottom: 20,
                   }}
@@ -549,13 +1181,16 @@ function Agenda() {
                   style={{
                     fontSize: 17,
                     lineHeight: 1.7,
-                    color: "rgba(255,255,255,0.9)",
+                    color: colors.gray,
                     marginBottom: 24,
                   }}
                 >
-                  Privatisation de panels, modules in situ, formats hybrides : nous réglons chaque étape pour vos équipes.
+                  Privatisation de panels, modules in situ, formats hybrides :
+                  nous réglons chaque étape pour vos équipes.
                 </p>
-                <div style={{ display: "grid", gap: 12, color: "#fff" }}>
+                <div
+                  style={{ display: "grid", gap: 12, color: colors.slate }}
+                >
                   {[
                     "Sélection de dates adaptées à vos contraintes",
                     "Animations co-brandées avec vos directions internes",
@@ -570,15 +1205,21 @@ function Agenda() {
                           width: 34,
                           height: 34,
                           borderRadius: "50%",
-                          background: "rgba(255,255,255,0.16)",
+                          background: "#fff",
+                          border: `1px solid ${colors.lightGray}`,
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
                         }}
                       >
-                        <i className="fa-solid fa-check" style={{ color: "#fff" }} />
+                        <i
+                          className="fa-solid fa-check"
+                          style={{ color: colors.blue }}
+                        />
                       </span>
-                      <span style={{ fontSize: 15, lineHeight: 1.5 }}>{item}</span>
+                      <span style={{ fontSize: 15, lineHeight: 1.5 }}>
+                        {item}
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -611,7 +1252,9 @@ function Agenda() {
                   >
                     Exemple d'accompagnement
                   </div>
-                  <h3 style={{ fontSize: 22, fontWeight: 800, marginBottom: 14 }}>
+                  <h3
+                    style={{ fontSize: 22, fontWeight: 800, marginBottom: 14 }}
+                  >
                     Programme corporate clé en main
                   </h3>
                   <ul
