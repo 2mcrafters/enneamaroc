@@ -343,7 +343,6 @@ function Agenda() {
               <div
                 style={{
                   display: "flex",
-                  display: "flex",
                   justifyContent: "center",
                   gap: 16,
                   flexWrap: "wrap",
