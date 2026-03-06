@@ -1,13 +1,13 @@
 import parse from "html-react-parser";
 
 const HeroBanner1 = ({
-  title = "Libérez votre potentiel avec l’Ennéagramme",
+  title = "Libérer votre potentiel avec EnnéaMaroc",
   mainimg = "/assets/imgss001/Layer 01.png",
-  inscriptionUrl = "/app/#/login",
-  RegisterUrl = "/app/#/signup",
-  subtitle = "Découvrez une voie claire pour mieux vous comprendre, transformer vos relations et agir avec conscience.",
-  height = "90vh",
-  heightSm = "70vh",
+  inscriptionUrl = "/page",
+  RegisterUrl = "/page",
+  subtitle = "Un chemin pour mieux vous connaître, vous libérer et vivre en autonomie.",
+  height = "100vh",
+  heightSm = "80vh",
 }) => {
   const bgUrl = typeof mainimg === "string" ? encodeURI(mainimg) : mainimg;
 
@@ -17,7 +17,7 @@ const HeroBanner1 = ({
       style={{
         "--hero-h": height,
         "--hero-h-sm": heightSm,
-        paddingTop: "10rem",
+        paddingTop: "6rem",
       }}
     >
       <style>{`

@@ -11,7 +11,7 @@ const Process = () => {
       id="process-section"
     >
       <div className="container">
-        <div className="title-area three text-center">
+        <div className="title-area three text-left">
           <SectionTitle
             SubTitle="AU CŒUR DE L'ENNÉAGRAMME"
             Title="L'ennéagramme est un outil puissant qui vous aide à mieux comprendre votre personnalité"

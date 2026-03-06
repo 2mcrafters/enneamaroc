@@ -60,11 +60,19 @@ const BlogCard = ({ blog }) => {
         boxShadow: cardShadow,
         width: "100%",
         height: "100%",
+        display: "flex",
+        flexDirection: "column",
       }}
     >
       <div
         className="inner-box"
-        style={{ position: "relative", cursor: "pointer" }}
+        style={{
+          position: "relative",
+          cursor: "pointer",
+          display: "flex",
+          flexDirection: "column",
+          height: "100%",
+        }}
       >
         {/* Full-card clickable overlay */}
         <Link
@@ -117,6 +125,9 @@ const BlogCard = ({ blog }) => {
             position: "relative",
             zIndex: 2,
             padding: isMobile ? "16px" : "20px",
+            display: "flex",
+            flexDirection: "column",
+            flexGrow: 1,
           }}
         >
           {/* Title */}
@@ -149,6 +160,7 @@ const BlogCard = ({ blog }) => {
               fontSize: isMobile ? "13px" : "14px",
               lineHeight: 1.6,
               wordBreak: "break-word",
+              flexGrow: 1,
             }}
             className="mb-10"
           >
@@ -158,7 +170,7 @@ const BlogCard = ({ blog }) => {
           {/* Button */}
           <Link
             to={toPath(blog.link)}
-            style={btnBase}
+            style={{ ...btnBase, marginTop: "auto" }}
             onMouseEnter={(e) =>
               (e.currentTarget.style.backgroundColor = "#dc3545")
             }

@@ -21,11 +21,16 @@ const highlightItems = [
 const Choose1 = () => {
   return (
     <section
-      id="pourquoi-enneamaroc"
+      id="pourquoi-ennea-maroc"
       className="choose-section space bg-theme3 overflow-hidden"
     >
       <div className="p-top-right wow slideInRight">
-        <img src="/assets/images/choose/shape01.png" alt="Choose shape" />
+        <img
+          src="/assets/images/choose/shape01.png"
+          alt="Forme décorative EnnéaMaroc"
+          loading="lazy"
+          decoding="async"
+        />
       </div>
       <div className="container">
         <div className="row">
@@ -35,7 +40,10 @@ const Choose1 = () => {
               <img
                 style={{ width: "240%" }}
                 src="/assets/images/choose/choose01.jpg"
-                alt="Choose Thumb"
+                alt="Participants en atelier coaching Ennéagramme"
+                loading="lazy"
+                decoding="async"
+                sizes="(min-width: 992px) 480px, 100vw"
               />
             </div>
             {/* <div className="since-box">
@@ -59,15 +67,15 @@ const Choose1 = () => {
           {/* Contenu texte */}
           <div className="col-lg-6">
             <div className="choose-content-wrapper choose-content-modern">
-              <span className="choose-eyebrow">Pourquoi Enneamaroc</span>
+              <span className="choose-eyebrow">Pourquoi EnnéaMaroc</span>
               <h2 className="choose-headline">
                 Nous créons des solutions
                 <span> humaines et innovantes</span>
               </h2>
               <p className="choose-description">
-                Grâce à l’Ennéagramme et au coaching, nous aidons individus et
-                organisations à libérer leur potentiel, renforcer leurs
-                relations et évoluer de manière durable.
+                Grâce à l’Ennéagramme , nous aidons individus et organisations à
+                libérer leur potentiel, renforcer leurs relations et évoluer de
+                manière durable.
               </p>
 
               <div className="choose-highlights">
@@ -86,7 +94,7 @@ const Choose1 = () => {
 
               <div className="choose-cta">
                 <div className="choose-badge">
-                  <strong>+15 ans</strong>
+                  <strong>+18 ans</strong>
                   <span>d'accompagnement humain</span>
                 </div>
                 <Link to="/contact" className="theme-btn bg-dark">

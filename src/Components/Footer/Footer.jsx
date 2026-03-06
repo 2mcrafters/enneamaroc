@@ -19,7 +19,7 @@ const Footer = () => {
     whatsapp: "0661 24 66 47",
     email: "bonjour@enneagrammaroc.ma",
     address:
-      "Av. My Youssef, résidence Hamza (au-dessus du café picasso) Entresol, n°2, CP 90 000 Tanger",
+      "Av. My Youssef, résidence Hamza (au-dessus du café Picasso), 4ème étage n°1, CP 90000 Tanger",
   };
 
   const digitsOnly = (value) => value.replace(/\D/g, "");
@@ -64,7 +64,7 @@ const Footer = () => {
             <Link to="/" className="inline-block">
               <img
                 src={logoSrc}
-                alt="Enneagram Maroc"
+                alt="EnnéaMaroc"
                 className="h-7 w-auto"
                 style={{ maxWidth: "61%" }}
               />
@@ -72,7 +72,7 @@ const Footer = () => {
 
             <p className="max-w-sm text-white leading-relaxed text-xs">
               <span className="font-semibold text-sm block mb-1">
-                Enneagram Maroc – Chemin vers soi.
+                EnnéaMaroc – Chemin vers soi.
               </span>
               Respirez. Observez. Choisissez. Chaque jour, un pas de plus vers
               une clarté intérieure.
@@ -171,7 +171,7 @@ const Footer = () => {
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-3">
           <div className="flex flex-col md:flex-row items-center justify-between gap-3">
             <span className="text-[11px] text-white">
-              © {new Date().getFullYear()} Enneagram Maroc — Fait avec{" "}
+              © {new Date().getFullYear()} EnnéaMaroc — Fait avec{" "}
               <span aria-hidden className="text-red-300">
                 ♥
               </span>{" "}

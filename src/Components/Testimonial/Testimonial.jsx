@@ -154,6 +154,98 @@ const TestimonialComponent = () => {
     setActiveIndex((prev) => (prev + 1) % totalItems);
   };
 
+  const getWrapperStyle = (variant = "desktop") => {
+    if (variant === "mobile") {
+      return {
+        display: "none",
+        flexDirection: "column",
+        gap: "10px",
+        justifyContent: "center",
+        alignItems: "stretch",
+        width: "100%",
+        padding: "0 18px 18px",
+        marginBottom: "28px",
+      };
+    }
+
+    return {
+      display: "flex",
+      flexWrap: "wrap",
+      gap: "12px",
+      justifyContent: "center",
+      marginBottom: "48px",
+    };
+  };
+
+  const getButtonStyle = (isActive, variant, accent) => {
+    const isMobile = variant === "mobile";
+    return {
+      cursor: "pointer",
+      padding: isMobile ? "12px 18px" : "16px 30px",
+      borderRadius: "999px",
+      border: `1px solid ${isActive ? "#ffffff" : "rgba(255, 255, 255, 0.35)"}`,
+      background: isActive ? "#ffffff" : "rgba(255, 255, 255, 0.14)",
+      color: isActive ? accent : "rgba(255, 255, 255, 0.92)",
+      fontWeight: 800,
+      letterSpacing: isMobile ? "0.08em" : "1.4px",
+      textTransform: "uppercase",
+      fontSize: isMobile ? "11px" : "13px",
+      transition: "all 0.25s ease",
+      backdropFilter: "blur(10px)",
+      boxShadow: isActive
+        ? "0 8px 24px rgba(255, 255, 255, 0.25)"
+        : "0 6px 18px rgba(0, 0, 0, 0.18)",
+      width: isMobile ? "100%" : "auto",
+      textAlign: "center",
+    };
+  };
+
+  const renderTabs = (variant = "desktop") => (
+    <div
+      role="tablist"
+      className={`ennea-tabs-wrapper ennea-tabs-wrapper-${variant}`}
+      style={getWrapperStyle(variant)}
+    >
+      {items.map((item, index) => {
+        const isActive = index === activeIndex;
+        const buttonStyle = getButtonStyle(isActive, variant, item.accent);
+        return (
+          <button
+            key={`${variant}-${item.label}`}
+            role="tab"
+            aria-selected={isActive}
+            onClick={() => setActiveIndex(index)}
+            className="ennea-tab-button"
+            style={buttonStyle}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "#e13734";
+              e.currentTarget.style.borderColor = "#e13734";
+              e.currentTarget.style.color = "#ffffff";
+              e.currentTarget.style.boxShadow =
+                "0 10px 28px rgba(225, 55, 52, 0.35)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = isActive
+                ? "#ffffff"
+                : "rgba(255, 255, 255, 0.14)";
+              e.currentTarget.style.borderColor = isActive
+                ? "#ffffff"
+                : "rgba(255, 255, 255, 0.35)";
+              e.currentTarget.style.color = isActive
+                ? item.accent
+                : "rgba(255, 255, 255, 0.92)";
+              e.currentTarget.style.boxShadow = isActive
+                ? "0 8px 24px rgba(255, 255, 255, 0.25)"
+                : "0 6px 18px rgba(0, 0, 0, 0.18)";
+            }}
+          >
+            {item.label}
+          </button>
+        );
+      })}
+    </div>
+  );
+
   const renderDescription = (
     desc,
     {
@@ -271,58 +363,52 @@ const TestimonialComponent = () => {
               margin: "0 auto 44px",
               color: "#ffffff",
               display: "grid",
-              gap: "18px",
-              textAlign: "center",
-              justifyItems: "center",
-              justifyContent: "center",
+              gap: "12px",
+              textAlign: "left",
+              justifyItems: "flex-start",
+              alignItems: "flex-start",
             }}
           >
-            <div
-              className="ennea-hero-label"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "10px",
-                padding: "12px 24px",
-                borderRadius: "999px",
-                background: "rgba(255, 255, 255, 0.16)",
-                border: "1px solid rgba(255, 255, 255, 0.3)",
-                letterSpacing: "0.28em",
-                textTransform: "uppercase",
-                fontSize: "12px",
-                fontWeight: 700,
-                backdropFilter: "blur(6px)",
-                marginBottom: "4px",
-              }}
-            >
-              L’ENNÉAGRAMME
-            </div>
             <h1
               className="ennea-hero-heading"
               style={{
                 margin: 0,
                 padding: "0 8px",
                 fontSize: "clamp(20px, 2.7vw, 36px)",
-                lineHeight: 1.02,
+                lineHeight: 1.18,
                 fontWeight: 700,
-                textTransform: "uppercase",
                 letterSpacing: "0.06em",
-                whiteSpace: "nowrap",
                 color: "#ffffff",
               }}
             >
               L’ENNÉAGRAMME : UNE CARTE VIVANTE DE L’ÊTRE HUMAIN
             </h1>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                padding: "0 8px",
+              }}
+            >
+              <img
+                src="/assets/images/logo/enneamaroc-logo.png"
+                alt="EnnéaMaroc"
+                style={{
+                  width: 72,
+                  height: "auto",
+                  filter: "drop-shadow(0 8px 18px rgba(0,0,0,0.35))",
+                }}
+              />
+            </div>
             <p
               className="ennea-hero-subtitle"
               style={{
                 margin: 0,
                 fontSize: "16px",
-                letterSpacing: "0.22em",
-                textTransform: "uppercase",
-                color: "rgba(255, 255, 255, 0.76)",
+                color: "rgba(255, 255, 255, 0.86)",
                 fontWeight: 600,
-                lineHeight: 1.3,
+                lineHeight: 1.4,
+                padding: "0 8px",
               }}
             >
               Plus qu’un outil, une voie de transformation
@@ -331,42 +417,23 @@ const TestimonialComponent = () => {
               className="ennea-hero-body"
               style={{
                 display: "grid",
-                gap: "14px",
-                maxWidth: "960px",
+                gap: "12px",
                 width: "100%",
                 color: "rgba(255, 255, 255, 0.78)",
                 fontSize: "15px",
-                lineHeight: "1.45",
-                justifyItems: "center",
+                lineHeight: "1.5",
+                padding: "0 8px",
               }}
             >
-              <p
-                style={{
-                  margin: 0,
-                  whiteSpace: "nowrap",
-                  textAlign: "center",
-                }}
-              >
+              <p style={{ margin: 0 }}>
                 L’Ennéagramme n’est pas seulement un modèle de personnalité.
               </p>
-              <p
-                style={{
-                  margin: 0,
-                  whiteSpace: "nowrap",
-                  textAlign: "center",
-                }}
-              >
+              <p style={{ margin: 0 }}>
                 C’est une carte vivante des dynamiques humaines, un miroir qui
                 révèle nos forces, nos fragilités, et les chemins d’évolution
                 possibles.
               </p>
-              <p
-                style={{
-                  margin: 0,
-                  whiteSpace: "nowrap",
-                  textAlign: "center",
-                }}
-              >
+              <p style={{ margin: 0 }}>
                 Il nous aide à passer de la survie automatique à la présence
                 consciente, en ouvrant un espace de liberté intérieure.
               </p>
@@ -375,7 +442,19 @@ const TestimonialComponent = () => {
           {/* Responsive overrides for small screens */}
           <style>
             {`
+              .ennea-tabs-wrapper-mobile {
+                display: none;
+              }
+
               @media (max-width: 640px) {
+                .ennea-tabs-wrapper-desktop {
+                  display: none !important;
+                }
+
+                .ennea-tabs-wrapper-mobile {
+                  display: flex !important;
+                }
+
                 .ennea-hero-wrapper {
                   padding: 0 18px;
                   gap: 14px !important;
@@ -410,41 +489,30 @@ const TestimonialComponent = () => {
                 .ennea-hero-body p {
                   white-space: normal !important;
                 }
+              }
 
-                /* Tab buttons - smaller on mobile, all in one line */
-                .ennea-tabs-wrapper {
-                  gap: 6px !important;
-                  margin-bottom: 32px !important;
-                  flex-wrap: nowrap !important;
-                  overflow-x: auto !important;
-                  padding: 4px 8px !important;
-                  -webkit-overflow-scrolling: touch;
-                  scrollbar-width: none;
-                  -ms-overflow-style: none;
-                }
-
-                .ennea-tabs-wrapper::-webkit-scrollbar {
-                  display: none;
+              @media (max-width: 420px) {
+                .ennea-tabs-wrapper-mobile {
+                  padding: 0 14px 16px !important;
+                  gap: 8px !important;
                 }
 
                 .ennea-tab-button {
-                  padding: 8px 12px !important;
                   font-size: 10px !important;
-                  letter-spacing: 0.8px !important;
-                  white-space: nowrap !important;
-                  flex-shrink: 0 !important;
+                  padding: 10px 16px !important;
+                  letter-spacing: 0.06em !important;
                 }
               }
 
-              @media (max-width: 480px) {
-                .ennea-tabs-wrapper {
-                  gap: 5px !important;
+              @media (max-width: 360px) {
+                .ennea-tabs-wrapper-mobile {
+                  padding: 0 12px 14px !important;
                 }
 
                 .ennea-tab-button {
-                  padding: 7px 10px !important;
                   font-size: 9px !important;
-                  letter-spacing: 0.6px !important;
+                  padding: 9px 14px !important;
+                  letter-spacing: 0.05em !important;
                 }
               }
 
@@ -455,78 +523,22 @@ const TestimonialComponent = () => {
                   letter-spacing: 1px !important;
                 }
               }
+
+              @media (max-width: 768px) {
+                .ennea-main-grid {
+                  grid-template-columns: 1fr !important;
+                }
+
+                .ennea-side-grid {
+                  display: none !important;
+                }
+              }
             `}
           </style>
           {/* Tabs */}
-          <div
-            role="tablist"
-            className="ennea-tabs-wrapper"
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "12px",
-              justifyContent: "center",
-              marginBottom: "48px",
-            }}
-          >
-            {items.map((item, index) => {
-              const isActive = index === activeIndex;
-              return (
-                <button
-                  key={item.label}
-                  role="tab"
-                  aria-selected={isActive}
-                  onClick={() => setActiveIndex(index)}
-                  className="ennea-tab-button"
-                  style={{
-                    cursor: "pointer",
-                    padding: "16px 30px",
-                    borderRadius: "999px",
-                    border: `1px solid ${
-                      isActive ? "#ffffff" : "rgba(255, 255, 255, 0.35)"
-                    }`,
-                    background: isActive
-                      ? "#ffffff"
-                      : "rgba(255, 255, 255, 0.14)",
-                    color: isActive ? item.accent : "rgba(255, 255, 255, 0.92)",
-                    fontWeight: 800,
-                    letterSpacing: "1.4px",
-                    textTransform: "uppercase",
-                    fontSize: "13px",
-                    transition: "all 0.25s ease",
-                    backdropFilter: "blur(10px)",
-                    boxShadow: isActive
-                      ? "0 8px 24px rgba(255, 255, 255, 0.25)"
-                      : "0 6px 18px rgba(0, 0, 0, 0.18)",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = "#e13734";
-                    e.currentTarget.style.borderColor = "#e13734";
-                    e.currentTarget.style.color = "#ffffff";
-                    e.currentTarget.style.boxShadow =
-                      "0 10px 28px rgba(225, 55, 52, 0.35)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = isActive
-                      ? "#ffffff"
-                      : "rgba(255, 255, 255, 0.14)";
-                    e.currentTarget.style.borderColor = isActive
-                      ? "#ffffff"
-                      : "rgba(255, 255, 255, 0.35)";
-                    e.currentTarget.style.color = isActive
-                      ? item.accent
-                      : "rgba(255, 255, 255, 0.92)";
-                    e.currentTarget.style.boxShadow = isActive
-                      ? "0 8px 24px rgba(255, 255, 255, 0.25)"
-                      : "0 6px 18px rgba(0, 0, 0, 0.18)";
-                  }}
-                >
-                  {item.label}
-                </button>
-              );
-            })}
-          </div>
-          ;{/* Active panel styled like Philosophie section */}
+          {renderTabs("desktop")}
+          {renderTabs("mobile")}
+          {/* Active panel styled like Philosophie section */}
           <div
             style={{
               maxWidth: "980px",
@@ -558,208 +570,127 @@ const TestimonialComponent = () => {
                   background: "#ffffff",
                   borderRadius: "26px",
                   padding: "40px 48px",
-                  display: "flex",
-                  flexWrap: "wrap",
-                  gap: "36px",
                   color: "#0e1b25",
-                  alignItems: "stretch",
+                  display: "grid",
+                  gap: "32px",
+                  boxShadow: "0 20px 60px rgba(5, 28, 50, 0.1)",
                 }}
               >
                 <div
+                  className="ennea-main-grid"
                   style={{
                     display: "grid",
-                    gap: "24px",
-                    alignContent: "start",
-                    flex: "1 1 300px",
-                    maxWidth: "360px",
+                    gridTemplateColumns: "minmax(0,1fr) 240px",
+                    gap: "32px",
                   }}
                 >
                   <div
                     style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "16px",
-                      flexWrap: "wrap",
+                      display: "grid",
+                      gap: "18px",
+                      textAlign: "left",
                     }}
                   >
-                    <div
-                      style={{
-                        display: "grid",
-                        placeItems: "center",
-                        width: "70px",
-                        height: "70px",
-                        borderRadius: "22px",
-                        background: `linear-gradient(135deg, ${active.accent} 0%, rgba(14, 27, 37, 0.08) 100%)`,
-                        boxShadow: "0 18px 38px rgba(10,131,202,0.22)",
-                        border: `1px solid ${active.accent}33`,
-                      }}
-                    >
-                      <Icon i={activeIndex} strokeColor="#ffffff" />
-                    </div>
                     <div
                       style={{
                         display: "flex",
-                        flexDirection: "column",
-                        gap: "6px",
+                        alignItems: "center",
+                        gap: "18px",
                       }}
                     >
-                      <span
+                      <div
                         style={{
-                          textTransform: "uppercase",
-                          letterSpacing: "0.18em",
-                          fontSize: "11px",
-                          fontWeight: 700,
-                          color: active.accent,
+                          display: "grid",
+                          placeItems: "center",
+                          width: "64px",
+                          height: "64px",
+                          borderRadius: "20px",
+                          background: `linear-gradient(135deg, ${active.accent} 0%, rgba(14, 27, 37, 0.08) 100%)`,
+                          boxShadow: "0 18px 32px rgba(10,131,202,0.18)",
                         }}
                       >
-                        {active.label}
-                      </span>
-                      <span
-                        style={{
-                          fontSize: "12px",
-                          letterSpacing: "0.28em",
-                          textTransform: "uppercase",
-                          color: "rgba(14, 27, 37, 0.55)",
-                        }}
-                      >
-                        Séquence {active.order}
-                      </span>
+                        <Icon i={activeIndex} strokeColor="#ffffff" />
+                      </div>
+                      <div>
+                        <p
+                          style={{
+                            margin: 0,
+                            fontSize: "12px",
+                            letterSpacing: "0.2em",
+                            textTransform: "uppercase",
+                            color: active.accent,
+                          }}
+                        >
+                          {active.label}
+                        </p>
+                        <p
+                          style={{
+                            margin: 0,
+                            fontSize: "18px",
+                            fontWeight: 700,
+                            color: "#0e1b25",
+                            maxWidth: "360px",
+                          }}
+                        >
+                          {active.title}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-
-                  <div
-                    style={{
-                      display: "grid",
-                      gap: "14px",
-                    }}
-                  >
-                    <h3
-                      style={{
-                        margin: 0,
-                        fontSize: "clamp(30px, 3.4vw, 46px)",
-                        lineHeight: 1.12,
-                        fontWeight: 800,
-                        color: active.accent,
-                        letterSpacing: "-0.6px",
-                      }}
-                    >
-                      {active.title}
-                    </h3>
-                    <span
-                      style={{
-                        fontSize: "13px",
-                        letterSpacing: "0.24em",
-                        textTransform: "uppercase",
-                        color: "rgba(14, 27, 37, 0.6)",
-                      }}
-                    >
-                      Corps / Cœur / Esprit
-                    </span>
                     <p
                       style={{
-                        margin: "2px 0 0",
-                        fontSize: "18px",
+                        margin: 0,
+                        fontSize: "16px",
+                        color: "rgba(14, 27, 37, 0.8)",
                         lineHeight: "1.6",
-                        color: "rgba(14, 27, 37, 0.88)",
-                        fontWeight: 500,
                       }}
                     >
                       {active.tag}
                     </p>
+                    <div>
+                      {renderDescription(active.desc, {
+                        paragraphColor: "rgba(14, 27, 37, 0.88)",
+                        bulletColor: "rgba(14, 27, 37, 0.75)",
+                      })}
+                    </div>
                   </div>
-                </div>
-
-                <div
-                  style={{
-                    display: "grid",
-                    gap: "20px",
-                    flex: "1 1 420px",
-                  }}
-                >
-                  <div>
-                    {renderDescription(active.desc, {
-                      paragraphColor: "rgba(14, 27, 37, 0.88)",
-                      bulletColor: "rgba(14, 27, 37, 0.75)",
-                    })}
-                  </div>
-
                   <div
+                    className="ennea-side-grid"
                     style={{
-                      padding: "18px 20px",
-                      borderRadius: "18px",
-                      background: "rgba(10, 131, 202, 0.08)",
-                      borderLeft: `4px solid ${active.accent}55`,
                       display: "grid",
-                      gap: "10px",
+                      gap: "20px",
+                      justifyContent: "center",
+                      alignItems: "start",
                     }}
                   >
-                    <span
+                    <div
                       style={{
-                        textTransform: "uppercase",
-                        fontSize: "11px",
-                        letterSpacing: "0.24em",
-                        color: "rgba(14, 27, 37, 0.5)",
+                        padding: "18px",
+                        borderRadius: "22px",
+                        border: `1px solid rgba(14, 27, 37, 0.08)`,
+                        background: "rgba(255,255,255,0.8)",
+                        boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
+                        display: "flex",
+                        justifyContent: "center",
                       }}
                     >
-                      Enjeu
-                    </span>
-                    <p
-                      style={{
-                        margin: 0,
-                        color: "rgba(14, 27, 37, 0.86)",
-                        fontSize: "16px",
-                        lineHeight: "1.7",
-                      }}
-                    >
-                      Faire dialoguer l'intuition ancestrale et les besoins du
-                      monde contemporain, pour accompagner des transformations
-                      humaines concrètes.
-                    </p>
+                      <img
+                        src="/assets/images/logo/enneamaroc-logo.png"
+                        alt="EnnéaMaroc logo"
+                        style={{ width: "95px", height: "auto" }}
+                      />
+                    </div>
                   </div>
                 </div>
               </article>
             </div>
           </div>
-          ;;
           <div
             style={{
               display: "flex",
               justifyContent: "center",
-              alignItems: "center",
-              gap: "16px",
               marginTop: "36px",
-              flexWrap: "wrap",
             }}
           >
-            <button
-              type="button"
-              onClick={goToPrev}
-              style={{
-                padding: "14px 28px",
-                borderRadius: "999px",
-                border: "1px solid rgba(255, 255, 255, 0.4)",
-                background: "rgba(255, 255, 255, 0.18)",
-                color: "#ffffff",
-                letterSpacing: "0.18em",
-                fontSize: "12px",
-                textTransform: "uppercase",
-                fontWeight: 700,
-                cursor: "pointer",
-                transition: "background 0.2s ease, transform 0.2s ease",
-                minWidth: "150px",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = "rgba(225, 55, 52, 0.9)";
-                e.currentTarget.style.transform = "translateY(-2px)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = "rgba(255, 255, 255, 0.18)";
-                e.currentTarget.style.transform = "translateY(0)";
-              }}
-              aria-label="Onglet précédent"
-            >
-              Précédent
-            </button>
             <button
               type="button"
               onClick={goToNext}
@@ -775,7 +706,7 @@ const TestimonialComponent = () => {
                 fontWeight: 700,
                 cursor: "pointer",
                 transition: "background 0.2s ease, transform 0.2s ease",
-                minWidth: "150px",
+                minWidth: "180px",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.background = "rgba(10, 131, 202, 0.9)";

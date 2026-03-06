@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import Seo from "../Components/Seo/Seo";
 
 const Approfondir = () => {
   // ---------- DATA ----------
@@ -140,21 +141,23 @@ const Approfondir = () => {
   }, 0); // 2*5 + 5 = 15
 
   return (
-    <div
-      className="details-page"
-      style={{ background: C.white, color: C.black }}
-    >
-      {/* preload image */}
-      <img
-        src={heroImg}
-        alt=""
-        style={{ display: "none" }}
-        onError={() => setHeroOk(false)}
-        onLoad={() => setHeroOk(true)}
-      />
+    <main role="main">
+      <Seo page="approfondir" path="/approfondir" />
+      <div
+        className="details-page"
+        style={{ background: C.white, color: C.black }}
+      >
+        {/* preload image */}
+        <img
+          src={heroImg}
+          alt="Préchargement fond atelier Approfondir"
+          style={{ display: "none" }}
+          onError={() => setHeroOk(false)}
+          onLoad={() => setHeroOk(true)}
+        />
 
-      {/* ===== Global transitions + hover colors ===== */}
-      <style>{`
+        {/* ===== Global transitions + hover colors ===== */}
+        <style>{`
         :root {
           --c-white: ${C.white};
           --c-black: ${C.black};
@@ -234,593 +237,611 @@ const Approfondir = () => {
         }
       `}</style>
 
-      {/* ============ HERO ============ */}
-      <section
-        style={{
-          position: "relative",
-          color: C.white,
-          padding: `187px 0px 150px`,
-          overflow: "hidden",
-          backgroundColor: heroOk ? "transparent" : C.blue,
-        }}
-      >
-        {heroOk && (
+        {/* ============ HERO ============ */}
+        <section
+          style={{
+            position: "relative",
+            color: C.white,
+            padding: `187px 0px 150px`,
+            overflow: "hidden",
+            backgroundColor: heroOk ? "transparent" : C.blue,
+          }}
+        >
+          {heroOk && (
+            <div
+              aria-hidden="true"
+              style={{
+                position: "absolute",
+                inset: 0,
+                backgroundImage: `url("${heroImg}")`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                opacity: IMAGE_OPACITY,
+                zIndex: 0,
+              }}
+            />
+          )}
+
           <div
             aria-hidden="true"
             style={{
               position: "absolute",
               inset: 0,
-              backgroundImage: `url("${heroImg}")`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-              opacity: IMAGE_OPACITY,
+              background: `linear-gradient(rgba(10,131,202,${OVERLAY_ALPHA}), rgba(10,131,202,${OVERLAY_ALPHA}))`,
               zIndex: 0,
             }}
           />
-        )}
 
-        <div
-          aria-hidden="true"
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: `linear-gradient(rgba(10,131,202,${OVERLAY_ALPHA}), rgba(10,131,202,${OVERLAY_ALPHA}))`,
-            zIndex: 0,
-          }}
-        />
-
-        <div className="container" style={{ position: "relative", zIndex: 1 }}>
-          <div className="row align-items-center">
-            <div className="col-lg-10 mx-auto text-center">
-              <div className="mb-2">
-                <span
-                  className="pill"
-                  style={pill("rgba(255,255,255,0.18)", C.white)}
+          <div
+            className="container"
+            style={{ position: "relative", zIndex: 1 }}
+          >
+            <div className="row align-items-center">
+              <div className="col-lg-10 mx-auto text-center">
+                <div className="mb-2">
+                  <span
+                    className="pill"
+                    style={pill("rgba(255,255,255,0.18)", C.white)}
+                  >
+                    Cycle – Certificat
+                  </span>
+                </div>
+                <h1
+                  className="mb-2"
+                  style={{
+                    ...h1,
+                    color: C.white,
+                    textShadow: "0 3px 12px rgba(0,0,0,.35)",
+                  }}
                 >
-                  Cycle – Certificat
-                </span>
-              </div>
-              <h1
-                className="mb-2"
-                style={{
-                  ...h1,
-                  color: C.white,
-                  textShadow: "0 3px 12px rgba(0,0,0,.35)",
-                }}
-              >
-                {PROGRAM_SUBTITLE}
-              </h1>
-              <p className="mb-4" style={{ color: C.white }}>
-                Six modules pour une exploration profonde des mécanismes, ombres
-                et potentiels.
-              </p>
+                  {PROGRAM_SUBTITLE}
+                </h1>
+                <p className="mb-4" style={{ color: C.white }}>
+                  Six modules pour une exploration profonde des mécanismes,
+                  ombres et potentiels.
+                </p>
 
-              <div
-                className="d-flex justify-content-center flex-wrap"
-                style={{ gap: 18 }}
-              >
-                {[
-                  { n: `${modules.length}`, t: "Modules" },
-                  { n: `${TOTAL_DAYS}`, t: "Jours" },
-                  { n: "100%", t: "Pratique" },
-                ].map((s, i) => (
-                  <div key={i} style={{ textAlign: "center" }}>
-                    <div
-                      className="pill"
-                      style={{
-                        ...pill("rgba(255,255,255,0.12)", C.white),
-                        padding: "10px 14px",
-                      }}
-                    >
-                      <span style={{ fontWeight: 800, marginRight: 8 }}>
-                        {s.n}
-                      </span>
-                      <span>{s.t}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-4">
-                <a
-                  href="/app/#/course/30"
-                  className="btn btn--white-blue"
-                  style={btn(C.white, C.blue)}
-                >
-                  <i className="fas fa-calendar-alt" /> Réserver ma place
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* INTRO */}
-      <section style={{ padding: "56px 0 8px" }}>
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-9 mx-auto text-center">
-              <span style={{ color: C.blue, fontWeight: 700 }}>
-                FORMATION COMPLÈTE
-              </span>
-              <h2 className="mt-1" style={h2}>
-                Programme de Formation en Ennéagramme
-              </h2>
-              <p className="mt-3" style={{ color: C.black }}>
-                Un parcours d’approfondissement qui conjugue théorie vivante,
-                panels, exercices expérientiels et auto-observation, pour une
-                transformation durable.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* MODULES */}
-      <section style={{ padding: "24px 0 56px" }}>
-        <div className="container">
-          <div className="row gy-4">
-            {modules.map((m) => (
-              <div key={m.id} className="col-lg-6 d-flex">
                 <div
-                  style={{ ...card, width: "100%" }}
-                  className="hover-card equal-height-card"
+                  className="d-flex justify-content-center flex-wrap"
+                  style={{ gap: 18 }}
                 >
+                  {[
+                    { n: `${modules.length}`, t: "Modules" },
+                    { n: `${TOTAL_DAYS}`, t: "Jours" },
+                    { n: "100%", t: "Pratique" },
+                  ].map((s, i) => (
+                    <div key={i} style={{ textAlign: "center" }}>
+                      <div
+                        className="pill"
+                        style={{
+                          ...pill("rgba(255,255,255,0.12)", C.white),
+                          padding: "10px 14px",
+                        }}
+                      >
+                        <span style={{ fontWeight: 800, marginRight: 8 }}>
+                          {s.n}
+                        </span>
+                        <span>{s.t}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-4">
+                  <a
+                    href="/app/#/course/30"
+                    className="btn btn--white-blue"
+                    style={btn(C.white, C.blue)}
+                  >
+                    <i className="fas fa-calendar-alt" /> Réserver ma place
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* INTRO */}
+        <section style={{ padding: "56px 0 8px" }}>
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-9 mx-auto text-center">
+                <span style={{ color: C.blue, fontWeight: 700 }}>
+                  FORMATION COMPLÈTE
+                </span>
+                <h2 className="mt-1" style={h2}>
+                  Programme de Formation en Ennéagramme
+                </h2>
+                <p className="mt-3" style={{ color: C.black }}>
+                  Un parcours d’approfondissement qui conjugue théorie vivante,
+                  panels, exercices expérientiels et auto-observation, pour une
+                  transformation durable.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* MODULES */}
+        <section style={{ padding: "24px 0 56px" }}>
+          <div className="container">
+            <div className="row gy-4">
+              {modules.map((m) => (
+                <div key={m.id} className="col-lg-6 d-flex">
                   <div
-                    className="d-flex justify-content-between align-items-center mb-2"
-                    style={{ gap: 12 }}
+                    style={{ ...card, width: "100%" }}
+                    className="hover-card equal-height-card"
                   >
                     <div
-                      className="d-flex align-items-center"
+                      className="d-flex justify-content-between align-items-center mb-2"
                       style={{ gap: 12 }}
                     >
                       <div
-                        style={{
-                          background: C.red,
-                          color: C.white,
-                          width: 44,
-                          height: 44,
-                          borderRadius: "50%",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                        }}
+                        className="d-flex align-items-center"
+                        style={{ gap: 12 }}
                       >
-                        <i className={`fas ${m.icon}`} />
+                        <div
+                          style={{
+                            background: C.red,
+                            color: C.white,
+                            width: 44,
+                            height: 44,
+                            borderRadius: "50%",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
+                        >
+                          <i className={`fas ${m.icon}`} />
+                        </div>
+                        <span style={{ color: C.blue, fontWeight: 700 }}>
+                          MODULE {m.id}
+                        </span>
                       </div>
-                      <span style={{ color: C.blue, fontWeight: 700 }}>
-                        MODULE {m.id}
+                      <span className="pill" style={pill(C.blue, C.white)}>
+                        {m.duration}
                       </span>
                     </div>
-                    <span className="pill" style={pill(C.blue, C.white)}>
-                      {m.duration}
-                    </span>
+
+                    <h3 style={{ fontWeight: 800 }}>{m.title}</h3>
+                    <p style={{ color: C.blue, marginTop: 2 }}>{m.subtitle}</p>
+                    <p
+                      className="mt-2"
+                      style={{ color: C.black, lineHeight: 1.6 }}
+                    >
+                      {m.description}
+                    </p>
+                    <p style={{ color: C.black, lineHeight: 1.6 }}>
+                      {m.details}
+                    </p>
                   </div>
-
-                  <h3 style={{ fontWeight: 800 }}>{m.title}</h3>
-                  <p style={{ color: C.blue, marginTop: 2 }}>{m.subtitle}</p>
-                  <p
-                    className="mt-2"
-                    style={{ color: C.black, lineHeight: 1.6 }}
-                  >
-                    {m.description}
-                  </p>
-                  <p style={{ color: C.black, lineHeight: 1.6 }}>{m.details}</p>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* INFO + PRICING */}
-      <section style={{ background: "#f7f7f7", padding: "56px 0" }}>
-        <div className="container">
-          {/* Row 1: Informations + Lieu */}
-          <div className="row g-4 align-items-start">
-            {/* LEFT: Informations pratiques */}
-            <div className="col-lg-6">
-              <span style={{ color: C.red, fontWeight: 700 }}>
-                INFORMATIONS PRATIQUES
-              </span>
-              <h2 className="mt-1" style={h2}>
-                Ce qui est inclus
-              </h2>
+        {/* INFO + PRICING */}
+        <section style={{ background: "#f7f7f7", padding: "56px 0" }}>
+          <div className="container">
+            {/* Row 1: Informations + Lieu */}
+            <div className="row g-4 align-items-start">
+              {/* LEFT: Informations pratiques */}
+              <div className="col-lg-6">
+                <span style={{ color: C.red, fontWeight: 700 }}>
+                  INFORMATIONS PRATIQUES
+                </span>
+                <h2 className="mt-1" style={h2}>
+                  Ce qui est inclus
+                </h2>
 
-              <ul
-                className="mt-3"
-                style={{ paddingLeft: 0, listStyle: "none" }}
-              >
-                {["Formation", "Livre 9 bases", "Pauses café"].map((t, i) => (
-                  <li
-                    key={i}
-                    className="d-flex align-items-start"
-                    style={{ gap: 10, marginBottom: 8 }}
+                <ul
+                  className="mt-3"
+                  style={{ paddingLeft: 0, listStyle: "none" }}
+                >
+                  {["Formation", "Livre 9 bases", "Pauses café"].map((t, i) => (
+                    <li
+                      key={i}
+                      className="d-flex align-items-start"
+                      style={{ gap: 10, marginBottom: 8 }}
+                    >
+                      <i
+                        className="fas fa-check-circle"
+                        style={{ color: C.red, marginTop: 2 }}
+                      />
+                      <span style={{ color: C.black }}>{t}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* RIGHT: Lieu & Horaires */}
+              <div className="col-lg-6">
+                <div className="hover-card" style={{ ...card, padding: 16 }}>
+                  <h4
+                    className="mb-2"
+                    style={{ display: "flex", alignItems: "center", gap: 8 }}
                   >
                     <i
-                      className="fas fa-check-circle"
-                      style={{ color: C.red, marginTop: 2 }}
+                      className="fas fa-map-marker-alt"
+                      style={{ color: C.blue }}
                     />
-                    <span style={{ color: C.black }}>{t}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* RIGHT: Lieu & Horaires */}
-            <div className="col-lg-6">
-              <div className="hover-card" style={{ ...card, padding: 16 }}>
-                <h4
-                  className="mb-2"
-                  style={{ display: "flex", alignItems: "center", gap: 8 }}
-                >
-                  <i
-                    className="fas fa-map-marker-alt"
-                    style={{ color: C.blue }}
-                  />
-                  Lieu & Horaires
-                </h4>
-                <p className="mb-1" style={{ fontWeight: 700, color: C.black }}>
-                  Ferme J'nan Lemonie — Sidi Yamani
-                </p>
-                <p style={{ color: C.black, marginBottom: 0 }}>
-                  <i className="fas fa-clock" style={{ marginRight: 6 }} />
-                  9H – 17H
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Row 2: Pricing cards */}
-          <div className="row g-4 mt-4">
-            {/* Card 1 */}
-            <div className="col-12 col-md-6">
-              <div
-                className="hover-card"
-                style={{
-                  ...card,
-                  position: "relative",
-                  paddingTop: 20,
-                  paddingBottom: 16,
-                  overflow: "hidden",
-                }}
-              >
-                <div
-                  style={{
-                    position: "absolute",
-                    left: 0,
-                    top: 0,
-                    bottom: 0,
-                    width: 12,
-                    background: C.red,
-                  }}
-                />
-                <div
-                  className="d-flex justify-content-between align-items-center"
-                  style={{ paddingLeft: 16 }}
-                >
-                  <h3 className="mb-1" style={{ fontWeight: 800 }}>
-                    Particuliers
-                  </h3>
-                  <span className="pill" style={pill(C.red, C.white)}>
-                    TTC
-                  </span>
-                </div>
-
-                <div
-                  style={{
-                    margin: "10px 0 14px",
-                    padding: "14px 18px",
-                    border: "2px dashed rgba(0,0,0,.18)",
-                    borderRadius: 14,
-                    display: "flex",
-                    alignItems: "baseline",
-                    gap: 8,
-                    justifyContent: "center",
-                    background: C.white,
-                  }}
-                >
-                  <span style={{ fontWeight: 800 }}>DH</span>
-                  <span
-                    style={{
-                      fontSize: 40,
-                      fontWeight: 800,
-                      letterSpacing: "-0.5px",
-                    }}
+                    Lieu & Horaires
+                  </h4>
+                  <p
+                    className="mb-1"
+                    style={{ fontWeight: 700, color: C.black }}
                   >
-                    2600
-                  </span>
+                    Ferme J'nan Lemonie — Sidi Yamani
+                  </p>
+                  <p style={{ color: C.black, marginBottom: 0 }}>
+                    <i className="fas fa-clock" style={{ marginRight: 6 }} />
+                    9H – 17H
+                  </p>
                 </div>
-
-                <ul
-                  className="mt-2"
-                  style={{ paddingLeft: 0, listStyle: "none" }}
-                >
-                  {["Formation", "Livre 9 bases", "Pauses café"].map((t, i) => (
-                    <li
-                      key={i}
-                      style={{
-                        marginBottom: 8,
-                        display: "flex",
-                        alignItems: "center",
-                      }}
-                    >
-                      <i
-                        className="fas fa-check"
-                        style={{ color: C.blue, marginRight: 8 }}
-                      />
-                      <span style={{ color: C.black }}>{t}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <a
-                  href="/app/#/course/30"
-                  className="btn"
-                  style={{
-                    ...btn(C.red, C.white),
-                    width: "100%",
-                    marginTop: 8,
-                  }}
-                >
-                  S'inscrire maintenant
-                </a>
               </div>
             </div>
 
-            {/* Card 2 */}
-            <div className="col-12 col-md-6">
-              <div
-                className="hover-card"
-                style={{
-                  ...card,
-                  position: "relative",
-                  paddingTop: 20,
-                  paddingBottom: 16,
-                  overflow: "hidden",
-                }}
-              >
+            {/* Row 2: Pricing cards */}
+            <div className="row g-4 mt-4">
+              {/* Card 1 */}
+              <div className="col-12 col-md-6">
                 <div
+                  className="hover-card"
                   style={{
-                    position: "absolute",
-                    left: 0,
-                    top: 0,
-                    bottom: 0,
-                    width: 12,
-                    background: C.blue,
-                  }}
-                />
-                <div
-                  className="d-flex justify-content-between align-items-center"
-                  style={{ paddingLeft: 16 }}
-                >
-                  <h3 className="mb-1" style={{ fontWeight: 800 }}>
-                    Formateurs & Entreprises
-                  </h3>
-                  <span className="pill" style={pill(C.blue, C.white)}>
-                    HTVA
-                  </span>
-                </div>
-
-                <div
-                  style={{
-                    margin: "10px 0 14px",
-                    padding: "14px 18px",
-                    border: "2px dashed rgba(0,0,0,.18)",
-                    borderRadius: 14,
-                    display: "flex",
-                    alignItems: "baseline",
-                    gap: 8,
-                    justifyContent: "center",
-                    background: C.white,
-                  }}
-                >
-                  <span style={{ fontWeight: 800 }}>DH</span>
-                  <span
-                    style={{
-                      fontSize: 40,
-                      fontWeight: 800,
-                      letterSpacing: "-0.5px",
-                    }}
-                  >
-                    3200
-                  </span>
-                </div>
-
-                <ul
-                  className="mt-2"
-                  style={{ paddingLeft: 0, listStyle: "none" }}
-                >
-                  {["Formation", "Livre 9 bases", "Pauses café"].map((t, i) => (
-                    <li
-                      key={i}
-                      style={{
-                        marginBottom: 8,
-                        display: "flex",
-                        alignItems: "center",
-                      }}
-                    >
-                      <i
-                        className="fas fa-check"
-                        style={{ color: C.black, marginRight: 8 }}
-                      />
-                      <span style={{ color: C.black }}>{t}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <a
-                  href="/app/#/course/30"
-                  className="btn btn--blue"
-                  style={{
-                    ...btn(C.blue, C.white),
-                    width: "100%",
-                    marginTop: 8,
-                  }}
-                >
-                  S'inscrire maintenant
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA + MAP */}
-      <section
-        style={{ background: C.white, padding: "56px 0", position: "relative" }}
-      >
-        <div className="container">
-          <div className="row g-4 align-items-stretch">
-            {/* CTA */}
-            <div className="col-lg-6">
-              <div
-                className="hover-card"
-                style={{
-                  background: C.white,
-                  color: C.black,
-                  borderRadius: 18,
-                  boxShadow: "0 10px 28px rgba(0,0,0,0.18)",
-                  position: "relative",
-                  overflow: "hidden",
-                  padding: 24,
-                  height: "100%",
-                }}
-              >
-                <div
-                  style={{
-                    position: "absolute",
-                    left: 0,
-                    top: 0,
-                    bottom: 0,
-                    width: 10,
-                    background: C.blue,
-                  }}
-                />
-                <div className="row align-items-center g-3">
-                  <div className="col-12">
-                    <div style={{ marginLeft: 14 }}>
-                      <span
-                        className="pill"
-                        style={{ ...pill(C.blue, C.white) }}
-                      >
-                        Cycle – Certificat
-                      </span>
-                      <h2
-                        className="mt-2 mb-2"
-                        style={{ fontWeight: 800, letterSpacing: "-0.2px" }}
-                      >
-                        Prêt(e) pour le voyage intérieur ?
-                      </h2>
-                      <p className="mb-0" style={{ color: C.black }}>
-                        Rejoignez les modules « Approfondir » et explorez vos
-                        mécanismes, zones d’ombre et potentiels — avec des
-                        outils concrets pour évoluer.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="col-12 text-lg-end">
-                    <div style={{ marginLeft: 14 }}>
-                      <a
-                        href="/app/#/course/30"
-                        className="btn btn--blue"
-                        style={{
-                          ...btn(C.blue, C.white),
-                          width: "100%",
-                          justifyContent: "center",
-                        }}
-                      >
-                        <i className="fas fa-calendar-alt" /> Réserver ma place
-                      </a>
-                      <div
-                        style={{
-                          fontSize: 12,
-                          marginTop: 8,
-                          textAlign: "center",
-                          color: C.black,
-                          opacity: 0.9,
-                        }}
-                      >
-                        Réponse rapide • Places limitées
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  style={{
-                    position: "absolute",
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    height: 6,
-                    background: C.blue,
-                  }}
-                />
-              </div>
-            </div>
-
-            {/* MAP */}
-            <div className="col-lg-6">
-              <div
-                className="hover-card"
-                style={{
-                  background: C.white,
-                  color: C.black,
-                  borderRadius: 18,
-                  boxShadow: "0 10px 28px rgba(0,0,0,0.12)",
-                  overflow: "hidden",
-                  padding: 16,
-                  height: "100%",
-                }}
-              >
-                <h3
-                  className="mb-3"
-                  style={{
-                    fontWeight: 800,
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 8,
-                  }}
-                >
-                  <i
-                    className="fas fa-map-marker-alt"
-                    style={{ color: C.blue }}
-                  />
-                  Localisation — Jnan Lemonie
-                </h3>
-                <div
-                  style={{
+                    ...card,
                     position: "relative",
-                    width: "100%",
-                    paddingBottom: "56.25%",
-                    height: 0,
-                    borderRadius: 12,
+                    paddingTop: 20,
+                    paddingBottom: 16,
                     overflow: "hidden",
                   }}
                 >
-                  <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5305.228879516067!2d-6.009267787231853!3d35.347562472582915!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd0bbf3da3ad8c9f%3A0x73ff61050e168005!2sJnan%20Lemonie!5e1!3m2!1sfr!2sma!4v1756569486248!5m2!1sfr!2sma"
+                  <div
                     style={{
                       position: "absolute",
-                      top: 0,
                       left: 0,
-                      width: "100%",
-                      height: "100%",
-                      border: 0,
+                      top: 0,
+                      bottom: 0,
+                      width: 12,
+                      background: C.red,
                     }}
-                    allowFullScreen
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    title="Jnan Lemonie - Google Map"
                   />
+                  <div
+                    className="d-flex justify-content-between align-items-center"
+                    style={{ paddingLeft: 16 }}
+                  >
+                    <h3 className="mb-1" style={{ fontWeight: 800 }}>
+                      Particuliers
+                    </h3>
+                    <span className="pill" style={pill(C.red, C.white)}>
+                      TTC
+                    </span>
+                  </div>
+
+                  <div
+                    style={{
+                      margin: "10px 0 14px",
+                      padding: "14px 18px",
+                      border: "2px dashed rgba(0,0,0,.18)",
+                      borderRadius: 14,
+                      display: "flex",
+                      alignItems: "baseline",
+                      gap: 8,
+                      justifyContent: "center",
+                      background: C.white,
+                    }}
+                  >
+                    <span style={{ fontWeight: 800 }}>DH</span>
+                    <span
+                      style={{
+                        fontSize: 40,
+                        fontWeight: 800,
+                        letterSpacing: "-0.5px",
+                      }}
+                    >
+                      2600
+                    </span>
+                  </div>
+
+                  <ul
+                    className="mt-2"
+                    style={{ paddingLeft: 0, listStyle: "none" }}
+                  >
+                    {["Formation", "Livre 9 bases", "Pauses café"].map(
+                      (t, i) => (
+                        <li
+                          key={i}
+                          style={{
+                            marginBottom: 8,
+                            display: "flex",
+                            alignItems: "center",
+                          }}
+                        >
+                          <i
+                            className="fas fa-check"
+                            style={{ color: C.blue, marginRight: 8 }}
+                          />
+                          <span style={{ color: C.black }}>{t}</span>
+                        </li>
+                      )
+                    )}
+                  </ul>
+
+                  <a
+                    href="/app/#/course/30"
+                    className="btn"
+                    style={{
+                      ...btn(C.red, C.white),
+                      width: "100%",
+                      marginTop: 8,
+                    }}
+                  >
+                    S'inscrire maintenant
+                  </a>
+                </div>
+              </div>
+
+              {/* Card 2 */}
+              <div className="col-12 col-md-6">
+                <div
+                  className="hover-card"
+                  style={{
+                    ...card,
+                    position: "relative",
+                    paddingTop: 20,
+                    paddingBottom: 16,
+                    overflow: "hidden",
+                  }}
+                >
+                  <div
+                    style={{
+                      position: "absolute",
+                      left: 0,
+                      top: 0,
+                      bottom: 0,
+                      width: 12,
+                      background: C.blue,
+                    }}
+                  />
+                  <div
+                    className="d-flex justify-content-between align-items-center"
+                    style={{ paddingLeft: 16 }}
+                  >
+                    <h3 className="mb-1" style={{ fontWeight: 800 }}>
+                      Formateurs & Entreprises
+                    </h3>
+                    <span className="pill" style={pill(C.blue, C.white)}>
+                      HTVA
+                    </span>
+                  </div>
+
+                  <div
+                    style={{
+                      margin: "10px 0 14px",
+                      padding: "14px 18px",
+                      border: "2px dashed rgba(0,0,0,.18)",
+                      borderRadius: 14,
+                      display: "flex",
+                      alignItems: "baseline",
+                      gap: 8,
+                      justifyContent: "center",
+                      background: C.white,
+                    }}
+                  >
+                    <span style={{ fontWeight: 800 }}>DH</span>
+                    <span
+                      style={{
+                        fontSize: 40,
+                        fontWeight: 800,
+                        letterSpacing: "-0.5px",
+                      }}
+                    >
+                      3200
+                    </span>
+                  </div>
+
+                  <ul
+                    className="mt-2"
+                    style={{ paddingLeft: 0, listStyle: "none" }}
+                  >
+                    {["Formation", "Livre 9 bases", "Pauses café"].map(
+                      (t, i) => (
+                        <li
+                          key={i}
+                          style={{
+                            marginBottom: 8,
+                            display: "flex",
+                            alignItems: "center",
+                          }}
+                        >
+                          <i
+                            className="fas fa-check"
+                            style={{ color: C.black, marginRight: 8 }}
+                          />
+                          <span style={{ color: C.black }}>{t}</span>
+                        </li>
+                      )
+                    )}
+                  </ul>
+
+                  <a
+                    href="/app/#/course/30"
+                    className="btn btn--blue"
+                    style={{
+                      ...btn(C.blue, C.white),
+                      width: "100%",
+                      marginTop: 8,
+                    }}
+                  >
+                    S'inscrire maintenant
+                  </a>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-    </div>
+        </section>
+
+        {/* CTA + MAP */}
+        <section
+          style={{
+            background: C.white,
+            padding: "56px 0",
+            position: "relative",
+          }}
+        >
+          <div className="container">
+            <div className="row g-4 align-items-stretch">
+              {/* CTA */}
+              <div className="col-lg-6">
+                <div
+                  className="hover-card"
+                  style={{
+                    background: C.white,
+                    color: C.black,
+                    borderRadius: 18,
+                    boxShadow: "0 10px 28px rgba(0,0,0,0.18)",
+                    position: "relative",
+                    overflow: "hidden",
+                    padding: 24,
+                    height: "100%",
+                  }}
+                >
+                  <div
+                    style={{
+                      position: "absolute",
+                      left: 0,
+                      top: 0,
+                      bottom: 0,
+                      width: 10,
+                      background: C.blue,
+                    }}
+                  />
+                  <div className="row align-items-center g-3">
+                    <div className="col-12">
+                      <div style={{ marginLeft: 14 }}>
+                        <span
+                          className="pill"
+                          style={{ ...pill(C.blue, C.white) }}
+                        >
+                          Cycle – Certificat
+                        </span>
+                        <h2
+                          className="mt-2 mb-2"
+                          style={{ fontWeight: 800, letterSpacing: "-0.2px" }}
+                        >
+                          Prêt(e) pour le voyage intérieur ?
+                        </h2>
+                        <p className="mb-0" style={{ color: C.black }}>
+                          Rejoignez les modules « Approfondir » et explorez vos
+                          mécanismes, zones d’ombre et potentiels — avec des
+                          outils concrets pour évoluer.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="col-12 text-lg-end">
+                      <div style={{ marginLeft: 14 }}>
+                        <a
+                          href="/app/#/course/30"
+                          className="btn btn--blue"
+                          style={{
+                            ...btn(C.blue, C.white),
+                            width: "100%",
+                            justifyContent: "center",
+                          }}
+                        >
+                          <i className="fas fa-calendar-alt" /> Réserver ma
+                          place
+                        </a>
+                        <div
+                          style={{
+                            fontSize: 12,
+                            marginTop: 8,
+                            textAlign: "center",
+                            color: C.black,
+                            opacity: 0.9,
+                          }}
+                        >
+                          Réponse rapide • Places limitées
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      position: "absolute",
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      height: 6,
+                      background: C.blue,
+                    }}
+                  />
+                </div>
+              </div>
+
+              {/* MAP */}
+              <div className="col-lg-6">
+                <div
+                  className="hover-card"
+                  style={{
+                    background: C.white,
+                    color: C.black,
+                    borderRadius: 18,
+                    boxShadow: "0 10px 28px rgba(0,0,0,0.12)",
+                    overflow: "hidden",
+                    padding: 16,
+                    height: "100%",
+                  }}
+                >
+                  <h3
+                    className="mb-3"
+                    style={{
+                      fontWeight: 800,
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 8,
+                    }}
+                  >
+                    <i
+                      className="fas fa-map-marker-alt"
+                      style={{ color: C.blue }}
+                    />
+                    Localisation — Jnan Lemonie
+                  </h3>
+                  <div
+                    style={{
+                      position: "relative",
+                      width: "100%",
+                      paddingBottom: "56.25%",
+                      height: 0,
+                      borderRadius: 12,
+                      overflow: "hidden",
+                    }}
+                  >
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5305.228879516067!2d-6.009267787231853!3d35.347562472582915!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd0bbf3da3ad8c9f%3A0x73ff61050e168005!2sJnan%20Lemonie!5e1!3m2!1sfr!2sma!4v1756569486248!5m2!1sfr!2sma"
+                      style={{
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        width: "100%",
+                        height: "100%",
+                        border: 0,
+                      }}
+                      allowFullScreen
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title="Jnan Lemonie - Google Map"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
   );
 };
 

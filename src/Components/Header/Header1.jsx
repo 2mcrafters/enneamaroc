@@ -25,20 +25,25 @@ export default function Header1({ variant = "" }) {
 
   // ---- NAV ITEMS (URLs sans accents)
   const navItems = [
-    { type: "hash", label: "l’ennéagramme", hashTo: "enneagramme-section" },
-    { type: "link", label: "école", to: "/ecole" },
+    {
+      type: "hash",
+      label: "Enneagram",
+      hashTo: "enneagramme-section",
+      mobileHidden: true,
+    },
+    { type: "link", label: "École", to: "/ecole" },
     {
       type: "select",
-      label: "parcours",
+      label: "Parcours",
       options: [
-        { label: "découvrir", to: "/découvrir" },
-        { label: "approfondir", to: "/approfondir" },
-        { label: "transmettre", to: "/transmettre" },
+        { label: "Découvrir", to: "/découvrir" },
+        { label: "Approfondir", to: "/approfondir" },
+        { label: "Transmettre", to: "/transmettre" },
       ],
     },
-    { type: "link", label: "solution", to: "/solution" },
-    { type: "link", label: "agenda", to: "/agenda" },
-    { type: "link", label: "contact", to: "/contact" },
+    { type: "link", label: "Solution", to: "/solution" },
+    { type: "link", label: "Agenda", to: "/agenda" },
+    { type: "link", label: "Contact", to: "/contact" },
   ];
 
   // ---- Helpers
@@ -339,7 +344,8 @@ export default function Header1({ variant = "" }) {
                 <img
                   className="cs-logo"
                   src="/assets/images/logo/logo.png"
-                  alt="Enneagram Maroc Logo"
+                  alt="EnnéaMaroc Logo"
+                  title="EnnéaMaroc"
                   style={{ height: "100%" }}
                 />
               </Link>
@@ -365,7 +371,9 @@ export default function Header1({ variant = "" }) {
                     {navItems.map((item) => (
                       <li
                         key={item.label}
-                        className="menu-item"
+                        className={`menu-item ${
+                          item.mobileHidden ? "mobile-hidden" : ""
+                        }`}
                         role="none"
                         style={{ display: "inline-flex", alignItems: "center" }}
                       >
@@ -383,8 +391,10 @@ export default function Header1({ variant = "" }) {
                 <div className="header-right">
                   <div className="profile-icon">
                     <a
-                      href={isLoggedIn ? "/app/#/profile" : "/app/#/login"}
-                      aria-label={isLoggedIn ? "Profil" : "Se connecter"}
+                      href={isLoggedIn ? "/app/#/profile" : "/page"}
+                      aria-label={
+                        isLoggedIn ? "Profil" : "Accéder à la page Se connecter"
+                      }
                       onClick={closeMobileAll}
                       style={{
                         width: 40,

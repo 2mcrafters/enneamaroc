@@ -16,7 +16,7 @@ const ContactInfo3 = () => {
                   </div>
                   <h2 className="sec-title">
                     Contactez l’équipe <br />{" "}
-                    <span className="bold">Enneagram Maroc</span>
+                    <span className="bold">EnnéaMaroc</span>
                   </h2>
                   <p className="sec-text " style={{ color: "#000" }}>
                     Une question sur nos formations, le coaching ou
@@ -33,9 +33,9 @@ const ContactInfo3 = () => {
                       <h4 className="title">Adresse</h4>
                       <p style={{ color: "#000" }}>
                         Av. My Youssef, résidence Hamza (au-dessus du café
-                        picasso)
+                        Picasso), 4ème étage n°1,
                         <br />
-                        Entresol, n°2 · CP 90 000 Tanger
+                        CP 90000 Tanger
                       </p>
                     </div>
                   </div>
